@@ -27,12 +27,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
-import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
-import edu.up.cs301.game.GameFramework.utilities.IPCoder;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.MessageBox;
-import edu.up.cs301.game.R;
+import com.example.euchregamestate.GameFramework.gameConfiguration.GameConfig;
+import com.example.euchregamestate.GameFramework.gameConfiguration.GamePlayerType;
+import com.example.euchregamestate.GameFramework.utilities.IPCoder;
+import com.example.euchregamestate.GameFramework.utilities.Logger;
+import com.example.euchregamestate.GameFramework.utilities.MessageBox;
+import com.example.euchregamestate.R;
 
 /**
  * class GameMainActivity

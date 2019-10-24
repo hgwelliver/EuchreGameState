@@ -3,18 +3,18 @@ package com.example.euchregamestate.GameFramework;
 import android.os.Handler;
 import android.os.Looper;
 
-import edu.up.cs301.game.GameFramework.actionMessage.GameOverAckAction;
-import edu.up.cs301.game.GameFramework.actionMessage.MyNameIsAction;
-import edu.up.cs301.game.GameFramework.actionMessage.ReadyAction;
-import edu.up.cs301.game.GameFramework.infoMessage.BindGameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameOverInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.StartGameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.TimerInfo;
-import edu.up.cs301.game.GameFramework.utilities.GameTimer;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.MessageBox;
-import edu.up.cs301.game.GameFramework.utilities.Tickable;
+import com.example.euchregamestate.GameFramework.actionMessage.GameOverAckAction;
+import com.example.euchregamestate.GameFramework.actionMessage.MyNameIsAction;
+import com.example.euchregamestate.GameFramework.actionMessage.ReadyAction;
+import com.example.euchregamestate.GameFramework.infoMessage.BindGameInfo;
+import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
+import com.example.euchregamestate.GameFramework.infoMessage.GameOverInfo;
+import com.example.euchregamestate.GameFramework.infoMessage.StartGameInfo;
+import com.example.euchregamestate.GameFramework.infoMessage.TimerInfo;
+import com.example.euchregamestate.GameFramework.utilities.GameTimer;
+import com.example.euchregamestate.GameFramework.utilities.Logger;
+import com.example.euchregamestate.GameFramework.utilities.MessageBox;
+import com.example.euchregamestate.GameFramework.utilities.Tickable;
 
 /**
  * An abstract computerized game player player. This is an abstract class, that

@@ -1,6 +1,6 @@
 package com.example.euchregamestate.GameFramework.infoMessage;
 
-import edu.up.cs301.game.GameFramework.Game;
+import com.example.euchregamestate.GameFramework.Game;
 
 /**
  * A message from the game to a player that tells the player:
