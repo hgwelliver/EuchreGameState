@@ -1,18 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:id="@+id/buttonAndMiddleCardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="480dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/scores"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:translationX="930dp">
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:translationX="100dp">
+
+                    <TextView
+                        android:id="@+id/blueTricks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="right"
+                        android:text="Blue Trick Score: 0"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/blueScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="right"
+                        android:text="Blue Team Score: 2"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/redTricks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="right"
+                        android:text="Red Trick Score: 1"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/redScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="right"
+                        android:text="Red Team Score: 1"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:translationX="-300dp">
+
+                <TextView
+                    android:id="@+id/selectTrumpButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:text="Select Trump"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/spadeButton"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_x="25dp"
+                        android:layout_y="25dp"
+                        android:alpha=".5"
+                        android:background="@drawable/spades" />
+
+                    <Button
+                        android:id="@+id/clubButton"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_x="25dp"
+                        android:layout_y="25dp"
+                        android:background="@drawable/clubs" />
+
+                    <Button
+                        android:id="@+id/heartButton"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_x="25dp"
+                        android:layout_y="25dp"
+                        android:alpha=".5"
+                        android:background="@drawable/hearts" />
+
+                    <Button
+                        android:id="@+id/diamondButton"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_x="25dp"
+                        android:layout_y="25dp"
+                        android:alpha=".5"
+                        android:background="@drawable/diamonds" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/passButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pass" />
+
+                <Button
+                    android:id="@+id/pickItUpButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pick It Up" />
+
+                <Button
+                    android:id="@+id/orderUpButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Order Up" />
+
+                <Button
+                    android:id="@+id/aloneButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Going Alone" />
+
+                <Button
+                    android:id="@+id/quitButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Quit" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/middleCardRows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:translationX="-300dp">
+
+                <LinearLayout
+                    android:id="@+id/middleCardTopRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/topplayer"
+                        android:layout_width="75dp"
+                        android:layout_height="150dp"
+                        android:adjustViewBounds="true"
+                        android:translationX="500dp"
+                        app:srcCompat="@drawable/nine_c" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/middleCardMiddleRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/leftplayer"
+                        android:layout_width="75dp"
+                        android:layout_height="150dp"
+                        android:adjustViewBounds="true"
+                        android:translationX="400dp"
+                        app:srcCompat="@drawable/ten_h" />
+
+                    <Space
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/rightplayer"
+                        android:layout_width="75dp"
+                        android:layout_height="150dp"
+                        android:adjustViewBounds="true"
+                        android:translationX="320dp"
+                        app:srcCompat="@drawable/jack_c" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/middleCardBottomRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/player"
+                        android:layout_width="75dp"
+                        android:layout_height="150dp"
+                        android:adjustViewBounds="true"
+                        android:alpha=".25"
+                        android:translationX="500dp"
+                        app:srcCompat="@drawable/cardback" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/playerCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:translationX="390dp">
+
+            <RelativeLayout
+                android:id="@+id/cardLinearLayout"
+                android:layout_width="600dp"
+                android:layout_height="150dp"
+                android:layout_gravity="bottom|right"
+                android:layout_x="500dp"
+                android:layout_y="500dp"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/kingdiamonds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@id/ninediamonds"
+                    android:layout_toRightOf="@id/ninediamonds"
+                    android:adjustViewBounds="true"
+                    android:translationX="10dp"
+                    app:srcCompat="@drawable/king_d" />
+
+                <ImageView
+                    android:id="@+id/ninediamonds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@id/jackspades"
+                    android:layout_gravity="right"
+                    android:adjustViewBounds="true"
+                    android:translationX="-110dp"
+                    app:srcCompat="@drawable/nine_d" />
+
+                <ImageView
+                    android:id="@+id/jackspades"
+                    android:layout_width="550dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/aceclubs"
+                    android:adjustViewBounds="true"
+                    android:translationX="-230dp"
+                    app:srcCompat="@drawable/jack_s" />
+
+                <ImageView
+                    android:id="@+id/aceclubs"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/acehearts"
+                    android:adjustViewBounds="true"
+                    android:translationX="-100dp"
+                    app:srcCompat="@drawable/ace_c" />
+
+                <ImageView
+                    android:id="@+id/acehearts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ace_h" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
