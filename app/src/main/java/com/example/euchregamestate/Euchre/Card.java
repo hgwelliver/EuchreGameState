@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class Card implements Serializable {
 
     int pictureID;
-    enum SUIT { HEARTS, SPADES, CLUBS, DIAMONDS }
-    enum NUMBER { NINE, TEN, ACE, JACK, QUEEN, KING }
+    public enum SUIT { HEARTS, SPADES, CLUBS, DIAMONDS }
+    public enum NUMBER { NINE, TEN, ACE, JACK, QUEEN, KING }
     SUIT theSuit;
     NUMBER theNumber;
     String cardName;
