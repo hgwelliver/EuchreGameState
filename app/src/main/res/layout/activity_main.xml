@@ -193,7 +193,7 @@
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
                         android:translationX="500dp"
-                        app:srcCompat="@drawable/nine_c" />
+                        app:srcCompat="@drawable/cardback" />
 
                 </LinearLayout>
 
@@ -210,7 +210,7 @@
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
                         android:translationX="400dp"
-                        app:srcCompat="@drawable/ten_h" />
+                        app:srcCompat="@drawable/cardback" />
 
                     <Space
                         android:layout_width="200dp"
@@ -222,7 +222,7 @@
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
                         android:translationX="320dp"
-                        app:srcCompat="@drawable/jack_c" />
+                        app:srcCompat="@drawable/cardback" />
 
 
                 </LinearLayout>
@@ -266,49 +266,49 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/kingdiamonds"
+                    android:id="@+id/playerhand5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignLeft="@id/ninediamonds"
-                    android:layout_toRightOf="@id/ninediamonds"
+                    android:layout_alignLeft="@id/playerhand3"
+                    android:layout_toRightOf="@id/playerhand4"
                     android:adjustViewBounds="true"
                     android:translationX="10dp"
-                    app:srcCompat="@drawable/king_d" />
+                    app:srcCompat="@drawable/cardback" />
 
                 <ImageView
-                    android:id="@+id/ninediamonds"
+                    android:id="@+id/playerhand4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignLeft="@id/jackspades"
+                    android:layout_alignLeft="@id/playerhand3"
                     android:layout_gravity="right"
                     android:adjustViewBounds="true"
                     android:translationX="-110dp"
-                    app:srcCompat="@drawable/nine_d" />
+                    app:srcCompat="@drawable/cardback" />
 
                 <ImageView
-                    android:id="@+id/jackspades"
+                    android:id="@+id/playerhand3"
                     android:layout_width="550dp"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/aceclubs"
+                    android:layout_toRightOf="@id/playerhand2"
                     android:adjustViewBounds="true"
                     android:translationX="-230dp"
-                    app:srcCompat="@drawable/jack_s" />
+                    app:srcCompat="@drawable/cardback" />
 
                 <ImageView
-                    android:id="@+id/aceclubs"
+                    android:id="@+id/playerhand2"
                     android:layout_width="360dp"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/acehearts"
+                    android:layout_toRightOf="@id/playerhand1"
                     android:adjustViewBounds="true"
                     android:translationX="-100dp"
-                    app:srcCompat="@drawable/ace_c" />
+                    app:srcCompat="@drawable/cardback" />
 
                 <ImageView
-                    android:id="@+id/acehearts"
+                    android:id="@+id/playerhand1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/ace_h" />
+                    app:srcCompat="@drawable/cardback" />
             </RelativeLayout>
         </LinearLayout>
 

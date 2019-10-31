@@ -1,5 +1,7 @@
 package com.example.euchregamestate.Euchre;
 
+import android.os.Bundle;
+
 import com.example.euchregamestate.GameFramework.GameMainActivity;
 import com.example.euchregamestate.GameFramework.GamePlayer;
 import com.example.euchregamestate.GameFramework.LocalGame;
@@ -65,6 +67,7 @@ public class EuchreMainActivity extends GameMainActivity {
         //done!
         return defaultConfig;
     }
+
     /**
      * createLocalGame
      *
