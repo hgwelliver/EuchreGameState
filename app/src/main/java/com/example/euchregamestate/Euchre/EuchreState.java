@@ -1,6 +1,7 @@
 package edu.euchreproject.gamestate;
 
 import com.example.euchregamestate.Euchre.Card;
+import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.R;
 
 import java.lang.reflect.Array;
@@ -12,7 +13,7 @@ import java.util.Random;
  * GameState
  * @author Mikey Ant, Haley Welliver, Sierra Nieland, Alex Rogers
  */
-public class GameState {
+public class EuchreState extends GameState {
     // info about the resources each player has
     protected ArrayList<Card> player1Hand = new ArrayList<>();
     protected ArrayList<Card> player2Hand = new ArrayList<>();
