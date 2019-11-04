@@ -1,4 +1,4 @@
-package edu.euchreproject.gamestate;
+package com.example.euchregamestate.Euchre;
 
 import com.example.euchregamestate.Euchre.Card;
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
