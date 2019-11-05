@@ -1,6 +1,6 @@
-package edu.euchreproject.gamestate;
+package com.example.euchregamestate.Euchre;
 
-import com.example.euchregamestate.Euchre.Card;
+import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.R;
 
 import java.lang.reflect.Array;
@@ -8,11 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-/**
- * GameState
- * @author Mikey Ant, Haley Welliver, Sierra Nieland, Alex Rogers
- */
-public class GameState {
+public class EuchreState extends GameState {
+
     // info about the resources each player has
     protected ArrayList<Card> player1Hand = new ArrayList<>();
     protected ArrayList<Card> player2Hand = new ArrayList<>();
@@ -57,7 +54,7 @@ public class GameState {
     protected Random rand = new Random();
 
     //default constructor
-    public GameState(){
+    public EuchreState(){
         // init instance variables
         this.dealer = 1; // change later to start with random dealer
         this.teamDealer = 0;
@@ -75,12 +72,12 @@ public class GameState {
         for(int y = 0; y < 24; y++){
             // fill deck with the 32 cards from the CardDeck class
             // need to make getCard method that allows deck to get cards
-            deck.add(y, getCard(y));
+            deck.add(y, deck.get(y));
         }
     }
 
     //copy constructor
-    public GameState(GameState other){
+    public EuchreState(EuchreState other){
         this.dealer = other.dealer;
         this.teamDealer = other.teamDealer;
         this.startGame = other.startGame;
@@ -97,7 +94,7 @@ public class GameState {
         for(int y = 0; y < 24; y++){
             // fill deck with the 32 cards from the CardDeck class
             // need to make getCard method that allows deck to get cards
-            deck.add(y, getCard(y));
+            deck.add(y, deck.get(y));
         }
     }
 
@@ -116,10 +113,10 @@ public class GameState {
                 "Passes: " + numPass + " Who Called: " + whoCalled + "\n" +
                 "Trump Suit: " + currentSuit + "\n" +
                 "Number of Plays; " + numPlays + "\n" +
-                "Round is Over: " + isRoundOver(trickNum) + "\n";
+                "Round is Over: " + isRoundOver(trickNum) + "\n"
 
-        //passes, who is alone, suit, numPlays,
-
+                //passes, who is alone, suit, numPlays,
+                ;
         return string;
     }
 
@@ -505,7 +502,7 @@ public class GameState {
         }
         else if(whoIsAlone == 2 && playerID == 4){
             numPlays++;
-            turn++;
+            turn = 1;
             return true;
         }
         else if(whoIsAlone == 3 && playerID == 1){
@@ -562,12 +559,12 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player1Hand.getSuit() == currentSuit){
-                            valid.add(player1Hand); // adds card to possible valid plays
+                          valid.add(player1Hand); // adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
-                        //player1Play = card selected
+                        // player1Play = card selected
                         // card goes to middle
                         currentSuit = player1Play.getSuit();
                         numPlays++;
@@ -593,7 +590,7 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player2Hand.getSuit() == currentSuit){
-                            valid.add(player2Hand); //adds card to possible valid plays
+                          valid.add(player2Hand); //adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
@@ -624,7 +621,7 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player3Hand.getSuit() == currentSuit){
-                            valid.add(player3Hand); adds card to possible valid plays
+                          valid.add(player3Hand); //adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
@@ -655,7 +652,7 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player4Hand.getSuit() == currentSuit){
-                            valid.add(player4Hand); // adds card to possible valid plays
+                          valid.add(player4Hand); // adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
@@ -689,7 +686,7 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player1Hand.getSuit() == currentSuit){
-                            valid.add(player1Hand); // adds card to possible valid plays
+                          valid.add(player1Hand); // adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
@@ -718,7 +715,7 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player2Hand.getSuit() == currentSuit){
-                            valid.add(player2Hand); // adds card to possible valid plays
+                          valid.add(player2Hand); // adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
@@ -747,7 +744,7 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player3Hand.getSuit() == currentSuit){
-                            valid.add(player3Hand); // adds card to possible valid plays
+                          valid.add(player3Hand); // adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
@@ -776,7 +773,7 @@ public class GameState {
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
                         if(player4Hand.getSuit() == currentSuit){
-                            valid.add(player4Hand); adds card to possible valid plays
+                          valid.add(player4Hand); //adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
@@ -816,28 +813,28 @@ public class GameState {
         value[3] = player3Play.getValue();
         value[4] = player4Play.getValue();
         if(player1Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-            value[1] += 10;
+             value[1] += 10;
         }
         else if(player2Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-            value[2] += 10;
+             value[2] += 10;
         }
         else if(player3Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-            value[3] += 10;
+             value[3] += 10;
         }
         else if(player3Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-            value[4] += 10;
+             value[4] += 10;
         }
         else if(player1Play.getSuit() == currentSuit){
-            value[1] += 20;
+             value[1] += 20;
         }
         else if(player2Play.getSuit() == currentSuit){
-            value[2] += 20;
+             value[2] += 20;
         }
         else if(player3Play.getSuit() == currentSuit){
-            value[3] += 20;
+             value[3] += 20;
         }
         else if(player4Play.getSuit() == currentSuit){
-            value[4] += 20;
+             value[4] += 20;
         }
         int winner = 0;
         for(int j = 1; j < 5; j++){
@@ -900,3 +897,5 @@ public class GameState {
         return false;
     }
 }
+
+
