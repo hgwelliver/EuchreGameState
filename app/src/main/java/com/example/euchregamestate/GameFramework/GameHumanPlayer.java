@@ -45,7 +45,7 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
     protected String[] allPlayerNames; // the names of all the player
     private Handler myHandler; // my thread's handler
     private Handler saveMe;
-    private GameMainActivity myActivity; // the current activity
+    protected GameMainActivity myActivity; // the current activity
     private GameTimer myTimer = new GameTimer(this); // my player's timer
     private boolean gameOver; // whether the game is over
 
