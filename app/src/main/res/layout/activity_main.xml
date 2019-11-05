@@ -23,9 +23,9 @@
             android:padding="10dp">
 
             <LinearLayout
-                android:id="@+id/scores"
+                android:id="@+id/scorelayout"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:orientation="horizontal"
                 android:translationX="930dp">
 
@@ -40,8 +40,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
+                        android:fontFamily="sans-serif-smallcaps"
                         android:gravity="right"
                         android:text="Blue Trick Score: 0"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
 
                     <TextView
@@ -49,8 +52,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
+                        android:fontFamily="sans-serif-smallcaps"
                         android:gravity="right"
-                        android:text="Blue Team Score: 2"
+                        android:text="Blue Team Score: 0"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
 
                     <TextView
@@ -58,8 +64,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
+                        android:fontFamily="sans-serif-smallcaps"
                         android:gravity="right"
-                        android:text="Red Trick Score: 1"
+                        android:text="Red Trick Score: 0"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
 
                     <TextView
@@ -67,9 +76,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
+                        android:fontFamily="sans-serif-smallcaps"
                         android:gravity="right"
-                        android:text="Red Team Score: 1"
+                        android:text="Red Team Score: 0"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/helpMenuButton"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:text="Help Menu"
+                        android:textSize="16sp"
+                        android:translationX="100dp"
+                        android:translationY="20dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -86,52 +108,58 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
+                    android:fontFamily="sans-serif-smallcaps"
                     android:text="Select Trump"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:orientation="horizontal">
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:translationY="10dp">
 
                     <Button
                         android:id="@+id/spadeButton"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_x="25dp"
-                        android:layout_y="25dp"
-                        android:alpha=".5"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/spades" />
 
                     <Button
+                        android:id="@+id/heartButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:layout_x="25dp"
+                        android:layout_y="25dp"
+                        android:background="@drawable/hearts" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:translationY="10dp">
+
+                    <Button
+                        android:id="@+id/diamondButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:layout_x="25dp"
+                        android:layout_y="25dp"
+                        android:background="@drawable/diamonds" />
+
+                    <Button
                         android:id="@+id/clubButton"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_weight="1"
                         android:layout_x="25dp"
                         android:layout_y="25dp"
                         android:background="@drawable/clubs" />
-
-                    <Button
-                        android:id="@+id/heartButton"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_x="25dp"
-                        android:layout_y="25dp"
-                        android:alpha=".5"
-                        android:background="@drawable/hearts" />
-
-                    <Button
-                        android:id="@+id/diamondButton"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_x="25dp"
-                        android:layout_y="25dp"
-                        android:alpha=".5"
-                        android:background="@drawable/diamonds" />
 
                 </LinearLayout>
 
@@ -139,31 +167,46 @@
                     android:id="@+id/passButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Pass" />
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Pass"
+                    android:textSize="16sp"
+                    android:translationY="20dp" />
 
                 <Button
                     android:id="@+id/pickItUpButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Pick It Up" />
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Pick It Up"
+                    android:textSize="16sp"
+                    android:translationY="20dp" />
 
                 <Button
                     android:id="@+id/orderUpButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Order Up" />
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Order Up"
+                    android:textSize="16sp"
+                    android:translationY="20dp" />
 
                 <Button
                     android:id="@+id/aloneButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Going Alone" />
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Going Alone"
+                    android:textSize="16sp"
+                    android:translationY="20dp" />
 
                 <Button
                     android:id="@+id/quitButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Quit" />
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Quit"
+                    android:textSize="16sp"
+                    android:translationY="20dp" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -192,6 +235,7 @@
                         android:layout_width="75dp"
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
+                        android:background="@android:color/holo_red_dark"
                         android:translationX="500dp"
                         app:srcCompat="@drawable/cardback" />
 
@@ -209,19 +253,26 @@
                         android:layout_width="75dp"
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
+                        android:background="@android:color/holo_blue_light"
                         android:translationX="400dp"
                         app:srcCompat="@drawable/cardback" />
 
-                    <Space
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/kitty"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:translationX="152dp"
+                        app:srcCompat="@drawable/cardback" />
 
                     <ImageView
                         android:id="@+id/rightplayer"
                         android:layout_width="75dp"
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
-                        android:translationX="320dp"
+                        android:background="@android:color/holo_blue_light"
+                        android:translationX="-100dp"
                         app:srcCompat="@drawable/cardback" />
 
 
@@ -239,7 +290,7 @@
                         android:layout_width="75dp"
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
-                        android:alpha=".25"
+                        android:background="@android:color/holo_red_dark"
                         android:translationX="500dp"
                         app:srcCompat="@drawable/cardback" />
 

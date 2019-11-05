@@ -20,38 +20,20 @@ public class EuchreMainActivity extends GameMainActivity {
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
         // yellow-on-blue GUI
-        playerTypes.add(new GamePlayerType("Local Human Player (blue-yellow)") {
+        playerTypes.add(new GamePlayerType("Local Human Player ") {
             public GamePlayer createPlayer(String name) {
-                return new EuchreHumanPlayer1(name, R.layout.euchre_human_player1);
-            }
-        });
-
-        // red-on-yellow GUI
-        playerTypes.add(new GamePlayerType("Local Human Player (yellow-red)") {
-            public GamePlayer createPlayer(String name) {
-                return new EuchreHumanPlayer1(name, R.layout.euchre_human_player1_flipped);
-            }
-        });
-        // game of 33
-        playerTypes.add(new GamePlayerType("Local Human Player (game of 33)") {
-            public GamePlayer createPlayer(String name) {
-                return new EuchreHumanPlayer2(name);
+                return new EuchreHumanPlayer(name, R.layout.euchre_human_player1);
             }
         });
 
         // dumb computer player
         playerTypes.add(new GamePlayerType("Computer Player (dumb)") {
             public GamePlayer createPlayer(String name) {
-                return new EuchreComputerPlayer1(name);
+                return new EuchreComputerPlayer(name);
             }
         });
 
-        // smarter computer player
-        playerTypes.add(new GamePlayerType("Computer Player (smart)") {
-            public GamePlayer createPlayer(String name) {
-                return new EuchreComputerPlayer2(name);
-            }
-        });
+
 
         // Create a game configuration class for Tic-tac-toe
         GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Tic-Tac-Toe", PORT_NUMBER);
