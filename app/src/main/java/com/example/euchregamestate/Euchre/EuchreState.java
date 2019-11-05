@@ -1,6 +1,6 @@
-package edu.euchreproject.gamestate;
+package com.example.euchregamestate.Euchre;
 
-import com.example.euchregamestate.Euchre.Card;
+import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.R;
 
 import java.lang.reflect.Array;
@@ -8,11 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-/**
- * GameState
- * @author Mikey Ant, Haley Welliver, Sierra Nieland, Alex Rogers
- */
-public class GameState {
+public class EuchreState extends GameState {
+
     // info about the resources each player has
     protected ArrayList<Card> player1Hand = new ArrayList<>();
     protected ArrayList<Card> player2Hand = new ArrayList<>();
@@ -57,7 +54,7 @@ public class GameState {
     protected Random rand = new Random();
 
     //default constructor
-    public GameState(){
+    public EuchreState(){
         // init instance variables
         this.dealer = 1; // change later to start with random dealer
         this.teamDealer = 0;
@@ -80,7 +77,7 @@ public class GameState {
     }
 
     //copy constructor
-    public GameState(GameState other){
+    public EuchreState(EuchreState other){
         this.dealer = other.dealer;
         this.teamDealer = other.teamDealer;
         this.startGame = other.startGame;
@@ -116,10 +113,10 @@ public class GameState {
                 "Passes: " + numPass + " Who Called: " + whoCalled + "\n" +
                 "Trump Suit: " + currentSuit + "\n" +
                 "Number of Plays; " + numPlays + "\n" +
-                "Round is Over: " + isRoundOver(trickNum) + "\n";
+                "Round is Over: " + isRoundOver(trickNum) + "\n"
 
-        //passes, who is alone, suit, numPlays,
-
+                //passes, who is alone, suit, numPlays,
+                ;
         return string;
     }
 
@@ -567,7 +564,7 @@ public class GameState {
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
-                        //player1Play = card selected
+                        // player1Play = card selected
                         // card goes to middle
                         currentSuit = player1Play.getSuit();
                         numPlays++;
@@ -900,3 +897,5 @@ public class GameState {
         return false;
     }
 }
+
+

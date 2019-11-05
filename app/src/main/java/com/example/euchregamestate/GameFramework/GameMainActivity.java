@@ -15,9 +15,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -27,12 +29,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
-import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
-import edu.up.cs301.game.GameFramework.utilities.IPCoder;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.MessageBox;
-import edu.up.cs301.game.R;
+import com.example.euchregamestate.GameFramework.gameConfiguration.GameConfig;
+import com.example.euchregamestate.GameFramework.gameConfiguration.GamePlayerType;
+import com.example.euchregamestate.GameFramework.utilities.IPCoder;
+import com.example.euchregamestate.GameFramework.utilities.Logger;
+import com.example.euchregamestate.GameFramework.utilities.MessageBox;
+import com.example.euchregamestate.R;
 
 /**
  * class GameMainActivity
@@ -152,6 +154,139 @@ public abstract class GameMainActivity extends Activity implements
     @Override
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //linking action buttons to listeners
+        Button passButton = (Button) findViewById(R.id.passButton);
+        passButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call pass function
+            }
+        });
+
+        Button pickItUpButton = (Button) findViewById(R.id.pickItUpButton);
+        pickItUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call pickitup function
+            }
+        });
+
+        Button orderUpButton = (Button) findViewById(R.id.orderUpButton);
+        orderUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call order up function
+            }
+        });
+
+        Button goingAloneButton = (Button) findViewById(R.id.aloneButton);
+        goingAloneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call going alone
+            }
+        });
+
+        Button quitButton = (Button) findViewById(R.id.quitButton);
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call quit
+            }
+        });
+
+
+        //linking trump selection buttons to listeners
+        Button spadeButton = (Button) findViewById(R.id.spadeButton);
+        spadeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //changes trump to spades
+            }
+        });
+
+        Button clubButton = (Button) findViewById(R.id.clubButton);
+        clubButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //changes trump to clubs
+            }
+        });
+
+        Button heartButton = (Button) findViewById(R.id.heartButton);
+        heartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //changes trump to hearts
+            }
+        });
+
+        Button diamondButton = (Button) findViewById(R.id.diamondButton);
+        diamondButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //changes trump to diamonds
+            }
+        });
+
+
+
+        //linking cards on layout
+        //player hand
+        ImageView playerHand1 = (ImageView) findViewById(R.id.playerhand1);
+        playerHand1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends card out to [player] when clicked
+            }
+        });
+
+        ImageView playerHand2 = (ImageView) findViewById(R.id.playerhand2);
+        playerHand2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends card out to [player] when clicked
+            }
+        });
+
+        ImageView playerHand3 = (ImageView) findViewById(R.id.playerhand3);
+        playerHand3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends card out to [player] when clicked
+            }
+        });
+
+        ImageView playerHand4 = (ImageView) findViewById(R.id.playerhand4);
+        playerHand4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends card out to [player] when clicked
+            }
+        });
+
+        ImageView playerHand5 = (ImageView) findViewById(R.id.playerhand5);
+        playerHand5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sends card out to [player] when clicked
+            }
+        });
+
+
+        //game play cards - these do not need onClickListeners because they do not
+        // need to be clicked, they serve as placeholders
+        ImageView player = (ImageView) findViewById(R.id.player);
+
+        ImageView rightPlayer = (ImageView) findViewById(R.id.rightplayer);
+
+        ImageView leftPlayer = (ImageView) findViewById(R.id.leftplayer);
+
+        ImageView topPlayer = (ImageView) findViewById(R.id.topplayer);
+
+
+
 
         //Set Context for Toast Logging
         Logger.setContext(getApplicationContext());
