@@ -44,4 +44,8 @@ public class Card implements Serializable {
         return this.theNumber;
     }
 
+    public static int getValsVal(NUMBER num){
+        int value = 0;
+        return value;
+    }
 }
