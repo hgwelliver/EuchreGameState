@@ -58,7 +58,7 @@ public class EuchreState extends GameState {
     protected Random rand = new Random();
 
     //default constructor
-    public GameState(){
+    public EuchreState(){
         // init instance variables
         this.dealer = 1; // change later to start with random dealer
         this.teamDealer = 0;
@@ -81,7 +81,7 @@ public class EuchreState extends GameState {
     }
 
     //copy constructor
-    public GameState(GameState other){
+    public EuchreState(GameState other){
         this.dealer = other.dealer;
         this.teamDealer = other.teamDealer;
         this.startGame = other.startGame;
