@@ -22,7 +22,7 @@ public class EuchreMainActivity extends GameMainActivity {
         // yellow-on-blue GUI
         playerTypes.add(new GamePlayerType("Local Human Player ") {
             public GamePlayer createPlayer(String name) {
-                return new EuchreHumanPlayer(name, R.layout.euchre_human_player1);
+                return new EuchreHumanPlayer(name);
             }
         });
 
