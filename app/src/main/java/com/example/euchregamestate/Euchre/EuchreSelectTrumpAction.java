@@ -1,4 +1,10 @@
 package com.example.euchregamestate.Euchre;
 
-public class EuchreSelectTrumpAction {
+import com.example.euchregamestate.GameFramework.GamePlayer;
+import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
+
+public class EuchreSelectTrumpAction extends GameAction {
+    public EuchreSelectTrumpAction(GamePlayer player){
+        super(player);
+    }
 }
