@@ -147,8 +147,9 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         ImageView topPlayer = (ImageView) myActivity.findViewById(R.id.topplayer);
     }
 
+    protected View v;
     public View getTopView(){
-
+        return v;
     }
 
     public void receiveInfo(GameInfo info){

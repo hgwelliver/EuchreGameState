@@ -13,6 +13,10 @@ import com.example.euchregamestate.R;
 import java.util.ArrayList;
 
 public class EuchreMainActivity extends GameMainActivity {
+
+    //Tag for logging
+    public static final int PORT_NUMBER = 5213;
+
     @Override
     public GameConfig createDefaultConfig() {
 
