@@ -15,36 +15,36 @@ public class CardDeck implements Serializable {
 
     //creating all cards...assigns a suit, number, and image to each card respectively
     //heart cards
-    Card nine_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.NINE, R.drawable.nine_h);
-    Card ten_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h);
-    Card ace_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.ACE, R.drawable.ace_h);
-    Card jack_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.JACK, R.drawable.jack_h);
-    Card queen_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.QUEEN, R.drawable.queen_h);
-    Card king_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.KING, R.drawable.king_h);
+    public Card nine_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.NINE, R.drawable.nine_h);
+    public Card ten_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h);
+    public Card ace_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.ACE, R.drawable.ace_h);
+    public Card jack_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.JACK, R.drawable.jack_h);
+    public Card queen_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.QUEEN, R.drawable.queen_h);
+    public Card king_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.KING, R.drawable.king_h);
 
     //spade cards
-    Card nine_s = new Card(Card.SUIT.SPADES, Card.NUMBER.NINE, R.drawable.nine_s);
-    Card ten_s = new Card(Card.SUIT.SPADES, Card.NUMBER.TEN, R.drawable.ten_s);
-    Card ace_s = new Card(Card.SUIT.SPADES, Card.NUMBER.ACE, R.drawable.ace_s);
-    Card jack_s = new Card(Card.SUIT.SPADES, Card.NUMBER.JACK, R.drawable.jack_s);
-    Card queen_s = new Card(Card.SUIT.SPADES, Card.NUMBER.QUEEN, R.drawable.queen_s);
-    Card king_s = new Card(Card.SUIT.SPADES, Card.NUMBER.KING, R.drawable.king_s);
+    public Card nine_s = new Card(Card.SUIT.SPADES, Card.NUMBER.NINE, R.drawable.nine_s);
+    public Card ten_s = new Card(Card.SUIT.SPADES, Card.NUMBER.TEN, R.drawable.ten_s);
+    public Card ace_s = new Card(Card.SUIT.SPADES, Card.NUMBER.ACE, R.drawable.ace_s);
+    public Card jack_s = new Card(Card.SUIT.SPADES, Card.NUMBER.JACK, R.drawable.jack_s);
+    public Card queen_s = new Card(Card.SUIT.SPADES, Card.NUMBER.QUEEN, R.drawable.queen_s);
+    public Card king_s = new Card(Card.SUIT.SPADES, Card.NUMBER.KING, R.drawable.king_s);
 
     //club cards
-    Card nine_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.NINE, R.drawable.nine_c);
-    Card ten_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.TEN, R.drawable.ten_c);
-    Card ace_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.ACE, R.drawable.ace_c);
-    Card jack_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.JACK, R.drawable.jack_c);
-    Card queen_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.QUEEN, R.drawable.queen_c);
-    Card king_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.KING, R.drawable.king_c);
+    public Card nine_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.NINE, R.drawable.nine_c);
+    public Card ten_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.TEN, R.drawable.ten_c);
+    public Card ace_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.ACE, R.drawable.ace_c);
+    public Card jack_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.JACK, R.drawable.jack_c);
+    public Card queen_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.QUEEN, R.drawable.queen_c);
+    public Card king_c = new Card(Card.SUIT.CLUBS, Card.NUMBER.KING, R.drawable.king_c);
 
     //diamond cards
-    Card nine_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.NINE, R.drawable.nine_d);
-    Card ten_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.TEN, R.drawable.ten_d);
-    Card ace_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.ACE, R.drawable.ace_d);
-    Card jack_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.JACK, R.drawable.jack_d);
-    Card queen_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.QUEEN, R.drawable.queen_d);
-    Card king_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.KING, R.drawable.king_d);
+    public Card nine_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.NINE, R.drawable.nine_d);
+    public Card ten_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.TEN, R.drawable.ten_d);
+    public Card ace_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.ACE, R.drawable.ace_d);
+    public Card jack_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.JACK, R.drawable.jack_d);
+    public Card queen_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.QUEEN, R.drawable.queen_d);
+    public Card king_d = new Card(Card.SUIT.DIAMONDS, Card.NUMBER.KING, R.drawable.king_d);
 
 
     //adds all possible cards to the arrayList
