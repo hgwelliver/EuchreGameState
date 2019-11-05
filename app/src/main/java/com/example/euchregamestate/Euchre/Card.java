@@ -36,54 +36,12 @@ public class Card implements Serializable {
         return pictureID;
     }
 
-    public SUIT getSuit(int id){
-        SUIT suit = null;
-
-        switch(id){
-            case 1:
-                suit = SUIT.HEARTS;
-                break;
-            case 2:
-                suit = SUIT.SPADES;
-                break;
-            case 3:
-                suit = SUIT.CLUBS;
-                break;
-            case 4:
-                suit = SUIT.DIAMONDS;
-                break;
-            default:
-                break;
-        }
-        return suit;
+    public SUIT getSuit(){
+        return this.theSuit;
     }
 
-    public NUMBER getValue(int id){
-        NUMBER number = null;
-
-        switch(id){
-            case 1:
-                number = NUMBER.NINE;
-                break;
-            case 2:
-                number = NUMBER.TEN;
-                break;
-            case 3:
-                number = NUMBER.ACE;
-                break;
-            case 4:
-                number = NUMBER.JACK;
-                break;
-            case 5:
-                number = NUMBER.QUEEN;
-                break;
-            case 6:
-                number = NUMBER.KING;
-                break;
-            default:
-                break;
-        }
-        return number;
+    public NUMBER getValue(){
+        return this.theNumber;
     }
 
 }
