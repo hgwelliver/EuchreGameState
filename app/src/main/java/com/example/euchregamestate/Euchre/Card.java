@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class Card implements Serializable {
 
     int pictureID;
-    enum SUIT { HEARTS, SPADES, CLUBS, DIAMONDS }
-    enum NUMBER { NINE, TEN, ACE, JACK, QUEEN, KING }
+    public enum SUIT { HEARTS, SPADES, CLUBS, DIAMONDS }
+    public enum NUMBER { NINE, TEN, ACE, JACK, QUEEN, KING }
     SUIT theSuit;
     NUMBER theNumber;
     String cardName;
@@ -36,7 +36,7 @@ public class Card implements Serializable {
         return pictureID;
     }
 
-    public SUIT getSuitById(int id){
+    public SUIT getSuit(int id){
         SUIT suit = null;
 
         switch(id){
@@ -58,7 +58,7 @@ public class Card implements Serializable {
         return suit;
     }
 
-    public NUMBER getNumberById(int id){
+    public NUMBER getValue(int id){
         NUMBER number = null;
 
         switch(id){
@@ -85,6 +85,5 @@ public class Card implements Serializable {
         }
         return number;
     }
-
 
 }

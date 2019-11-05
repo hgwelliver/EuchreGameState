@@ -1,20 +1,25 @@
-package com.example.euchregamestate.Euchre;
+package edu.euchreproject.gamestate;
 
-import com.example.euchregamestate.GameFramework.infoMessage.GameState;
+import com.example.euchregamestate.Euchre.Card;
 import com.example.euchregamestate.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
-public class EuchreState extends GameState {
-
+/**
+ * GameState
+ * @author Mikey Ant, Haley Welliver, Sierra Nieland, Alex Rogers
+ */
+public class GameState {
     // info about the resources each player has
     protected ArrayList<Card> player1Hand = new ArrayList<>();
     protected ArrayList<Card> player2Hand = new ArrayList<>();
     protected ArrayList<Card> player3Hand = new ArrayList<>();
     protected ArrayList<Card> player4Hand = new ArrayList<>();
     // info about the state of resources
-    protected Card[] deck;
+    protected ArrayList<Card> deck = new ArrayList<>();
     // whose turn
     protected int turn; // 1/5 for player 1, 2/6 for player 2, 3/7 for player 3, 4/8 for player 4
     protected int dealer; // 1 for player 1, 2 for player 2, 3 for player 3, 4 for player 4
@@ -52,7 +57,7 @@ public class EuchreState extends GameState {
     protected Random rand = new Random();
 
     //default constructor
-    public EuchreState(){
+    public GameState(){
         // init instance variables
         this.dealer = 1; // change later to start with random dealer
         this.teamDealer = 0;
@@ -67,16 +72,15 @@ public class EuchreState extends GameState {
         this.redTrickScore = 0;
         this.blueTrickScore = 0;
         // init deck of cards
-        deck = new Card[24];
         for(int y = 0; y < 24; y++){
             // fill deck with the 32 cards from the CardDeck class
             // need to make getCard method that allows deck to get cards
-            // deck[y] = getCard(y);
+            deck.add(y, deck.get(y));
         }
     }
 
     //copy constructor
-    public EuchreState(EuchreState other){
+    public GameState(GameState other){
         this.dealer = other.dealer;
         this.teamDealer = other.teamDealer;
         this.startGame = other.startGame;
@@ -90,11 +94,10 @@ public class EuchreState extends GameState {
         this.redTrickScore = other.redTrickScore;
         this.blueTrickScore = other.blueTrickScore;
         // init deck of cards
-        deck = new Card[24];
         for(int y = 0; y < 24; y++){
             // fill deck with the 32 cards from the CardDeck class
             // need to make getCard method that allows deck to get cards
-            // deck[y] = getCard(y);
+            deck.add(y, deck.get(y));
         }
     }
 
@@ -113,10 +116,10 @@ public class EuchreState extends GameState {
                 "Passes: " + numPass + " Who Called: " + whoCalled + "\n" +
                 "Trump Suit: " + currentSuit + "\n" +
                 "Number of Plays; " + numPlays + "\n" +
-                "Round is Over: " + isRoundOver(trickNum) + "\n"
+                "Round is Over: " + isRoundOver(trickNum) + "\n";
 
-                //passes, who is alone, suit, numPlays,
-                ;
+        //passes, who is alone, suit, numPlays,
+
         return string;
     }
 
@@ -135,84 +138,42 @@ public class EuchreState extends GameState {
     public boolean deal(){
         // deal cards when game is started and game stage is 0
         if(startGame && gameStage == 0){
-            /*
-            // clone deck of cards
-            Card[] deckCopy = new Card[24];
-            for(int x = 0; x < 24; x++){
-                // copy deck
-                deckCopy[x] = deck[x];
-            }
+
+            // need to clear everything
+            player1Hand.clear();
+            player2Hand.clear();
+            player3Hand.clear();
+            player4Hand.clear();
+            kitty.clear();
+            currentMiddle.clear();
+            // shuffle deck
+            Collections.shuffle(deck);
             // deal cards to each player
             // player 1's hand
             for(int i = 0; i < 5; i++){
-                // choose index of a random card from the deck
-                int card = rand.nextInt(24);
-                player1Hand.add(deckCopy[card];
-                // need delete card method
-                copyDeck.deleteCard(card);
+                player1Hand.add(i, deck.get(i));
             }
             // player 2's hand
-            for(int i = 0; i < 5; i++){
-                int numCards = 0;
-                while(numCards < 5){
-                    // choose index of a random card from the deck
-                    int card = rand.nextInt(24);
-                    if(copyDeck[card] != null){
-                        player2Hand.add(deckCopy[card];
-                        copyDeck.deleteCard(card);
-                        numCards++;
-                    }
-                }
+            for(int i = 5; i < 10; i++){
+                player2Hand.add(i, deck.get(i));
             }
             // player 3's hand
-            for(int i = 0; i < 5; i++){
-                int numCards = 0;
-                while(numCards < 5){
-                    // choose index of a random card from the deck
-                    int card = rand.nextInt(24);
-                    if(copyDeck[card] != null){
-                        player3Hand.add(deckCopy[card];
-                        copyDeck.deleteCard(card);
-                        numCards++;
-                    }
-                }
+            for(int i = 10; i < 15; i++){
+                player3Hand.add(i, deck.get(i));
             }
             // player 4's hand
-            for(int i = 0; i < 5; i++){
-                int numCards = 0;
-                while(numCards < 5){
-                    // choose index of a random card from the deck
-                    int card = rand.nextInt(24);
-                    if(copyDeck[card] != null){
-                        player4Hand.add(deckCopy[card];
-                        copyDeck.deleteCard(card);
-                        numCards++;
-                    }
-                }
+            for(int i = 15; i < 20; i++){
+                player4Hand.add(i, deck.get(i));
             }
             // deal remaining cards to the kitty and choose one as middle card
-            for(int i = 0; i < 4; i++){
-                int numCards = 0;
-                while(numCards < 4){
-                    // choose index of a random card from the deck
-                    int card = rand.nextInt(24);
-                    if(copyDeck[card] != null && numCards == 0){
-                        // choose middle card
-                        middleCard = deckCopy[card];
-                        // need a getSuit method
-                        middleCardSuit = middleCard.getSuit();
-                        kitty.add(deckCopy[card];
-                        copyDeck.deleteCard(card);
-                        numCards++;
-                    }
-                    else{
-                        kitty.add(deckCopy[card];
-                        copyDeck.deleteCard(card);
-                        numCards++;
-                    }
+            for(int i = 20; i < 24; i++){
+                if(i == 20){
+                    middleCard = deck.get(i);
+                    middleCardSuit = middleCard.getSuit();
                 }
+                kitty.add(i, deck.get(i));
             }
-            */
+
             // make middle card visible
             middleVisible = true;
             // change game state to 1
@@ -287,7 +248,7 @@ public class EuchreState extends GameState {
             else if(teamDealer == 0 && playerID == dealer){
                 // set trump to suit of middle card
                 currentSuit = middleCardSuit;
-                // isPickitUp(dealer);
+                isPickItUp(dealer);
                 middleVisible = false;
                 whoCalled = 0;
                 whoIsAlone = dealer;
@@ -302,7 +263,7 @@ public class EuchreState extends GameState {
             else if(teamDealer == 1 && playerID == dealer){
                 // set trump to suit of middle card
                 currentSuit = middleCardSuit;
-                // isPickitUp()
+                isPickItUp(dealer);
                 whoCalled = 1;
                 whoIsAlone = dealer;
                 middleVisible = false;
@@ -318,7 +279,7 @@ public class EuchreState extends GameState {
             else if(teamDealer == 0 && (playerID == 2 || playerID == 4)){
                 // set trump to suit of middle card
                 currentSuit = middleCardSuit;
-                // isOrderUpTrump()
+                isOrderUpTrump(dealer);
                 whoCalled = 1;
                 if(playerID == 2){
                     whoIsAlone = 2;
@@ -334,7 +295,7 @@ public class EuchreState extends GameState {
             else if(teamDealer == 1 && (playerID == 1 || playerID == 3)){
                 // set trump to suit of middle card
                 currentSuit = middleCardSuit;
-                // isOrderUpTrump()
+                isOrderUpTrump(dealer);
                 whoCalled = 0;
                 if(playerID == 1){
                     whoIsAlone = 1;
@@ -544,7 +505,7 @@ public class EuchreState extends GameState {
         }
         else if(whoIsAlone == 2 && playerID == 4){
             numPlays++;
-            turn++;
+            turn = 1;
             return true;
         }
         else if(whoIsAlone == 3 && playerID == 1){
@@ -562,8 +523,8 @@ public class EuchreState extends GameState {
                 if(playerID == 1){
                     // player1Play = card selected
                     // card goes to middle
-                    // currentSuit = player1Play.getSuit();
-                    // firstPlayed = player1Play.getSuit();
+                    currentSuit = player1Play.getSuit();
+                    firstPlayed = player1Play.getSuit();
                     numPlays++;
                     turn++;
                     return true;
@@ -571,8 +532,8 @@ public class EuchreState extends GameState {
                 else if(playerID == 2){
                     // player2Play = card selected
                     // card goes to middle
-                    // currentSuit = player2Play.getSuit();
-                    // firstPlayed = player2Play.getSuit();
+                    currentSuit = player2Play.getSuit();
+                    firstPlayed = player2Play.getSuit();
                     numPlays++;
                     turn++;
                     return true;
@@ -580,8 +541,8 @@ public class EuchreState extends GameState {
                 else if(playerID == 3){
                     // player3Play = card selected
                     // card goes to middle
-                    // currentSuit = player3Play.getSuit();
-                    // firstPlayed = player3Play.getSuit();
+                    currentSuit = player3Play.getSuit();
+                    firstPlayed = player3Play.getSuit();
                     numPlays++;
                     turn++;
                     return true;
@@ -589,8 +550,8 @@ public class EuchreState extends GameState {
                 else if(playerID == 4){
                     // player2Play = card selected
                     // card goes to middle
-                    // currentSuit = player2Play.getSuit();
-                    // firstPlayed = player3Play.getSuit();
+                    currentSuit = player2Play.getSuit();
+                    firstPlayed = player3Play.getSuit();
                     numPlays++;
                     turn = 1;
                     return true;
@@ -600,15 +561,15 @@ public class EuchreState extends GameState {
                 if(playerID == 1){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player1Hand.getSuit() == currentSuit){
-                        //  valid.add(player1Hand); adds card to possible valid plays
-                        //}
+                        if(player1Hand.getSuit() == currentSuit){
+                          valid.add(player1Hand); // adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
-                        // player1Play = card selected
+                        //player1Play = card selected
                         // card goes to middle
-                        // currentSuit = player1Play.getSuit();
+                        currentSuit = player1Play.getSuit();
                         numPlays++;
                         turn++;
                         return true;
@@ -617,7 +578,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player1Play)){
                             // player1Play = card selected
                             // card goes to middle
-                            // currentSuit = player1Play.getSuit();
+                            currentSuit = player1Play.getSuit();
                             numPlays++;
                             turn++;
                             return true;
@@ -631,15 +592,15 @@ public class EuchreState extends GameState {
                 else if(playerID == 2){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player2Hand.getSuit() == currentSuit){
-                        //  valid.add(player2Hand); adds card to possible valid plays
-                        //}
+                        if(player2Hand.getSuit() == currentSuit){
+                          valid.add(player2Hand); //adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
                         // player2Play = card selected
                         // card goes to middle
-                        // currentSuit = player1Play.getSuit();
+                        currentSuit = player1Play.getSuit();
                         numPlays++;
                         turn++;
                         return true;
@@ -648,7 +609,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player2Play)){
                             // player2Play = card selected
                             // card goes to middle
-                            // currentSuit = player2Play.getSuit();
+                            currentSuit = player2Play.getSuit();
                             numPlays++;
                             turn++;
                             return true;
@@ -662,15 +623,15 @@ public class EuchreState extends GameState {
                 else if(playerID == 3){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player3Hand.getSuit() == currentSuit){
-                        //  valid.add(player3Hand); adds card to possible valid plays
-                        //}
+                        if(player3Hand.getSuit() == currentSuit){
+                          valid.add(player3Hand); //adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
                         // player3Play = card selected
                         // card goes to middle
-                        // currentSuit = player3Play.getSuit();
+                        currentSuit = player3Play.getSuit();
                         numPlays++;
                         turn++;
                         return true;
@@ -679,7 +640,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player3Play)){
                             // player3Play = card selected
                             // card goes to middle
-                            // currentSuit = player3Play.getSuit();
+                            currentSuit = player3Play.getSuit();
                             numPlays++;
                             turn++;
                             return true;
@@ -693,15 +654,15 @@ public class EuchreState extends GameState {
                 else if(playerID == 4){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player4Hand.getSuit() == currentSuit){
-                        //  valid.add(player4Hand); adds card to possible valid plays
-                        //}
+                        if(player4Hand.getSuit() == currentSuit){
+                          valid.add(player4Hand); // adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
                         // player4Play = card selected
                         // card goes to middle
-                        // currentSuit = player4Play.getSuit();
+                        currentSuit = player4Play.getSuit();
                         numPlays++;
                         turn = 1;
                         return true;
@@ -710,7 +671,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player4Play)){
                             // player4Play = card selected
                             // card goes to middle
-                            // currentSuit = player4Play.getSuit();
+                            currentSuit = player4Play.getSuit();
                             numPlays++;
                             turn = 1;
                             return true;
@@ -727,15 +688,15 @@ public class EuchreState extends GameState {
                 if(playerID == 1){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player1Hand.getSuit() == currentSuit){
-                        //  valid.add(player1Hand); adds card to possible valid plays
-                        //}
+                        if(player1Hand.getSuit() == currentSuit){
+                          valid.add(player1Hand); // adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
                         // player1Play = card selected
                         // card goes to middle
-                        // currentSuit = player1Play.getSuit();
+                        currentSuit = player1Play.getSuit();
                         isTrickComplete(true);
                         return true;
                     }
@@ -743,7 +704,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player1Play)){
                             // player1Play = card selected
                             // card goes to middle
-                            // currentSuit = player1Play.getSuit();
+                            currentSuit = player1Play.getSuit();
                             isTrickComplete(true);
                             return true;
                         }
@@ -756,15 +717,15 @@ public class EuchreState extends GameState {
                 else if(playerID == 2){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player2Hand.getSuit() == currentSuit){
-                        //  valid.add(player2Hand); adds card to possible valid plays
-                        //}
+                        if(player2Hand.getSuit() == currentSuit){
+                          valid.add(player2Hand); // adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
                         // player2Play = card selected
                         // card goes to middle
-                        // currentSuit = player1Play.getSuit();
+                        currentSuit = player1Play.getSuit();
                         isTrickComplete(true);
                         return true;
                     }
@@ -772,7 +733,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player2Play)){
                             // player2Play = card selected
                             // card goes to middle
-                            // currentSuit = player2Play.getSuit();
+                            currentSuit = player2Play.getSuit();
                             isTrickComplete(true);
                             return true;
                         }
@@ -785,15 +746,15 @@ public class EuchreState extends GameState {
                 else if(playerID == 3){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player3Hand.getSuit() == currentSuit){
-                        //  valid.add(player3Hand); adds card to possible valid plays
-                        //}
+                        if(player3Hand.getSuit() == currentSuit){
+                          valid.add(player3Hand); // adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
                         // player3Play = card selected
                         // card goes to middle
-                        // currentSuit = player3Play.getSuit();
+                        currentSuit = player3Play.getSuit();
                         isTrickComplete(true);
                         return true;
                     }
@@ -801,7 +762,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player3Play)){
                             // player3Play = card selected
                             // card goes to middle
-                            // currentSuit = player3Play.getSuit();
+                            currentSuit = player3Play.getSuit();
                             isTrickComplete(true);
                             return true;
                         }
@@ -814,15 +775,15 @@ public class EuchreState extends GameState {
                 else if(playerID == 4){
                     ArrayList<Card> valid = new ArrayList<>();
                     for(int i = 0; i < valid.size(); i++){
-                        //if(player4Hand.getSuit() == currentSuit){
-                        //  valid.add(player4Hand); adds card to possible valid plays
-                        //}
+                        if(player4Hand.getSuit() == currentSuit){
+                          valid.add(player4Hand); //adds card to possible valid plays
+                        }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
                         // player4Play = card selected
                         // card goes to middle
-                        // currentSuit = player4Play.getSuit();
+                        currentSuit = player4Play.getSuit();
                         isTrickComplete(true);
                         return true;
                     }
@@ -830,7 +791,7 @@ public class EuchreState extends GameState {
                         if(valid.contains(player4Play)){
                             // player4Play = card selected
                             // card goes to middle
-                            // currentSuit = player4Play.getSuit();
+                            currentSuit = player4Play.getSuit();
                             isTrickComplete(true);
                             return true;
                         }
@@ -850,34 +811,34 @@ public class EuchreState extends GameState {
         // if round is complete calculate who won trick
         // need to set values of cards 9-14
         int[] value = new int[5];
-        // value[1] = player1Play.getValue();
-        // value[2] = player2Play.getValue();
-        // value[3] = player3Play.getValue();
-        // value[4] = player4Play.getValue();
-        // if(player1Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-        //      value[1] += 10;
-        // }
-        // else if(player2Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-        //      value[2] += 10;
-        // }
-        // else if(player3Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-        //      value[3] += 10;
-        // }
-        // else if(player3Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
-        //      value[4] += 10;
-        // }
-        // else if(player1Play.getSuit() == currentSuit){
-        //      value[1] += 20;
-        // }
-        // else if(player2Play.getSuit() == currentSuit){
-        //      value[2] += 20;
-        // }
-        // else if(player3Play.getSuit() == currentSuit){
-        //      value[3] += 20;
-        // }
-        // else if(player4Play.getSuit() == currentSuit){
-        //      value[4] += 20;
-        // }
+        value[1] = player1Play.getValue();
+        value[2] = player2Play.getValue();
+        value[3] = player3Play.getValue();
+        value[4] = player4Play.getValue();
+        if(player1Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
+             value[1] += 10;
+        }
+        else if(player2Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
+             value[2] += 10;
+        }
+        else if(player3Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
+             value[3] += 10;
+        }
+        else if(player3Play.getSuit() == firstPlayed && firstPlayed != currentSuit){
+             value[4] += 10;
+        }
+        else if(player1Play.getSuit() == currentSuit){
+             value[1] += 20;
+        }
+        else if(player2Play.getSuit() == currentSuit){
+             value[2] += 20;
+        }
+        else if(player3Play.getSuit() == currentSuit){
+             value[3] += 20;
+        }
+        else if(player4Play.getSuit() == currentSuit){
+             value[4] += 20;
+        }
         int winner = 0;
         for(int j = 1; j < 5; j++){
             if(value[j] > winner){
@@ -939,5 +900,3 @@ public class EuchreState extends GameState {
         return false;
     }
 }
-
-
