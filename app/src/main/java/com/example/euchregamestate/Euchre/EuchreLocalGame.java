@@ -24,22 +24,29 @@ public class EuchreLocalGame extends LocalGame {
     protected boolean makeMove(GameAction action) {
         int ID = state.getTurn();
         if(action instanceof EuchrePlayCardAction) {
+            return false;
         }
-        if(action instanceof EuchrePassAction){
+        else if(action instanceof EuchrePassAction){
+            boolean b = state.isPass(ID);
+            return b;
+        }
+        else if(action instanceof EuchreOrderUpAction){
+            boolean b = state.isOrderUpTrump(ID);
+            return b;
+        }
+        else if(action instanceof EuchreSelectTrumpAction){
+            boolean b = state.isSelectTrump(ID);
+            return b;
+        }
+        else if(action instanceof EuchrePickItUpAction){
+            boolean b = state.isPickItUp(ID);
+        }
+        else if(action instanceof EuchreGoingAloneAction){
+            boolean b = state.isGoingAlone(ID);
+            return b;
 
         }
-        if(action instanceof EuchreOrderUpAction){
-
-        }
-        if(action instanceof EuchreSelectTrumpAction){
-
-        }
-        if(action instanceof EuchrePickItUpAction){
-
-        }
-        if(action instanceof EuchreGoingAloneAction){
-
-        }
+        return false;
     }
 
 
