@@ -53,6 +53,10 @@ public class EuchreState extends GameState {
     // random number generator
     protected Random rand = new Random();
 
+    public int getTurn() {
+        return turn;
+    }
+
     //default constructor
     public EuchreState(){
         // init instance variables
@@ -896,6 +900,7 @@ public class EuchreState extends GameState {
         }
         return false;
     }
+
 }
 
 
