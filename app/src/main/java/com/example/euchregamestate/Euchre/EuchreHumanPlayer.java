@@ -1,5 +1,6 @@
 package com.example.euchregamestate.Euchre;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,9 +12,16 @@ import com.example.euchregamestate.R;
 
 public class EuchreHumanPlayer extends GameHumanPlayer {
 
+    //instance variables
+    private static final String TAG = "EuchreHumanPlayer";
+
+    private Activity myActivity;
+
+    private int layoutId;
+
     public EuchreHumanPlayer(String name, int layoutID){
         super(name);
-
+        this.layoutId = layoutID;
     }
 
     protected void initAfterReady() {
