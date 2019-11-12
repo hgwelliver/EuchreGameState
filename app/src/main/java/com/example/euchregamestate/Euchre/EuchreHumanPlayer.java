@@ -19,12 +19,16 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     protected void initAfterReady() {
         if(myActivity == null)
             return;
+
+        final EuchreHumanPlayer hp = this;
+
         //linking action buttons to listeners
         Button passButton = (Button) myActivity.findViewById(R.id.passButton);
         passButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //call pass function
+                game.sendAction(new EuchrePassAction(hp));
             }
         });
 
@@ -33,6 +37,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 //call pickitup function
+                game.sendAction(new EuchrePickItUpAction(hp));
             }
         });
 
@@ -41,14 +46,18 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 //call order up function
+                game.sendAction(new EuchreOrderUpAction(hp));
             }
         });
 
         Button goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
+
+
         goingAloneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //call going alone
+                game.sendAction(new EuchreGoingAloneAction(hp));
             }
         });
 
@@ -57,6 +66,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 //call quit
+                //game.sendAction(new EuchreQuitAction(hp));
             }
         });
 

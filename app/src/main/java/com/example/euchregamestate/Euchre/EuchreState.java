@@ -11,12 +11,13 @@ import java.util.Random;
 public class EuchreState extends GameState {
 
     // info about the resources each player has
+    protected CardDeck deck = new CardDeck();
     protected ArrayList<Card> player1Hand = new ArrayList<>();
     protected ArrayList<Card> player2Hand = new ArrayList<>();
     protected ArrayList<Card> player3Hand = new ArrayList<>();
     protected ArrayList<Card> player4Hand = new ArrayList<>();
     // info about the state of resources
-    protected ArrayList<Card> deck = new ArrayList<>();
+    protected ArrayList<Card> deckList = new ArrayList<>();
     // whose turn
     protected int turn; // 1/5 for player 1, 2/6 for player 2, 3/7 for player 3, 4/8 for player 4
     protected int dealer; // 1 for player 1, 2 for player 2, 3 for player 3, 4 for player 4
@@ -76,7 +77,7 @@ public class EuchreState extends GameState {
         for(int y = 0; y < 24; y++){
             // fill deck with the 32 cards from the CardDeck class
             // need to make getCard method that allows deck to get cards
-            deck.add(y, deck.get(y));
+            deckList.add(y, deck.cardDeck[y]);
         }
     }
 
