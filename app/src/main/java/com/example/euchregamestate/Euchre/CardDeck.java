@@ -2,6 +2,8 @@ package com.example.euchregamestate.Euchre;
 import com.example.euchregamestate.R;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * CardDeck class - creates a deck of 24 euchre cards that are stored in an array
@@ -11,8 +13,8 @@ import java.io.Serializable;
 public class CardDeck implements Serializable {
 
     //creates an array for all cards
-    public Card[] cardDeck = new Card[23];
-
+    //public Card[] cardDeck = new Card[23];
+    public ArrayList<Card> cardDeck = new ArrayList<>();
     //creating all cards...assigns a suit, number, and image to each card respectively
     //heart cards
     public Card nine_h = new Card(Card.SUIT.HEARTS, Card.NUMBER.NINE, R.drawable.nine_h);
@@ -49,32 +51,33 @@ public class CardDeck implements Serializable {
 
     //adds all possible cards to the arrayList
     public CardDeck() {
-        cardDeck[0] = nine_h;
-        cardDeck[1] = ten_h;
-        cardDeck[2] = ace_h;
-        cardDeck[3] = jack_h;
-        cardDeck[4] = queen_h;
-        cardDeck[5] = king_h;
+        // create a standard euchre deck with the cards above
+        cardDeck.add(nine_h);
+        cardDeck.add(ten_h);
+        cardDeck.add(ace_h);
+        cardDeck.add(jack_h);
+        cardDeck.add(queen_h);
+        cardDeck.add(king_h);
 
-        cardDeck[6] = nine_s;
-        cardDeck[7] = ten_s;
-        cardDeck[8] = ace_s;
-        cardDeck[9] = jack_s;
-        cardDeck[10] = queen_s;
-        cardDeck[11] = king_s;
+        cardDeck.add(nine_s);
+        cardDeck.add(ten_s);
+        cardDeck.add(ace_s);
+        cardDeck.add(jack_s);
+        cardDeck.add(queen_s);
+        cardDeck.add(king_s);
 
-        cardDeck[12] = nine_c;
-        cardDeck[13] = ten_c;
-        cardDeck[14] = ace_c;
-        cardDeck[15] = jack_c;
-        cardDeck[16] = queen_c;
-        cardDeck[17] = king_c;
+        cardDeck.add(nine_c);
+        cardDeck.add(ten_c);
+        cardDeck.add(ace_c);
+        cardDeck.add(jack_c);
+        cardDeck.add(queen_c);
+        cardDeck.add(king_c);
 
-        cardDeck[18] = nine_d;
-        cardDeck[19] = ten_d;
-        cardDeck[20] = ace_d;
-        cardDeck[21] = jack_d;
-        cardDeck[22] = queen_d;
-        cardDeck[23] = king_d;
+        cardDeck.add(nine_d);
+        cardDeck.add(ten_d);
+        cardDeck.add(ace_d);
+        cardDeck.add(jack_d);
+        cardDeck.add(queen_d);
+        cardDeck.add(king_d);
     }
 }

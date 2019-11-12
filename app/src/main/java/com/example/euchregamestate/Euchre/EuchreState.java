@@ -77,7 +77,7 @@ public class EuchreState extends GameState {
         for(int y = 0; y < 24; y++){
             // fill deck with the 32 cards from the CardDeck class
             // need to make getCard method that allows deck to get cards
-            deckList.add(y, deck.cardDeck[y]);
+            deckList.add(y, deck.cardDeck.get(y));
         }
     }
 
@@ -99,7 +99,7 @@ public class EuchreState extends GameState {
         for(int y = 0; y < 24; y++){
             // fill deck with the 32 cards from the CardDeck class
             // need to make getCard method that allows deck to get cards
-            deck.add(y, deck.get(y));
+            deckList.add(y, deck.cardDeck.get(y));
         }
     }
 
@@ -149,31 +149,31 @@ public class EuchreState extends GameState {
             kitty.clear();
             currentMiddle.clear();
             // shuffle deck
-            Collections.shuffle(deck);
+            Collections.shuffle(deckList);
             // deal cards to each player
             // player 1's hand
             for(int i = 0; i < 5; i++){
-                player1Hand.add(i, deck.get(i));
+                player1Hand.add(i, deckList.get(i));
             }
             // player 2's hand
             for(int i = 5; i < 10; i++){
-                player2Hand.add(i, deck.get(i));
+                player2Hand.add(i, deckList.get(i));
             }
             // player 3's hand
             for(int i = 10; i < 15; i++){
-                player3Hand.add(i, deck.get(i));
+                player3Hand.add(i, deckList.get(i));
             }
             // player 4's hand
             for(int i = 15; i < 20; i++){
-                player4Hand.add(i, deck.get(i));
+                player4Hand.add(i, deckList.get(i));
             }
             // deal remaining cards to the kitty and choose one as middle card
             for(int i = 20; i < 24; i++){
                 if(i == 20){
-                    middleCard = deck.get(i);
+                    middleCard = deckList.get(i);
                     middleCardSuit = middleCard.getSuit();
                 }
-                kitty.add(i, deck.get(i));
+                kitty.add(i, deckList.get(i));
             }
 
             // make middle card visible

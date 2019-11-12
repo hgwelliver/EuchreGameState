@@ -19,6 +19,9 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
     private int layoutId;
 
+
+    private EuchreState latestState = null;
+
     public EuchreHumanPlayer(String name, int layoutID){
         super(name);
         this.layoutId = layoutID;
@@ -173,11 +176,21 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         return v;
     }
 
+    @Override
     public void receiveInfo(GameInfo info){
+        if ( (info != null) && (info instanceof EuchreState) ) {
+            this.latestState = (EuchreState)info;
+
+        }
+        else {
+            return;
+        }
 
     }
 
+    @Override
     public void setAsGui(GameMainActivity activity){
-
+        // Load the layout resource for the new configuration
+        activity.setContentView(R.layout.activity_main);
     }
 }
