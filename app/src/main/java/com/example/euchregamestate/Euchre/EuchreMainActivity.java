@@ -26,7 +26,7 @@ public class EuchreMainActivity extends GameMainActivity {
         // yellow-on-blue GUI
         playerTypes.add(new GamePlayerType("Local Human Player ") {
             public GamePlayer createPlayer(String name) {
-                return new EuchreHumanPlayer(name);
+                return new EuchreHumanPlayer(name, R.layout.activity_main);
             }
         });
 
@@ -40,11 +40,13 @@ public class EuchreMainActivity extends GameMainActivity {
 
 
         // Create a game configuration class for Tic-tac-toe
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Tic-Tac-Toe", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Tic-Tac-Toe", PORT_NUMBER);
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0); // yellow-on-blue GUI
-        defaultConfig.addPlayer("Computer", 1); // dumb computer player
+        defaultConfig.addPlayer("Computer1", 1); // dumb computer player
+        defaultConfig.addPlayer("Computer2", 1); // dumb computer player
+        defaultConfig.addPlayer("Computer3", 1); // dumb computer player
 
         // Set the initial information for the remote player
         defaultConfig.setRemoteData("Remote Player", "", 1); // red-on-yellow GUI

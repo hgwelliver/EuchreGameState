@@ -11,11 +11,14 @@ import com.example.euchregamestate.R;
 
 public class EuchreHumanPlayer extends GameHumanPlayer {
 
-    public EuchreHumanPlayer(String name){
+    public EuchreHumanPlayer(String name, int layoutID){
         super(name);
+
     }
 
     protected void initAfterReady() {
+        if(myActivity == null)
+            return;
         //linking action buttons to listeners
         Button passButton = (Button) myActivity.findViewById(R.id.passButton);
         passButton.setOnClickListener(new View.OnClickListener() {
