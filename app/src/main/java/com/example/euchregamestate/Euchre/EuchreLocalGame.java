@@ -7,6 +7,7 @@ import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 
 public class EuchreLocalGame extends LocalGame {
     private EuchreState state;
+    int playerNum;
     public EuchreLocalGame(){
         state = new EuchreState();
     }
@@ -17,48 +18,70 @@ public class EuchreLocalGame extends LocalGame {
         if(playerIdx == state.getTurn()){
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
     @Override
     protected boolean makeMove(GameAction action) {
-        int ID = state.getTurn();
+        playerNum = state.getTurn();
         if(action instanceof EuchrePlayCardAction) {
-            return false;
+            EuchrePlayCardAction playAct = (EuchrePlayCardAction) action;
+            playerNum = this.getPlayerIdx(playAct.getPlayer());
+            if(state.turn == playerNum) {
+                return state.validMove(playerNum, playAct.getCardToPlay());
+            }
         }
         else if(action instanceof EuchrePassAction){
-            boolean b = state.isPass(ID);
-            return b;
+            EuchrePassAction passAct = (EuchrePassAction) action;
+            playerNum = this.getPlayerIdx(passAct.getPlayer());
+            if(state.turn == playerNum){
+                return state.isPass(playerNum);
+            }
         }
         else if(action instanceof EuchreOrderUpAction){
-            boolean b = state.isOrderUpTrump(ID);
-            return b;
+            EuchreOrderUpAction orderAct = (EuchreOrderUpAction) action;
+            playerNum = this.getPlayerIdx(orderAct.getPlayer());
+            if(state.turn == playerNum){
+                return state.isOrderUpTrump(playerNum);
+            }
         }
         else if(action instanceof EuchreSelectTrumpAction){
-            boolean b = state.isSelectTrump(ID);
-            return b;
+            EuchreSelectTrumpAction selectAct = (EuchreSelectTrumpAction) action;
+            playerNum = this.getPlayerIdx(selectAct.getPlayer());
+            if(state.turn == playerNum){
+                return state.isSelectTrump(playerNum);
+            }
         }
         else if(action instanceof EuchrePickItUpAction){
-            boolean b = state.isPickItUp(ID);
+            EuchrePickItUpAction pickAct = (EuchrePickItUpAction) action;
+            playerNum = this.getPlayerIdx(pickAct.getPlayer());
+            if(state.turn == playerNum){
+                return state.isPickItUp(playerNum);
+            }
         }
         else if(action instanceof EuchreGoingAloneAction){
-            boolean b = state.isGoingAlone(ID);
-            return b;
-
+            EuchreGoingAloneAction aloneAct = (EuchreGoingAloneAction) action;
+            playerNum = this.getPlayerIdx(aloneAct.getPlayer());
+            if(state.turn == playerNum){
+                return state.isGoingAlone(playerNum);
+            }
         }
         return false;
     }
 
-
-
-
-
     @Override
-
     protected void sendUpdatedStateTo(GamePlayer p) {
         //TODO  You will implement this method
-        EuchreState state2 = new EuchreState(state);
-        p.sendInfo(state2);
+        //If there is no updated state, return
+        if (state == null) return;
+
+        //make a copy of the state
+        EuchreState recent = new EuchreState(state);//copy of state
+
+        //send copy of state to the player
+        p.sendInfo(recent);
     }
 
     @Override
@@ -72,4 +95,5 @@ public class EuchreLocalGame extends LocalGame {
         }
         return null;
     }
+
 }
