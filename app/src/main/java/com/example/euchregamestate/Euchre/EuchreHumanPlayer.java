@@ -19,7 +19,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
     private int layoutId;
 
-
     private EuchreState latestState = null;
 
     public EuchreHumanPlayer(String name, int layoutID){
@@ -192,5 +191,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     public void setAsGui(GameMainActivity activity){
         // Load the layout resource for the new configuration
         activity.setContentView(R.layout.activity_main);
+        myActivity = activity;
+
     }
 }
