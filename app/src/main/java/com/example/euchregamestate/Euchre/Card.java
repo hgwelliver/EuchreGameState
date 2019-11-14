@@ -32,7 +32,7 @@ public class Card implements Serializable {
         return cardName;
     }
 
-    public int getPictureID() {
+    public int getResourceId() {
         return pictureID;
     }
 

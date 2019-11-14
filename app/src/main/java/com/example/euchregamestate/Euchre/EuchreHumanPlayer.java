@@ -1,6 +1,7 @@
 package com.example.euchregamestate.Euchre;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,14 +11,24 @@ import com.example.euchregamestate.GameFramework.GameMainActivity;
 import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
 import com.example.euchregamestate.R;
 
+import java.util.ArrayList;
+
 public class EuchreHumanPlayer extends GameHumanPlayer {
 
     //instance variables
     private static final String TAG = "EuchreHumanPlayer";
 
+    private Button passButton, pickItUpButton, orderUpButton, goingAloneButton,
+            quitButton, helpMenuButton;
+    private ImageView spadeButton, clubButton, heartButton, diamondButton;
+    private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
+    private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
+    private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
+
     private Activity myActivity;
 
     private int layoutId;
+
 
     private EuchreState latestState = null;
 
@@ -27,147 +38,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     }
 
     protected void initAfterReady() {
-        if(myActivity == null)
-            return;
-
-        final EuchreHumanPlayer hp = this;
-
-        //linking action buttons to listeners
-        Button passButton = (Button) myActivity.findViewById(R.id.passButton);
-        passButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //call pass function
-                game.sendAction(new EuchrePassAction(hp));
-            }
-        });
-
-        Button pickItUpButton = (Button) myActivity.findViewById(R.id.pickItUpButton);
-        pickItUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //call pickitup function
-                game.sendAction(new EuchrePickItUpAction(hp));
-            }
-        });
-
-        Button orderUpButton = (Button) myActivity.findViewById(R.id.orderUpButton);
-        orderUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //call order up function
-                game.sendAction(new EuchreOrderUpAction(hp));
-            }
-        });
-
-        Button goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
 
 
-        goingAloneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //call going alone
-                game.sendAction(new EuchreGoingAloneAction(hp));
-            }
-        });
-
-        Button quitButton = (Button) myActivity.findViewById(R.id.quitButton);
-        quitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //call quit
-                //game.sendAction(new EuchreQuitAction(hp));
-            }
-        });
-
-
-        //linking trump selection buttons to listeners
-        Button spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
-        spadeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //changes trump to spades
-            }
-        });
-
-        Button clubButton = (Button) myActivity.findViewById(R.id.clubButton);
-        clubButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //changes trump to clubs
-            }
-        });
-
-        Button heartButton = (Button) myActivity.findViewById(R.id.heartButton);
-        heartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //changes trump to hearts
-            }
-        });
-
-        Button diamondButton = (Button) myActivity.findViewById(R.id.diamondButton);
-        diamondButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //changes trump to diamonds
-            }
-        });
-
-
-
-        //linking cards on layout
-        //player hand
-        ImageView playerHand1 = (ImageView) myActivity.findViewById(R.id.playerhand1);
-        playerHand1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //sends card out to [player] when clicked
-            }
-        });
-
-        ImageView playerHand2 = (ImageView) myActivity.findViewById(R.id.playerhand2);
-        playerHand2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //sends card out to [player] when clicked
-            }
-        });
-
-        ImageView playerHand3 = (ImageView) myActivity.findViewById(R.id.playerhand3);
-        playerHand3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //sends card out to [player] when clicked
-            }
-        });
-
-        ImageView playerHand4 = (ImageView) myActivity.findViewById(R.id.playerhand4);
-        playerHand4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //sends card out to [player] when clicked
-            }
-        });
-
-        ImageView playerHand5 = (ImageView) myActivity.findViewById(R.id.playerhand5);
-        playerHand5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //sends card out to [player] when clicked
-            }
-        });
-
-
-        //game play cards - these do not need onClickListeners because they do not
-        // need to be clicked, they serve as placeholders
-        ImageView player = (ImageView) myActivity.findViewById(R.id.player);
-
-        ImageView rightPlayer = (ImageView) myActivity.findViewById(R.id.rightplayer);
-
-        ImageView leftPlayer = (ImageView) myActivity.findViewById(R.id.leftplayer);
-
-        ImageView topPlayer = (ImageView) myActivity.findViewById(R.id.topplayer);
     }
 
     protected View v;
@@ -176,9 +48,53 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     }
 
     @Override
+    //being handed an updated game state
+    //latest truth of the game
+    //updateGUI
     public void receiveInfo(GameInfo info){
         if ( (info != null) && (info instanceof EuchreState) ) {
             this.latestState = (EuchreState)info;
+
+            //maybe call updateGUI()
+
+            playerHands.add(player);
+            playerHands.add(topPlayer);
+            playerHands.add(leftPlayer);
+            playerHands.add(rightPlayer);
+
+            //draw background for draw pile
+            kitty.setImageResource(R.drawable.cardback);
+
+            player.setImageResource(R.drawable.cardback);
+            topPlayer.setImageResource(R.drawable.cardback);
+            rightPlayer.setImageResource(R.drawable.cardback);
+            leftPlayer.setImageResource(R.drawable.cardback);
+
+            //draw everything here based on what is in the latest state
+            //playerhand1.setImageResource(R.drawable.ace_d);
+
+            //arraylist of cards
+            ArrayList<Card> p1Hand = latestState.getPlayerHand(1);
+
+            //ask the card for its image resource id
+            //int id = p1Hand.get(0).getResourceId();
+            //setImageResource like above ^
+            //playerhand1.setImageResource(id);
+            int i = 0;
+            for(; i < p1Hand.size(); i++){
+                int id = p1Hand.get(i).getResourceId();
+                //setImageResource like above ^
+                playerhand1.setImageResource(id);
+            }
+            for(; i < 5; i++){
+                //set cards to empty
+                playerhand1.setImageResource(R.drawable.cardback);
+                playerhand2.setImageResource(R.drawable.cardback);
+                playerhand3.setImageResource(R.drawable.cardback);
+                playerhand4.setImageResource(R.drawable.cardback);
+                playerhand5.setImageResource(R.drawable.cardback);
+            }
+
 
         }
         else {
@@ -190,8 +106,132 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     @Override
     public void setAsGui(GameMainActivity activity){
         // Load the layout resource for the new configuration
-        activity.setContentView(R.layout.activity_main);
+
         myActivity = activity;
 
+        final EuchreHumanPlayer hp = this;
+
+        if(myActivity == null)
+            return;
+
+        activity.setContentView(R.layout.activity_main);
+
+        //creating the button and ImageViews used to draw the cards
+
+        passButton = (Button) myActivity.findViewById(R.id.passButton);
+        pickItUpButton = (Button) myActivity.findViewById(R.id.pickItUpButton);
+        orderUpButton = (Button) myActivity.findViewById(R.id.orderUpButton);
+        goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
+        quitButton = (Button) myActivity.findViewById(R.id.quitButton);
+
+        //cards on table
+        //these do not need onClickListeners because they do not
+        // need to be clicked, they serve as placeholders
+        player = (ImageView) myActivity.findViewById(R.id.player);
+        topPlayer = (ImageView) myActivity.findViewById(R.id.topplayer);
+        rightPlayer = (ImageView) myActivity.findViewById(R.id.rightplayer);
+        leftPlayer = (ImageView) myActivity.findViewById(R.id.leftplayer);
+        kitty = (ImageView) myActivity.findViewById(R.id.kitty);
+
+
+        //cards in hand
+        playerhand1 = (ImageView) myActivity.findViewById(R.id.playerhand1);
+        playerhand2 = (ImageView) myActivity.findViewById(R.id.playerhand2);
+        playerhand3 = (ImageView) myActivity.findViewById(R.id.playerhand3);
+        playerhand4 = (ImageView) myActivity.findViewById(R.id.playerhand4);
+        playerhand5 = (ImageView) myActivity.findViewById(R.id.playerhand5);
+
+        //quits game
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //quits program
+                myActivity.finish();
+            }
+        });
+
+        //haley will do this
+/*        helpMenuButton.setOnClickListener(new View.OnClickListener() {
+            //displays rules when button is pressed
+            @Override
+            public void onClick(View v) {
+                myActivity.startActivity(new Intent(myActivity, help.class));
+            }
+        });*/
+
+        passButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                game.sendAction(new EuchrePassAction(hp));
+
+            }
+        });
+
+        pickItUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                game.sendAction(new EuchrePickItUpAction(hp));
+
+            }
+        });
+
+        orderUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                game.sendAction(new EuchreOrderUpAction(hp));
+
+            }
+        });
+
+        goingAloneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                game.sendAction(new EuchreGoingAloneAction(hp));
+
+            }
+        });
+
+        //when the cards in player hand are clicked
+        playerhand1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+       
+            }
+        });
+
+        playerhand2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        playerhand3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        playerhand4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        playerhand5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
     }
+
+
+
+
 }

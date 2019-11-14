@@ -95,6 +95,12 @@ public class EuchreState extends GameState {
 
     }
 
+    //playerNum = 1-4
+    public ArrayList<Card> getPlayerHand(int playerNum){
+        //switch statememt for each player
+        return player1Hand;
+    }
+
     @Override
     public String toString(){
         String string = "Player 1's Hand: " + ArrayToString(player1Hand) + "\n" +
