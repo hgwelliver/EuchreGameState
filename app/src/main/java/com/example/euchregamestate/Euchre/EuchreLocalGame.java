@@ -68,6 +68,10 @@ public class EuchreLocalGame extends LocalGame {
                 return state.isGoingAlone(playerNum);
             }
         }
+        else if(action instanceof EuchreDealAction){
+            EuchreDealAction dealAct = (EuchreDealAction) action;
+            return state.deal();
+        }
         return false;
     }
 
