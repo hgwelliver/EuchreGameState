@@ -96,11 +96,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 playerhand5.setImageResource(R.drawable.cardback);
             }*/
 
-            playerhand1.setImageResource(R.drawable.jack_d);
-            playerhand2.setImageResource(R.drawable.ten_c);
-            playerhand3.setImageResource(R.drawable.nine_h);
-            playerhand4.setImageResource(R.drawable.ten_d);
-            playerhand5.setImageResource(R.drawable.ace_s);
+            playerhand1.setImageResource(latestState.player1Hand.get(0).getResourceId());
+            playerhand2.setImageResource(latestState.player1Hand.get(1).getResourceId());
+            playerhand3.setImageResource(latestState.player1Hand.get(2).getResourceId());
+            playerhand4.setImageResource(latestState.player1Hand.get(3).getResourceId());
+            playerhand5.setImageResource(latestState.player1Hand.get(4).getResourceId());
 
 
         }
@@ -202,7 +202,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(R.drawable.jack_d);
+                player.setImageResource(latestState.player1Hand.get(0).getResourceId());
                 playerhand1.setImageResource(R.drawable.cardback);
             }
         });
@@ -210,7 +210,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(R.drawable.ten_c);
+                player.setImageResource(latestState.player1Hand.get(1).getResourceId());
                 playerhand2.setImageResource(R.drawable.cardback);
             }
         });
@@ -218,7 +218,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(R.drawable.nine_h);
+                player.setImageResource(latestState.player1Hand.get(2).getResourceId());
                 playerhand3.setImageResource(R.drawable.cardback);
             }
         });
@@ -226,7 +226,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(R.drawable.ten_d);
+                player.setImageResource(latestState.player1Hand.get(3).getResourceId());
                 playerhand4.setImageResource(R.drawable.cardback);
             }
         });
@@ -234,7 +234,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(R.drawable.ace_s);
+                player.setImageResource(latestState.player1Hand.get(4).getResourceId());
                 playerhand5.setImageResource(R.drawable.cardback);
             }
         });

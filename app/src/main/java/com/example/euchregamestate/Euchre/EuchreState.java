@@ -5,14 +5,16 @@ import com.example.euchregamestate.R;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class EuchreState extends GameState {
 
     // info about the resources each player has
-    protected CardDeck deck = new CardDeck();
-    protected ArrayList<Card> player1Hand = new ArrayList<>();
+    public CardDeck deck;
+    protected ArrayList<Card> player1Hand;
     protected ArrayList<Card> player2Hand = new ArrayList<>();
     protected ArrayList<Card> player3Hand = new ArrayList<>();
     protected ArrayList<Card> player4Hand = new ArrayList<>();
@@ -74,7 +76,13 @@ public class EuchreState extends GameState {
         this.redTrickScore = 0;
         this.blueTrickScore = 0;
         // init deck of cards
-        deal();
+        this.deck = new CardDeck();
+        Collections.shuffle(deck.cardDeck);
+        player1Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(0),deck.cardDeck.get(1),deck.cardDeck.get(2),deck.cardDeck.get(3),deck.cardDeck.get(4)));
+        player2Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(5),deck.cardDeck.get(6),deck.cardDeck.get(7),deck.cardDeck.get(8),deck.cardDeck.get(9)));
+        player3Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(10),deck.cardDeck.get(11),deck.cardDeck.get(12),deck.cardDeck.get(13),deck.cardDeck.get(14)));
+        player4Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(15),deck.cardDeck.get(16),deck.cardDeck.get(17),deck.cardDeck.get(18),deck.cardDeck.get(19)));
+        kitty = new ArrayList<>(Arrays.asList(deck.cardDeck.get(20),deck.cardDeck.get(21),deck.cardDeck.get(22),deck.cardDeck.get(23)));
     }
 
     //copy constructor
@@ -91,6 +99,7 @@ public class EuchreState extends GameState {
         this.blueScore = other.blueScore;
         this.redTrickScore = other.redTrickScore;
         this.blueTrickScore = other.blueTrickScore;
+        this.player1Hand = other.player1Hand;
         // init deck of cards
 
     }
@@ -152,10 +161,10 @@ public class EuchreState extends GameState {
             // player 1's hand
             for(int i = 0; i < 5; i++){
                 player1Hand.add(i, deck.cardDeck.get(i));
-                player2Hand.add(5 + i, deck.cardDeck.get(5 + i));
-                player3Hand.add(10 + i, deck.cardDeck.get(10 + i));
-                player4Hand.add(15 + i, deck.cardDeck.get(15 + i));
-                kitty.add(i + 20, deck.cardDeck.get(20 + i));
+               // player2Hand.add(5 + i, deck.cardDeck.get(5 + i));
+               // player3Hand.add(10 + i, deck.cardDeck.get(10 + i));
+                //player4Hand.add(15 + i, deck.cardDeck.get(15 + i));
+               // kitty.add(i + 20, deck.cardDeck.get(20 + i));
             }
             middleCard = deck.cardDeck.get(20);
             middleCardSuit = middleCard.getSuit();

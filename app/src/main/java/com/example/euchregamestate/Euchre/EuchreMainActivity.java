@@ -65,7 +65,7 @@ public class EuchreMainActivity extends GameMainActivity {
      *         class.
      */
     @Override
-    public LocalGame createLocalGame() {
+    public EuchreLocalGame createLocalGame() {
 
         return new EuchreLocalGame();
     }
