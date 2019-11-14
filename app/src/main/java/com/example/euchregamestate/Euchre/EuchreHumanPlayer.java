@@ -81,8 +81,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             //int id = p1Hand.get(0).getResourceId();
             //setImageResource like above ^
             //playerhand1.setImageResource(id);
-            int i = 0;
-/*            for(; i < p1Hand.size(); i++){
+         /*   int i = 0;
+           for(; i < p1Hand.size(); i++){
                 int id = p1Hand.get(i).getResourceId();
                 //setImageResource like above ^
                 playerhand1.setImageResource(id);
@@ -95,12 +95,43 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 playerhand4.setImageResource(R.drawable.cardback);
                 playerhand5.setImageResource(R.drawable.cardback);
             }*/
+         if(p1Hand.size() > 0){
+             int id = p1Hand.get(0).getResourceId();
+             playerhand1.setImageResource(id);
+         }
+         else{
+             playerhand1.setImageResource(R.drawable.cardback);
+         }
+            if(p1Hand.size() > 1){
+                int id = p1Hand.get(1).getResourceId();
+                playerhand2.setImageResource(id);
+            }
+            else{
+                playerhand2.setImageResource(R.drawable.cardback);
+            }
+            if(p1Hand.size() > 2){
+                int id = p1Hand.get(2).getResourceId();
+                playerhand3.setImageResource(id);
+            }
+            else{
+                playerhand3.setImageResource(R.drawable.cardback);
+            }
+            if(p1Hand.size() > 3){
+                int id = p1Hand.get(3).getResourceId();
+                playerhand4.setImageResource(id);
+            }
+            else{
+                playerhand4.setImageResource(R.drawable.cardback);
+            }
+            if(p1Hand.size() > 4){
+                int id = p1Hand.get(4).getResourceId();
+                playerhand5.setImageResource(id);
+            }
+            else{
+                playerhand5.setImageResource(R.drawable.cardback);
+            }
 
-            playerhand1.setImageResource(latestState.player1Hand.get(0).getResourceId());
-            playerhand2.setImageResource(latestState.player1Hand.get(1).getResourceId());
-            playerhand3.setImageResource(latestState.player1Hand.get(2).getResourceId());
-            playerhand4.setImageResource(latestState.player1Hand.get(3).getResourceId());
-            playerhand5.setImageResource(latestState.player1Hand.get(4).getResourceId());
+
 
 
         }
@@ -165,6 +196,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 myActivity.startActivity(new Intent(myActivity, help.class));
             }
         });*/
+        //if(latestState.getTurn() ==0){//can only do actions on turn
 
         passButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,46 +234,55 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(latestState.player1Hand.get(0).getResourceId());
-                playerhand1.setImageResource(R.drawable.cardback);
+                //player.setImageResource(latestState.player1Hand.get(0).getResourceId());
+                //playerhand1.setImageResource(R.drawable.cardback);
+                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
             }
         });
 
         playerhand2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(latestState.player1Hand.get(1).getResourceId());
-                playerhand2.setImageResource(R.drawable.cardback);
+                //player.setImageResource(latestState.player1Hand.get(1).getResourceId());
+                //playerhand2.setImageResource(R.drawable.cardback);
+                //latestState.setTurn(2);
+                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
             }
         });
 
         playerhand3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(latestState.player1Hand.get(2).getResourceId());
-                playerhand3.setImageResource(R.drawable.cardback);
+                //player.setImageResource(latestState.player1Hand.get(2).getResourceId());
+                //playerhand3.setImageResource(R.drawable.cardback);
+                //latestState.setTurn(2);
+                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
             }
         });
 
         playerhand4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(latestState.player1Hand.get(3).getResourceId());
-                playerhand4.setImageResource(R.drawable.cardback);
+                //player.setImageResource(latestState.player1Hand.get(3).getResourceId());
+                //playerhand4.setImageResource(R.drawable.cardback);
+                //latestState.setTurn(2);
+                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
             }
         });
 
         playerhand5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setImageResource(latestState.player1Hand.get(4).getResourceId());
-                playerhand5.setImageResource(R.drawable.cardback);
+                //player.setImageResource(latestState.player1Hand.get(4).getResourceId());
+                //playerhand5.setImageResource(R.drawable.cardback);
+                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
+
             }
         });
 
 
-
-    }
+        //sendInfo(latestState);
+    }//}
 
 
 

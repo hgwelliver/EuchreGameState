@@ -4,6 +4,7 @@ import com.example.euchregamestate.GameFramework.GamePlayer;
 import com.example.euchregamestate.GameFramework.LocalGame;
 import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
+import com.example.euchregamestate.GameFramework.utilities.Logger;
 
 public class EuchreLocalGame extends LocalGame {
     private EuchreState state;
@@ -27,6 +28,7 @@ public class EuchreLocalGame extends LocalGame {
     protected boolean makeMove(GameAction action) {
         playerNum = state.getTurn();
         if(action instanceof EuchrePlayCardAction) {
+            Logger.log("MakeMove","HavePlayCardAction");
             EuchrePlayCardAction playAct = (EuchrePlayCardAction) action;
             playerNum = this.getPlayerIdx(playAct.getPlayer());
             if(state.turn == playerNum) {
