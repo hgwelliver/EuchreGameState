@@ -320,7 +320,7 @@
                     android:id="@+id/playerhand5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignLeft="@id/playerhand3"
+                    android:layout_alignLeft="@id/playerhand4"
                     android:layout_toRightOf="@id/playerhand4"
                     android:adjustViewBounds="true"
                     android:translationX="10dp"
