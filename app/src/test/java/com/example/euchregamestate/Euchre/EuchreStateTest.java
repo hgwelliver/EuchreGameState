@@ -26,7 +26,7 @@ public class EuchreStateTest {
     public void isGoingAlone() {
         EuchreState testState = new EuchreState();
         // playerId param will be set to 3
-        testState.turn = 2;
+        testState.turn = 3;
         testState.gameStage = 1;
         testState.dealer = 1;
         testState.teamDealer = 0;
@@ -42,10 +42,8 @@ public class EuchreStateTest {
         testState.isGoingAlone(3);
         // test to make sure it updates the whoIsAlone variable properly
         assertEquals(testState.whoIsAlone, 3);
-
-
-
-
+        // test to make sure it clears player1's hand
+        assertEquals(testState.player1Hand.size(), 0);
 
     }
 

@@ -37,8 +37,9 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 Random rand = new Random();
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
                 int num = rand.nextInt(hand.size());
-                Card card = hand.get(num);
+                Card card = hand.get(num+1);
                 game.sendAction(new EuchrePlayCardAction(this, card));
+
             }
         }
     }

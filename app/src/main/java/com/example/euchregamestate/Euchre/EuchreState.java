@@ -1,5 +1,7 @@
 package com.example.euchregamestate.Euchre;
 
+import android.widget.Switch;
+
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.R;
 
@@ -67,9 +69,9 @@ public class EuchreState extends GameState {
         this.teamDealer = 0;
         this.startGame = true;
         this.quit = false;
-        this.gameStage = 0;
+        this.gameStage = 2;
         this.numPass = 0;
-        this.turn = 0;
+        this.turn = 1;
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
@@ -101,14 +103,44 @@ public class EuchreState extends GameState {
         this.redTrickScore = other.redTrickScore;
         this.blueTrickScore = other.blueTrickScore;
         this.player1Hand = other.player1Hand;
+        this.player2Hand = other.player2Hand;
+        this.player3Hand = other.player3Hand;
+        this.player4Hand = other.player4Hand;
+        this.player1Play = other.player1Play;
+        this.player2Play = other.player2Play;
+        this.player3Play = other.player3Play;
+        this.player4Play = other.player4Play;
         // init deck of cards
+
+    }
+
+    public void setPlay(int ID, Card c){
+        if(ID == 1){
+            player1Play = c;
+        }if(ID == 2){
+            player2Play = c;
+        }
+        if(ID == 3){
+            player3Play = c;
+        }
+        if(ID == 4){
+            player4Play = c;
+        }
 
     }
 
     //playerNum = 1-4
     public ArrayList<Card> getPlayerHand(int playerNum){
         //switch statememt for each player
-        return player1Hand;
+        if(playerNum ==1){
+        return player1Hand;}
+        if(playerNum ==2){
+            return player2Hand;}
+        if(playerNum ==3){
+            return player3Hand;}
+        if(playerNum ==4){
+            return player4Hand;}
+        else{return null;}
     }
 
     @Override
@@ -188,7 +220,7 @@ public class EuchreState extends GameState {
         if(numPass == 3 && turn == playerID){
             numPass++;
             // make sure turn goes back to 1 if player is 4
-            turn++;
+            turn++; // fix if player 4
             gameStage++;
             middleVisible = false;
             return true;
@@ -517,7 +549,8 @@ public class EuchreState extends GameState {
             turn++;
             return true;
         }
-        if(turn == playerID && gameStage == 3){
+        // turn == playerID
+        if(gameStage == 3){
             if(numPlays == 0){
                 if(playerID == 1){
                     player1Play = selectedCard;
@@ -549,8 +582,8 @@ public class EuchreState extends GameState {
                 else if(playerID == 4){
                     player2Play = selectedCard;
                     // card goes to middle
-                    currentSuit = player2Play.getSuit();
-                    firstPlayed = player3Play.getSuit();
+                    currentSuit = player4Play.getSuit();
+                    firstPlayed = player4Play.getSuit();
                     numPlays++;
                     turn = 1;
                     return true;

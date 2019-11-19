@@ -71,11 +71,48 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             rightPlayer.setImageResource(R.drawable.cardback);
             leftPlayer.setImageResource(R.drawable.cardback);
 
+            if(latestState.player1Play == null){
+                player.setImageResource(R.drawable.cardback);
+            }
+            else{
+                player.setImageResource(latestState.player1Play.getResourceId());
+                playerhand1.setImageResource(R.drawable.cardback);
+            }
+
+            /*if(latestState.player2Play == null){
+                player.setImageResource(R.drawable.cardback);
+            }
+            else{
+                player.setImageResource(latestState.player2Play.getResourceId());
+                playerhand1.setImageResource(R.drawable.cardback);
+            }
+
+            if(latestState.player3Play == null){
+                player.setImageResource(R.drawable.cardback);
+            }
+            else{
+                player.setImageResource(latestState.player3Play.getResourceId());
+                playerhand1.setImageResource(R.drawable.cardback);
+            }
+
+
+            if(latestState.player4Play == null){
+                player.setImageResource(R.drawable.cardback);
+            }
+            else{
+                player.setImageResource(latestState.player4Play.getResourceId());
+                playerhand1.setImageResource(R.drawable.cardback);
+            }*/
+
+
             //draw everything here based on what is in the latest state
             //playerhand1.setImageResource(R.drawable.ace_d);
 
             //arraylist of cards
             ArrayList<Card> p1Hand = latestState.getPlayerHand(1);
+            ArrayList<Card> p2Hand = latestState.getPlayerHand(2);
+            ArrayList<Card> p3Hand = latestState.getPlayerHand(3);
+            ArrayList<Card> p4Hand = latestState.getPlayerHand(4);
 
             //ask the card for its image resource id
             //int id = p1Hand.get(0).getResourceId();
@@ -102,10 +139,10 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
          else{
              playerhand1.setImageResource(R.drawable.cardback);
          }
-            if(p1Hand.size() > 1){
-                int id = p1Hand.get(1).getResourceId();
-                playerhand2.setImageResource(id);
-            }
+         if(p1Hand.size() > 1){
+             int id = p1Hand.get(1).getResourceId();
+             playerhand2.setImageResource(id);
+         }
             else{
                 playerhand2.setImageResource(R.drawable.cardback);
             }
