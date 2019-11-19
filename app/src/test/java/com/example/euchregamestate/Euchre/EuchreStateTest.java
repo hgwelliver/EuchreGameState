@@ -56,11 +56,21 @@ public class EuchreStateTest {
     }
 
     @Test
+    /**
+     * @author Haley
+     */
     public void isSelectTrump() {
-    }
+        EuchreState testState = new EuchreState();
+        testState.gameStage = 2;
+        testState.turn = 1;
 
-    @Test
-    public void isQuit() {
+
+        Card.SUIT selected = Card.SUIT.HEARTS;
+        Card.SUIT actualSelected = Card.SUIT.HEARTS;
+
+        testState.isSelectTrump(1);
+
+        assertNotEquals(selected, actualSelected);
     }
 
     @Test

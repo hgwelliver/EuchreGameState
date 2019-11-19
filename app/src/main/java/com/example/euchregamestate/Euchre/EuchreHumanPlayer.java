@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.example.euchregamestate.GameFramework.GameHumanPlayer;
 import com.example.euchregamestate.GameFramework.GameMainActivity;
@@ -226,13 +227,16 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         });
 
         //haley will do this
-/*        helpMenuButton.setOnClickListener(new View.OnClickListener() {
+        helpMenuButton.setOnClickListener(new View.OnClickListener() {
             //displays rules when button is pressed
             @Override
             public void onClick(View v) {
-                myActivity.startActivity(new Intent(myActivity, help.class));
+                //myActivity.startActivity(new Intent(myActivity, help.class));
+
+                //myActivity.setAnimationStyle;
+                //PopupWindow
             }
-        });*/
+        });
         //if(latestState.getTurn() ==0){//can only do actions on turn
 
         passButton.setOnClickListener(new View.OnClickListener() {
