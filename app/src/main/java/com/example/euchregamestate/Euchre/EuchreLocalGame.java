@@ -17,7 +17,7 @@ public class EuchreLocalGame extends LocalGame {
     protected boolean canMove(int playerIdx) {
         //TODO  You will implement this method
         //return true;
-        if(playerIdx+1 == state.getTurn()){
+        if(playerIdx == state.getTurn()){
             return true;
         }
         else {
@@ -31,7 +31,7 @@ public class EuchreLocalGame extends LocalGame {
         if(action instanceof EuchrePlayCardAction) {
             Logger.log("MakeMove","HavePlayCardAction");
             EuchrePlayCardAction playAct = (EuchrePlayCardAction) action;
-            playerNum = this.getPlayerIdx(playAct.getPlayer())+1;
+            playerNum = this.getPlayerIdx(playAct.getPlayer());
             if(state.turn == playerNum) {
                 state.validMove(playerNum, playAct.getCardToPlay());
                 sendAllUpdatedState();
@@ -40,35 +40,35 @@ public class EuchreLocalGame extends LocalGame {
         }
         else if(action instanceof EuchrePassAction){
             EuchrePassAction passAct = (EuchrePassAction) action;
-            playerNum = this.getPlayerIdx(passAct.getPlayer())+1;
+            playerNum = this.getPlayerIdx(passAct.getPlayer());
             if(state.turn == playerNum){
                 return state.isPass(playerNum);
             }
         }
         else if(action instanceof EuchreOrderUpAction){
             EuchreOrderUpAction orderAct = (EuchreOrderUpAction) action;
-            playerNum = this.getPlayerIdx(orderAct.getPlayer())+1;
+            playerNum = this.getPlayerIdx(orderAct.getPlayer());
             if(state.turn == playerNum){
                 return state.isOrderUpTrump(playerNum);
             }
         }
         else if(action instanceof EuchreSelectTrumpAction){
             EuchreSelectTrumpAction selectAct = (EuchreSelectTrumpAction) action;
-            playerNum = this.getPlayerIdx(selectAct.getPlayer())+1;
+            playerNum = this.getPlayerIdx(selectAct.getPlayer());
             if(state.turn == playerNum){
                 return state.isSelectTrump(playerNum);
             }
         }
         else if(action instanceof EuchrePickItUpAction){
             EuchrePickItUpAction pickAct = (EuchrePickItUpAction) action;
-            playerNum = this.getPlayerIdx(pickAct.getPlayer())+1;
+            playerNum = this.getPlayerIdx(pickAct.getPlayer());
             if(state.turn == playerNum){
                 return state.isPickItUp(playerNum);
             }
         }
         else if(action instanceof EuchreGoingAloneAction){
             EuchreGoingAloneAction aloneAct = (EuchreGoingAloneAction) action;
-            playerNum = this.getPlayerIdx(aloneAct.getPlayer())+1;
+            playerNum = this.getPlayerIdx(aloneAct.getPlayer());
             if(state.turn == playerNum){
                 return state.isGoingAlone(playerNum);
             }
