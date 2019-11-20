@@ -134,17 +134,17 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 playerhand4.setImageResource(R.drawable.cardback);
                 playerhand5.setImageResource(R.drawable.cardback);
             }*/
-         if(p1Hand.size() > 0){
+            if(p1Hand.size() > 0){
              int id = p1Hand.get(0).getResourceId();
              playerhand1.setImageResource(id);
-         }
-         else{
-             playerhand1.setImageResource(R.drawable.cardback);
-         }
-         if(p1Hand.size() > 1){
+            }
+            else{
+                playerhand1.setImageResource(R.drawable.cardback);
+            }
+            if(p1Hand.size() > 1){
              int id = p1Hand.get(1).getResourceId();
              playerhand2.setImageResource(id);
-         }
+            }
             else{
                 playerhand2.setImageResource(R.drawable.cardback);
             }
