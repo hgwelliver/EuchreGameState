@@ -77,6 +77,7 @@ public class EuchreState extends GameState {
         this.blueScore = 0;
         this.redTrickScore = 0;
         this.blueTrickScore = 0;
+        this.currentSuit = null;
         // init deck of cards
         this.deck = new CardDeck();
         //Collections.shuffle(deck.cardDeck);
@@ -110,6 +111,7 @@ public class EuchreState extends GameState {
         this.player2Play = other.player2Play;
         this.player3Play = other.player3Play;
         this.player4Play = other.player4Play;
+        this.currentSuit = other.currentSuit;
         // init deck of cards
 
     }
@@ -629,14 +631,14 @@ public class EuchreState extends GameState {
                 }
                 else if(playerID == 1){
                     ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
+                    for(int i = 0; i < player2Hand.size(); i++){
                         if(player2Hand.get(i).getSuit() == currentSuit){
                             valid.add(player2Hand.get(i)); // adds card to possible valid plays
                         }
                     }
                     // if valid array is empty then any card is valid
                     if(valid.isEmpty()){
-                        // player2Play = card selected
+                         player2Play = selectedCard;
                         // card goes to middle
                         currentSuit = player1Play.getSuit();
                         numPlays++;
@@ -644,8 +646,8 @@ public class EuchreState extends GameState {
                         return true;
                     }
                     else{
-                        if(valid.contains(player2Play)){
-                            // player2Play = card selected
+                        if(valid.contains(selectedCard)){
+                            player2Play = selectedCard;
                             // card goes to middle
                             currentSuit = player2Play.getSuit();
                             numPlays++;

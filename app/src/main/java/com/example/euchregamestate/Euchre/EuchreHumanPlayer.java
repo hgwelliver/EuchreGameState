@@ -80,15 +80,15 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 player.setImageResource(latestState.player1Play.getResourceId());
                 playerhand1.setImageResource(R.drawable.cardback);
             }
-
-            /*if(latestState.player2Play == null){
+            /*
+            if(latestState.player2Play == null){
                 player.setImageResource(R.drawable.cardback);
             }
             else{
                 player.setImageResource(latestState.player2Play.getResourceId());
                 playerhand1.setImageResource(R.drawable.cardback);
             }
-
+            /*
             if(latestState.player3Play == null){
                 player.setImageResource(R.drawable.cardback);
             }
@@ -111,10 +111,10 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             //playerhand1.setImageResource(R.drawable.ace_d);
 
             //arraylist of cards
-            ArrayList<Card> p1Hand = latestState.getPlayerHand(1);
-            ArrayList<Card> p2Hand = latestState.getPlayerHand(2);
-            ArrayList<Card> p3Hand = latestState.getPlayerHand(3);
-            ArrayList<Card> p4Hand = latestState.getPlayerHand(4);
+            ArrayList<Card> p1Hand = latestState.getPlayerHand(0);
+            ArrayList<Card> p2Hand = latestState.getPlayerHand(1);
+            ArrayList<Card> p3Hand = latestState.getPlayerHand(2);
+            ArrayList<Card> p4Hand = latestState.getPlayerHand(3);
 
             //ask the card for its image resource id
             //int id = p1Hand.get(0).getResourceId();

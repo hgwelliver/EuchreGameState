@@ -28,7 +28,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
         // do what it do
         if(latestState.turn == playerNum){
             // pause for one second
-            sleep(1000);
+            sleep(1);
             // send an action from this computer player
             if(latestState.gameStage == 1 || latestState.gameStage == 2){
                 game.sendAction(new EuchrePassAction(this));
@@ -36,9 +36,31 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
             else if(latestState.gameStage == 3){
                 Random rand = new Random();
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
-                int num = rand.nextInt(hand.size());
-                Card card = hand.get(num+1);
-                game.sendAction(new EuchrePlayCardAction(this, card));
+
+
+
+
+                ArrayList<Card> valid = new ArrayList<>();
+
+
+                for(int i = 0; i < hand.size(); i++){
+                    if(hand.get(i).getSuit() == latestState.currentSuit){
+                        valid.add(hand.get(i)); // adds card to possible valid plays
+                    }
+                }
+                // if valid array is empty then any card is valid
+                if(valid.isEmpty()){
+                    int num = rand.nextInt(hand.size());
+                    Card cardPlay = hand.get(num);
+                    game.sendAction(new EuchrePlayCardAction(this, cardPlay));
+                }
+                else {
+                    int num = rand.nextInt(valid.size());
+                    Card cardPlay = valid.get(num);
+                    game.sendAction(new EuchrePlayCardAction(this, cardPlay));
+                }
+
+
 
             }
         }
