@@ -599,247 +599,51 @@ public class EuchreState extends GameState {
             }
             else if(numPlays < 3){
                 if(playerID == 0){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
-                        if(player1Hand.get(i).getSuit() == currentSuit){
-                          valid.add(player1Hand.get(i)); // adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                        player1Play = selectedCard;
-                        // card goes to middle
-                        currentSuit = player1Play.getSuit();
-                        numPlays++;
-                        turn++;
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(player1Play)){
-                            player1Play = selectedCard;
-                            // card goes to middle
-                            currentSuit = player1Play.getSuit();
-                            numPlays++;
-                            turn++;
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player1Play = selectedCard;
+                    numPlays++;
+                    turn++;
+                    return true;
                 }
                 else if(playerID == 1){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < player2Hand.size(); i++){
-                        if(player2Hand.get(i).getSuit() == currentSuit){
-                            valid.add(player2Hand.get(i)); // adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                         player2Play = selectedCard;
-                        // card goes to middle
-                        currentSuit = player1Play.getSuit();
-                        numPlays++;
-                        turn++;
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(selectedCard)){
-                            player2Play = selectedCard;
-                            // card goes to middle
-                            currentSuit = player2Play.getSuit();
-                            numPlays++;
-                            turn++;
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player2Play = selectedCard;
+                    numPlays++;
+                    turn++;
+                    return true;
                 }
                 else if(playerID == 2){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
-                        if(player3Hand.get(i).getSuit() == currentSuit){
-                            valid.add(player3Hand.get(i)); // adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                        // player3Play = card selected
-                        // card goes to middle
-                        currentSuit = player3Play.getSuit();
-                        numPlays++;
-                        turn++;
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(player3Play)){
-                            // player3Play = card selected
-                            // card goes to middle
-                            currentSuit = player3Play.getSuit();
-                            numPlays++;
-                            turn++;
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player3Play = selectedCard;
+                    numPlays++;
+                    turn++;
+                    return true;
                 }
                 else if(playerID == 3){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
-                        if(player4Hand.get(i).getSuit() == currentSuit){
-                            valid.add(player4Hand.get(i)); // adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                        // player4Play = card selected
-                        // card goes to middle
-                        currentSuit = player4Play.getSuit();
-                        numPlays++;
-                        turn = 0;
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(player4Play)){
-                            // player4Play = card selected
-                            // card goes to middle
-                            currentSuit = player4Play.getSuit();
-                            numPlays++;
-                            turn = 0;
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player4Play = selectedCard;
+                    numPlays++;
+                    turn = 0;
+                    return true;
                 }
             }
             // if three cards have been played this is the last card
             else if(numPlays == 3){
                 if(playerID == 0){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
-                        if(player1Play.getSuit() == currentSuit){
-                          valid.add(player1Play); // adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                        // player1Play = card selected
-                        // card goes to middle
-                        currentSuit = player1Play.getSuit();
-                        isTrickComplete();
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(player1Play)){
-                            // player1Play = card selected
-                            // card goes to middle
-                            currentSuit = player1Play.getSuit();
-                            isTrickComplete();
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player1Play = selectedCard;
+                    isTrickComplete();
+                    return true;
                 }
                 else if(playerID == 1){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
-                        if(player2Play.getSuit() == currentSuit){
-                          valid.add(player2Play); // adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                        // player2Play = card selected
-                        // card goes to middle
-                        currentSuit = player1Play.getSuit();
-                        isTrickComplete();
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(player2Play)){
-                            // player2Play = card selected
-                            // card goes to middle
-                            currentSuit = player2Play.getSuit();
-                            isTrickComplete();
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player2Play = selectedCard;
+                    isTrickComplete();
+                    return true;
                 }
                 else if(playerID == 2){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
-                        if(player3Play.getSuit() == currentSuit){
-                          valid.add(player3Play); // adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                        // player3Play = card selected
-                        // card goes to middle
-                        currentSuit = player3Play.getSuit();
-                        isTrickComplete();
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(player3Play)){
-                            // player3Play = card selected
-                            // card goes to middle
-                            currentSuit = player3Play.getSuit();
-                            isTrickComplete();
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player3Play = selectedCard;
+                    isTrickComplete();
+                    return true;
                 }
                 else if(playerID == 3){
-                    ArrayList<Card> valid = new ArrayList<>();
-                    for(int i = 0; i < valid.size(); i++){
-                        if(player4Play.getSuit() == currentSuit){
-                          valid.add(player4Play); //adds card to possible valid plays
-                        }
-                    }
-                    // if valid array is empty then any card is valid
-                    if(valid.isEmpty()){
-                        // player4Play = card selected
-                        // card goes to middle
-                        currentSuit = player4Play.getSuit();
-                        isTrickComplete();
-                        return true;
-                    }
-                    else{
-                        if(valid.contains(player4Play)){
-                            // player4Play = card selected
-                            // card goes to middle
-                            currentSuit = player4Play.getSuit();
-                            isTrickComplete();
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-
+                    player4Play = selectedCard;
+                    isTrickComplete();
+                    return true;
                 }
             }
         }

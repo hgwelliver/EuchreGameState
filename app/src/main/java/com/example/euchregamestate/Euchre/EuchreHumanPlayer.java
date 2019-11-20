@@ -80,31 +80,28 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 player.setImageResource(latestState.player1Play.getResourceId());
                 playerhand1.setImageResource(R.drawable.cardback);
             }
-            /*
+
             if(latestState.player2Play == null){
-                player.setImageResource(R.drawable.cardback);
+                leftPlayer.setImageResource(R.drawable.cardback);
             }
             else{
-                player.setImageResource(latestState.player2Play.getResourceId());
-                playerhand1.setImageResource(R.drawable.cardback);
+                leftPlayer.setImageResource(latestState.player2Play.getResourceId());
+                playerhand2.setImageResource(R.drawable.cardback);
             }
-            /*
             if(latestState.player3Play == null){
-                player.setImageResource(R.drawable.cardback);
+                topPlayer.setImageResource(R.drawable.cardback);
             }
             else{
-                player.setImageResource(latestState.player3Play.getResourceId());
-                playerhand1.setImageResource(R.drawable.cardback);
+                topPlayer.setImageResource(latestState.player3Play.getResourceId());
+                playerhand3.setImageResource(R.drawable.cardback);
             }
-
-
             if(latestState.player4Play == null){
-                player.setImageResource(R.drawable.cardback);
+                rightPlayer.setImageResource(R.drawable.cardback);
             }
             else{
-                player.setImageResource(latestState.player4Play.getResourceId());
-                playerhand1.setImageResource(R.drawable.cardback);
-            }*/
+                rightPlayer.setImageResource(latestState.player4Play.getResourceId());
+                playerhand4.setImageResource(R.drawable.cardback);
+            }
 
 
             //draw everything here based on what is in the latest state
