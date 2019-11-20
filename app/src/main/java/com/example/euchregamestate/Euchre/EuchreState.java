@@ -34,7 +34,7 @@ public class EuchreState extends GameState {
     protected Card player2Play;
     protected Card player3Play;
     protected Card player4Play;
-    protected Card.SUIT middleCardSuit; // redundant bc suit is within card
+    protected Card.SUIT middleCardSuit;
     protected Card middleCard;
     protected boolean middleVisible;
     protected int whoIsAlone;
@@ -532,11 +532,7 @@ public class EuchreState extends GameState {
         }
         return false;
     }
-    // method for quitting
-    public boolean isQuit(){
-        startGame = false;
-        return true;
-    }
+
     // method for making a move
     public boolean validMove(int playerID, Card selectedCard){
         if(whoIsAlone == 1 && playerID == 2){

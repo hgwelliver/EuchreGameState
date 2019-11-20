@@ -333,6 +333,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/playerhand3"
+                    android:layout_toRightOf="@id/playerhand3"
                     android:layout_gravity="right"
                     android:layout_marginLeft="20dp"
                     android:adjustViewBounds="true"
