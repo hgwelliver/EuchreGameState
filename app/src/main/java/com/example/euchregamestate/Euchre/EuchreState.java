@@ -520,7 +520,7 @@ public class EuchreState extends GameState {
         return false;
     }
     // method for select trump
-    public boolean isSelectTrump(int playerID){
+    public boolean isSelectTrump(int playerID, Card.SUIT suit){
         if(turn == playerID && gameStage == 2){
             // need input of what trump is selected
             Card.SUIT selected = Card.SUIT.HEARTS;

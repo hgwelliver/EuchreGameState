@@ -3,6 +3,7 @@ package com.example.euchregamestate.Euchre;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -29,8 +30,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
     private Button passButton, pickItUpButton, orderUpButton, goingAloneButton,
             quitButton;
-    private Button helpButton;
-    private ImageView spadeButton, clubButton, heartButton, diamondButton;
+    private Button helpButton, resetButton;
+    private Button spadeButton, clubButton, heartButton, diamondButton;
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
@@ -176,6 +177,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 playerhand5.setImageResource(R.drawable.cardback);
             }
 
+            player.setBackgroundColor(Color.YELLOW);
             //switching card and cardback when playing a card
             if(latestState.player1Play == null){
                 player.setImageResource(R.drawable.cardback);
@@ -196,31 +198,61 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 }
                 else
                     playerhand5.setImageResource(android.R.color.transparent);
+                //player.setBackgroundColor(Color.YELLOW);
             }
+            //player.setBackgroundColor(Color.RED);
 
             if(latestState.player2Play == null){
                 leftPlayer.setImageResource(R.drawable.cardback);
             }
             else{
                 leftPlayer.setImageResource(latestState.player2Play.getResourceId());
-                //playerhand2.setImageResource(R.drawable.cardback);
+                //leftPlayer.setBackgroundColor(Color.YELLOW);
             }
+            //leftPlayer.setBackgroundColor(Color.BLUE);
+
             if(latestState.player3Play == null){
                 topPlayer.setImageResource(R.drawable.cardback);
             }
             else{
                 topPlayer.setImageResource(latestState.player3Play.getResourceId());
-                //playerhand3.setImageResource(R.drawable.cardback);
+                //topPlayer.setBackgroundColor(Color.YELLOW);
             }
+            //topPlayer.setBackgroundColor(Color.RED);
+
             if(latestState.player4Play == null){
                 rightPlayer.setImageResource(R.drawable.cardback);
             }
             else{
                 rightPlayer.setImageResource(latestState.player4Play.getResourceId());
-                //playerhand4.setImageResource(R.drawable.cardback);
+                //rightPlayer.setBackgroundColor(Color.YELLOW);
             }
+            //rightPlayer.setBackgroundColor(Color.BLUE);
 
+            int lightBlue = 0xff33b5e5;
+            if(latestState.turn == 0)
+                player.setBackgroundColor(Color.YELLOW);
 
+            else
+                player.setBackgroundColor(Color.RED);
+
+            if(latestState.turn == 1)
+                leftPlayer.setBackgroundColor(Color.YELLOW);
+
+            else
+                leftPlayer.setBackgroundColor(lightBlue);
+
+            if(latestState.turn == 2)
+                topPlayer.setBackgroundColor(Color.YELLOW);
+
+            else
+                topPlayer.setBackgroundColor(Color.RED);
+
+            if(latestState.turn == 3)
+                rightPlayer.setBackgroundColor(Color.YELLOW);
+
+            else
+                rightPlayer.setBackgroundColor(lightBlue);
 
         }
         else {
@@ -250,6 +282,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
         helpButton = (Button) myActivity.findViewById(R.id.helpMenuButton);
+        resetButton = (Button) myActivity.findViewById(R.id.resetButton);
 
         //cards on table
         //these do not need onClickListeners because they do not
@@ -268,12 +301,28 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand4 = (ImageView) myActivity.findViewById(R.id.playerhand4);
         playerhand5 = (ImageView) myActivity.findViewById(R.id.playerhand5);
 
+        //suit buttons
+        spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
+        heartButton = (Button) myActivity.findViewById(R.id.heartButton);
+        diamondButton = (Button) myActivity.findViewById(R.id.diamondButton);
+        spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
+
         //quits game
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //quits program
                 myActivity.finish();
+            }
+        });
+
+        resetButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //restarts program
+                Intent intent = myActivity.getIntent();
+                myActivity.finish();
+                myActivity.startActivity(intent);
             }
         });
 
@@ -390,6 +439,34 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand5.setImageResource(R.drawable.cardback);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
                 handIndex = 4;
+
+            }
+        });
+
+        spadeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //game.sendAction(new EuchreSelectTrumpAction(hp, ));
+            }
+        });
+
+        heartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        diamondButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        spadeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });

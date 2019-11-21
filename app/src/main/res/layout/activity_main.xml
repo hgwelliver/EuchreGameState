@@ -93,6 +93,26 @@
                         android:textSize="16sp"
                         android:translationX="100dp"
                         android:translationY="20dp" />
+
+                    <Button
+                        android:id="@+id/resetButton"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:text="New Game"
+                        android:textSize="16sp"
+                        android:translationX="100dp"
+                        android:translationY="20dp" />
+
+                    <Button
+                        android:id="@+id/quitButton"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:text="Quit"
+                        android:textSize="16sp"
+                        android:translationX="100dp"
+                        android:translationY="20dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -197,15 +217,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="Going Alone"
-                    android:textSize="16sp"
-                    android:translationY="20dp" />
-
-                <Button
-                    android:id="@+id/quitButton"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="Quit"
                     android:textSize="16sp"
                     android:translationY="20dp" />
 
