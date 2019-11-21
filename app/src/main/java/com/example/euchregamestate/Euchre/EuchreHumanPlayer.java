@@ -1,11 +1,16 @@
 package com.example.euchregamestate.Euchre;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.example.euchregamestate.GameFramework.GameHumanPlayer;
@@ -15,17 +20,21 @@ import com.example.euchregamestate.R;
 
 import java.util.ArrayList;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 public class EuchreHumanPlayer extends GameHumanPlayer {
 
     //instance variables
     private static final String TAG = "EuchreHumanPlayer";
 
     private Button passButton, pickItUpButton, orderUpButton, goingAloneButton,
-            quitButton, helpMenuButton;
+            quitButton;
+    private Button helpButton;
     private ImageView spadeButton, clubButton, heartButton, diamondButton;
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
+    private int handIndex;
 
     private Activity myActivity;
 
@@ -173,12 +182,20 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
             else{
                 player.setImageResource(latestState.player1Play.getResourceId());
-                if(latestState.player1Play.getResourceId() == player.getId()) {
+                if(handIndex == 0){
                     playerhand1.setImageResource(android.R.color.transparent);
                 }
-                else if(latestState.player1Play.getResourceId() == playerhand2.getId()) {
+                else if(handIndex == 1){
                     playerhand2.setImageResource(android.R.color.transparent);
                 }
+                else if(handIndex == 2){
+                    playerhand3.setImageResource(android.R.color.transparent);
+                }
+                else if(handIndex == 3){
+                    playerhand4.setImageResource(android.R.color.transparent);
+                }
+                else
+                    playerhand5.setImageResource(android.R.color.transparent);
             }
 
             if(latestState.player2Play == null){
@@ -232,6 +249,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         orderUpButton = (Button) myActivity.findViewById(R.id.orderUpButton);
         goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
+        helpButton = (Button) myActivity.findViewById(R.id.helpMenuButton);
 
         //cards on table
         //these do not need onClickListeners because they do not
@@ -259,18 +277,32 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
-        //haley will do this
-/*        helpMenuButton.setOnClickListener(new View.OnClickListener() {
-            //displays rules when button is pressed
+        /*helpButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                myActivity.openOptionsMenu();
-                //myActivity.startActivity(new Intent(myActivity, help.class));
+            public void onClick(View v){
+                LinearLayout layout;
 
-                //myActivity.setAnimationStyle;
-                //PopupWindow
+                LayoutInflater layoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.help,null);
+
+                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopUp);
+
+                PopupWindow pop = new PopupWindow(customView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+                pop.showAtLocation(layout, Gravity.CENTER, 0, 0);
+
+                //close the popup window on button click
+                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pop.dismiss();
+                    }
+                });
+
             }
         });*/
+
+
         //if(latestState.getTurn() ==0){//can only do actions on turn
 
         passButton.setOnClickListener(new View.OnClickListener() {
@@ -312,6 +344,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //player.setImageResource(latestState.player1Hand.get(0).getResourceId());
                 //playerhand1.setImageResource(R.drawable.cardback);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
+
+                handIndex = 0;
             }
         });
 
@@ -322,6 +356,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand2.setImageResource(R.drawable.cardback);
                 //latestState.setTurn(2);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
+                handIndex = 1;
 
             }
         });
@@ -333,6 +368,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand3.setImageResource(R.drawable.cardback);
                 //latestState.setTurn(2);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
+                handIndex = 2;
             }
         });
 
@@ -343,6 +379,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand4.setImageResource(R.drawable.cardback);
                 //latestState.setTurn(2);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
+                handIndex = 3;
             }
         });
 
@@ -352,6 +389,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //player.setImageResource(latestState.player1Hand.get(4).getResourceId());
                 //playerhand5.setImageResource(R.drawable.cardback);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
+                handIndex = 4;
 
             }
         });
