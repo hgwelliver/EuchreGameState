@@ -73,7 +73,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             rightPlayer.setImageResource(R.drawable.cardback);
             leftPlayer.setImageResource(R.drawable.cardback);
 
-            if(latestState.player1Play == null){
+            /*if(latestState.player1Play == null){
                 player.setImageResource(R.drawable.cardback);
             }
             else{
@@ -101,7 +101,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             else{
                 rightPlayer.setImageResource(latestState.player4Play.getResourceId());
                 playerhand4.setImageResource(R.drawable.cardback);
-            }
+            }*/
 
 
             //draw everything here based on what is in the latest state
@@ -167,6 +167,41 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 playerhand5.setImageResource(R.drawable.cardback);
             }
 
+            //switching card and cardback when playing a card
+            if(latestState.player1Play == null){
+                player.setImageResource(R.drawable.cardback);
+            }
+            else{
+                player.setImageResource(latestState.player1Play.getResourceId());
+                if(latestState.player1Play.getResourceId() == player.getId()) {
+                    playerhand1.setImageResource(android.R.color.transparent);
+                }
+                else if(latestState.player1Play.getResourceId() == playerhand2.getId()) {
+                    playerhand2.setImageResource(android.R.color.transparent);
+                }
+            }
+
+            if(latestState.player2Play == null){
+                leftPlayer.setImageResource(R.drawable.cardback);
+            }
+            else{
+                leftPlayer.setImageResource(latestState.player2Play.getResourceId());
+                //playerhand2.setImageResource(R.drawable.cardback);
+            }
+            if(latestState.player3Play == null){
+                topPlayer.setImageResource(R.drawable.cardback);
+            }
+            else{
+                topPlayer.setImageResource(latestState.player3Play.getResourceId());
+                //playerhand3.setImageResource(R.drawable.cardback);
+            }
+            if(latestState.player4Play == null){
+                rightPlayer.setImageResource(R.drawable.cardback);
+            }
+            else{
+                rightPlayer.setImageResource(latestState.player4Play.getResourceId());
+                //playerhand4.setImageResource(R.drawable.cardback);
+            }
 
 
 
@@ -287,6 +322,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand2.setImageResource(R.drawable.cardback);
                 //latestState.setTurn(2);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
+
             }
         });
 
