@@ -83,37 +83,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             rightPlayer.setImageResource(R.drawable.cardback);
             leftPlayer.setImageResource(R.drawable.cardback);
 
-            /*if(latestState.player1Play == null){
-                player.setImageResource(R.drawable.cardback);
-            }
-            else{
-                player.setImageResource(latestState.player1Play.getResourceId());
-                playerhand1.setImageResource(R.drawable.cardback);
-            }
-
-            if(latestState.player2Play == null){
-                leftPlayer.setImageResource(R.drawable.cardback);
-            }
-            else{
-                leftPlayer.setImageResource(latestState.player2Play.getResourceId());
-                playerhand2.setImageResource(R.drawable.cardback);
-            }
-            if(latestState.player3Play == null){
-                topPlayer.setImageResource(R.drawable.cardback);
-            }
-            else{
-                topPlayer.setImageResource(latestState.player3Play.getResourceId());
-                playerhand3.setImageResource(R.drawable.cardback);
-            }
-            if(latestState.player4Play == null){
-                rightPlayer.setImageResource(R.drawable.cardback);
-            }
-            else{
-                rightPlayer.setImageResource(latestState.player4Play.getResourceId());
-                playerhand4.setImageResource(R.drawable.cardback);
-            }*/
-
-
             //draw everything here based on what is in the latest state
             //playerhand1.setImageResource(R.drawable.ace_d);
 
@@ -123,24 +92,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             ArrayList<Card> p3Hand = latestState.getPlayerHand(2);
             ArrayList<Card> p4Hand = latestState.getPlayerHand(3);
 
-            //ask the card for its image resource id
-            //int id = p1Hand.get(0).getResourceId();
-            //setImageResource like above ^
-            //playerhand1.setImageResource(id);
-         /*   int i = 0;
-           for(; i < p1Hand.size(); i++){
-                int id = p1Hand.get(i).getResourceId();
-                //setImageResource like above ^
-                playerhand1.setImageResource(id);
-            }
-            for(; i < 5; i++){
-                //set cards to empty
-                playerhand1.setImageResource(R.drawable.cardback);
-                playerhand2.setImageResource(R.drawable.cardback);
-                playerhand3.setImageResource(R.drawable.cardback);
-                playerhand4.setImageResource(R.drawable.cardback);
-                playerhand5.setImageResource(R.drawable.cardback);
-            }*/
+            //shows dealed cards
             if(p1Hand.size() > 0){
              int id = p1Hand.get(0).getResourceId();
              playerhand1.setImageResource(id);
