@@ -1,11 +1,17 @@
 package com.example.euchregamestate.Euchre;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -16,18 +22,22 @@ import com.example.euchregamestate.R;
 
 import java.util.ArrayList;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 public class EuchreHumanPlayer extends GameHumanPlayer {
 
     //instance variables
     private static final String TAG = "EuchreHumanPlayer";
 
     private Button passButton, pickItUpButton, orderUpButton, goingAloneButton,
-            quitButton, helpMenuButton;
-    private ImageView spadeButton, clubButton, heartButton, diamondButton;
+            quitButton;
+    private Button helpButton, resetButton;
+    private Button spadeButton, clubButton, heartButton, diamondButton;
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
     private TextView redTrick, blueTrick, redScore, blueScore;
+    private int handIndex;
 
     private Activity myActivity;
 
@@ -75,7 +85,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
 
             redScore.setText("Red Team  Score: " + latestState.redScore);
-            
+
             blueScore.setText("Blue Team  Score: " + latestState.blueScore);
 
             //draw background for draw pile
@@ -126,24 +136,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             ArrayList<Card> p3Hand = latestState.getPlayerHand(2);
             ArrayList<Card> p4Hand = latestState.getPlayerHand(3);
 
-            //ask the card for its image resource id
-            //int id = p1Hand.get(0).getResourceId();
-            //setImageResource like above ^
-            //playerhand1.setImageResource(id);
-         /*   int i = 0;
-           for(; i < p1Hand.size(); i++){
-                int id = p1Hand.get(i).getResourceId();
-                //setImageResource like above ^
-                playerhand1.setImageResource(id);
-            }
-            for(; i < 5; i++){
-                //set cards to empty
-                playerhand1.setImageResource(R.drawable.cardback);
-                playerhand2.setImageResource(R.drawable.cardback);
-                playerhand3.setImageResource(R.drawable.cardback);
-                playerhand4.setImageResource(R.drawable.cardback);
-                playerhand5.setImageResource(R.drawable.cardback);
-            }*/
+            //shows dealed cards
             if(p1Hand.size() > 0){
              int id = p1Hand.get(0).getResourceId();
              playerhand1.setImageResource(id);
@@ -180,8 +173,82 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 playerhand5.setImageResource(R.drawable.cardback);
             }
 
+            player.setBackgroundColor(Color.YELLOW);
+            //switching card and cardback when playing a card
+            if(latestState.player1Play == null){
+                player.setImageResource(R.drawable.cardback);
+            }
+            else{
+                player.setImageResource(latestState.player1Play.getResourceId());
+                if(handIndex == 0){
+                    playerhand1.setImageResource(android.R.color.transparent);
+                }
+                else if(handIndex == 1){
+                    playerhand2.setImageResource(android.R.color.transparent);
+                }
+                else if(handIndex == 2){
+                    playerhand3.setImageResource(android.R.color.transparent);
+                }
+                else if(handIndex == 3){
+                    playerhand4.setImageResource(android.R.color.transparent);
+                }
+                else
+                    playerhand5.setImageResource(android.R.color.transparent);
+                //player.setBackgroundColor(Color.YELLOW);
+            }
+            //player.setBackgroundColor(Color.RED);
 
+            if(latestState.player2Play == null){
+                leftPlayer.setImageResource(R.drawable.cardback);
+            }
+            else{
+                leftPlayer.setImageResource(latestState.player2Play.getResourceId());
+                //leftPlayer.setBackgroundColor(Color.YELLOW);
+            }
+            //leftPlayer.setBackgroundColor(Color.BLUE);
 
+            if(latestState.player3Play == null){
+                topPlayer.setImageResource(R.drawable.cardback);
+            }
+            else{
+                topPlayer.setImageResource(latestState.player3Play.getResourceId());
+                //topPlayer.setBackgroundColor(Color.YELLOW);
+            }
+            //topPlayer.setBackgroundColor(Color.RED);
+
+            if(latestState.player4Play == null){
+                rightPlayer.setImageResource(R.drawable.cardback);
+            }
+            else{
+                rightPlayer.setImageResource(latestState.player4Play.getResourceId());
+                //rightPlayer.setBackgroundColor(Color.YELLOW);
+            }
+            //rightPlayer.setBackgroundColor(Color.BLUE);
+
+            int lightBlue = 0xff33b5e5;
+            if(latestState.turn == 0)
+                player.setBackgroundColor(Color.YELLOW);
+
+            else
+                player.setBackgroundColor(Color.RED);
+
+            if(latestState.turn == 1)
+                leftPlayer.setBackgroundColor(Color.YELLOW);
+
+            else
+                leftPlayer.setBackgroundColor(lightBlue);
+
+            if(latestState.turn == 2)
+                topPlayer.setBackgroundColor(Color.YELLOW);
+
+            else
+                topPlayer.setBackgroundColor(Color.RED);
+
+            if(latestState.turn == 3)
+                rightPlayer.setBackgroundColor(Color.YELLOW);
+
+            else
+                rightPlayer.setBackgroundColor(lightBlue);
 
         }
         else {
@@ -210,6 +277,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         orderUpButton = (Button) myActivity.findViewById(R.id.orderUpButton);
         goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
+        helpButton = (Button) myActivity.findViewById(R.id.helpMenuButton);
+        resetButton = (Button) myActivity.findViewById(R.id.resetButton);
 
         redTrick = (TextView) myActivity.findViewById(R.id.redTricks);
         blueTrick = (TextView) myActivity.findViewById(R.id.blueTricks);
@@ -234,6 +303,12 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         playerhand4 = (ImageView) myActivity.findViewById(R.id.playerhand4);
         playerhand5 = (ImageView) myActivity.findViewById(R.id.playerhand5);
 
+        //suit buttons
+        spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
+        heartButton = (Button) myActivity.findViewById(R.id.heartButton);
+        diamondButton = (Button) myActivity.findViewById(R.id.diamondButton);
+        spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
+
         //quits game
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,18 +318,42 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
-        //haley will do this
-/*        helpMenuButton.setOnClickListener(new View.OnClickListener() {
-            //displays rules when button is pressed
+        resetButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                myActivity.openOptionsMenu();
-                //myActivity.startActivity(new Intent(myActivity, help.class));
+            public void onClick(View v){
+                //restarts program
+                Intent intent = myActivity.getIntent();
+                myActivity.finish();
+                myActivity.startActivity(intent);
+            }
+        });
 
-                //myActivity.setAnimationStyle;
-                //PopupWindow
+        /*helpButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                LinearLayout layout;
+
+                LayoutInflater layoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.help,null);
+
+                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopUp);
+
+                PopupWindow pop = new PopupWindow(customView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+                pop.showAtLocation(layout, Gravity.CENTER, 0, 0);
+
+                //close the popup window on button click
+                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pop.dismiss();
+                    }
+                });
+
             }
         });*/
+
+
         //if(latestState.getTurn() ==0){//can only do actions on turn
 
         passButton.setOnClickListener(new View.OnClickListener() {
@@ -296,6 +395,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //player.setImageResource(latestState.player1Hand.get(0).getResourceId());
                 //playerhand1.setImageResource(R.drawable.cardback);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
+
+                handIndex = 0;
             }
         });
 
@@ -306,6 +407,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand2.setImageResource(R.drawable.cardback);
                 //latestState.setTurn(2);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
+                handIndex = 1;
+
             }
         });
 
@@ -316,6 +419,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand3.setImageResource(R.drawable.cardback);
                 //latestState.setTurn(2);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
+                handIndex = 2;
             }
         });
 
@@ -326,6 +430,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //playerhand4.setImageResource(R.drawable.cardback);
                 //latestState.setTurn(2);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
+                handIndex = 3;
             }
         });
 
@@ -335,6 +440,35 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //player.setImageResource(latestState.player1Hand.get(4).getResourceId());
                 //playerhand5.setImageResource(R.drawable.cardback);
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
+                handIndex = 4;
+
+            }
+        });
+
+        spadeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //game.sendAction(new EuchreSelectTrumpAction(hp, ));
+            }
+        });
+
+        heartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        diamondButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        spadeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });

@@ -32,7 +32,7 @@ public class EuchreLocalGame extends LocalGame {
             Logger.log("MakeMove","HavePlayCardAction");
             EuchrePlayCardAction playAct = (EuchrePlayCardAction) action;
             playerNum = this.getPlayerIdx(playAct.getPlayer());
-            if(state.turn == playerNum) {
+            if(state.turn == playerNum && state.gameStage == 3) {
                 state.validMove(playerNum, playAct.getCardToPlay());
                 sendAllUpdatedState();
                 if(state.numPlays == 4){
@@ -49,22 +49,22 @@ public class EuchreLocalGame extends LocalGame {
         else if(action instanceof EuchrePassAction){
             EuchrePassAction passAct = (EuchrePassAction) action;
             playerNum = this.getPlayerIdx(passAct.getPlayer());
-            if(state.turn == playerNum){
+            if(state.turn == playerNum && (state.gameStage == 1 || state.gameStage == 2)){
                 return state.isPass(playerNum);
             }
         }
         else if(action instanceof EuchreOrderUpAction){
             EuchreOrderUpAction orderAct = (EuchreOrderUpAction) action;
             playerNum = this.getPlayerIdx(orderAct.getPlayer());
-            if(state.turn == playerNum){
+            if(state.turn == playerNum  && state.gameStage == 1){
                 return state.isOrderUpTrump(playerNum);
             }
         }
         else if(action instanceof EuchreSelectTrumpAction){
             EuchreSelectTrumpAction selectAct = (EuchreSelectTrumpAction) action;
             playerNum = this.getPlayerIdx(selectAct.getPlayer());
-            if(state.turn == playerNum){
-                return state.isSelectTrump(playerNum);
+            if(state.turn == playerNum && state.gameStage == 2){
+                //return state.isSelectTrump(playerNum, );
             }
         }
         else if(action instanceof EuchrePickItUpAction){
