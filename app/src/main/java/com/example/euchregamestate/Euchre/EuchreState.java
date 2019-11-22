@@ -564,7 +564,6 @@ public class EuchreState extends GameState {
                 if(playerID == 0){
                     player1Play = selectedCard;
                     // card goes to middle
-                    currentTrumpSuit = player1Play.getSuit();
                     firstPlayedSuit = player1Play.getSuit();
                     numPlays++;
                     turn++;
@@ -573,7 +572,6 @@ public class EuchreState extends GameState {
                 else if(playerID == 1){
                     player2Play = selectedCard;
                     // card goes to middle
-                    currentTrumpSuit = player2Play.getSuit();
                     firstPlayedSuit = player2Play.getSuit();
                     numPlays++;
                     turn++;
@@ -582,7 +580,6 @@ public class EuchreState extends GameState {
                 else if(playerID == 2){
                     player3Play = selectedCard;
                     // card goes to middle
-                    currentTrumpSuit = player3Play.getSuit();
                     firstPlayedSuit = player3Play.getSuit();
                     numPlays++;
                     turn++;
@@ -591,7 +588,6 @@ public class EuchreState extends GameState {
                 else if(playerID == 3){
                     player2Play = selectedCard;
                     // card goes to middle
-                    currentTrumpSuit = player4Play.getSuit();
                     firstPlayedSuit = player4Play.getSuit();
                     numPlays++;
                     turn = 0;
@@ -710,16 +706,16 @@ public class EuchreState extends GameState {
         if(player4Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
             value[3] += 10;
         }
-        if(player1Play.getSuit() == currentTrumpSuit){
+        if(player1Play.getSuit() == currentTrumpSuit || value[0] == 7){
             value[0] += 20;
         }
-        if(player2Play.getSuit() == currentTrumpSuit){
+        if(player2Play.getSuit() == currentTrumpSuit || value[1] == 7){
             value[1] += 20;
         }
-        if(player3Play.getSuit() == currentTrumpSuit){
+        if(player3Play.getSuit() == currentTrumpSuit || value[2] == 7){
             value[2] += 20;
         }
-        if(player4Play.getSuit() == currentTrumpSuit){
+        if(player4Play.getSuit() == currentTrumpSuit || value[3] == 7){
             value[3] += 20;
         }
         int winner = 0;
