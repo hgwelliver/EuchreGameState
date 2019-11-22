@@ -226,26 +226,28 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             //rightPlayer.setBackgroundColor(Color.BLUE);
 
             int lightBlue = 0xff33b5e5;
+            int yellow = 0xffffbb33;
+            int red = 0xffcc0000;
             if(latestState.turn == 0)
-                player.setBackgroundColor(Color.YELLOW);
+                player.setBackgroundColor(yellow);
 
             else
-                player.setBackgroundColor(Color.RED);
+                player.setBackgroundColor(red);
 
             if(latestState.turn == 1)
-                leftPlayer.setBackgroundColor(Color.YELLOW);
+                leftPlayer.setBackgroundColor(yellow);
 
             else
                 leftPlayer.setBackgroundColor(lightBlue);
 
             if(latestState.turn == 2)
-                topPlayer.setBackgroundColor(Color.YELLOW);
+                topPlayer.setBackgroundColor(yellow);
 
             else
-                topPlayer.setBackgroundColor(Color.RED);
+                topPlayer.setBackgroundColor(red);
 
             if(latestState.turn == 3)
-                rightPlayer.setBackgroundColor(Color.YELLOW);
+                rightPlayer.setBackgroundColor(yellow);
 
             else
                 rightPlayer.setBackgroundColor(lightBlue);
