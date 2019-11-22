@@ -64,7 +64,8 @@ public class EuchreLocalGame extends LocalGame {
             EuchreSelectTrumpAction selectAct = (EuchreSelectTrumpAction) action;
             playerNum = this.getPlayerIdx(selectAct.getPlayer());
             if(state.turn == playerNum && state.gameStage == 2){
-                //return state.isSelectTrump(playerNum, );
+                state.isSelectTrump(playerNum, selectAct.getSuitToPlay());
+                sendAllUpdatedState();
             }
         }
         else if(action instanceof EuchrePickItUpAction){

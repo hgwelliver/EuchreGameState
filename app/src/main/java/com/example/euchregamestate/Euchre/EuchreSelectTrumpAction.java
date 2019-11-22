@@ -3,8 +3,15 @@ package com.example.euchregamestate.Euchre;
 import com.example.euchregamestate.GameFramework.GamePlayer;
 import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
 
+
 public class EuchreSelectTrumpAction extends GameAction {
-    public EuchreSelectTrumpAction(GamePlayer player){
+    private Card.SUIT suit;
+    public EuchreSelectTrumpAction(GamePlayer player, Card.SUIT suitSelected){
         super(player);
+        suit = suitSelected;
+    }
+    public Card.SUIT getSuitToPlay()
+    {
+        return suit;
     }
 }

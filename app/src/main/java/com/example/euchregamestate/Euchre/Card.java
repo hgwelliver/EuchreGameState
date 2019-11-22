@@ -49,13 +49,41 @@ public class Card implements Serializable {
         int value = 0;
         if(num == NUMBER.NINE) { value = 1;}
         if(num == NUMBER.TEN) { value = 2;}
-        if(num == NUMBER.QUEEN) { value = 3;}
-        if(num == NUMBER.KING) { value = 4;}
-        if(num == NUMBER.ACE) { value = 5;}
-        if(num == NUMBER.JACK && suit == trump) {
-            value = 6;
+        if(num == NUMBER.JACK && suit != trump){
+            if(trump == SUIT.CLUBS && suit != SUIT.SPADES){
+                value = 3;
+            }
+            if(trump == SUIT.SPADES && suit != SUIT.CLUBS){
+                value = 3;
+            }
+            if(trump == SUIT.DIAMONDS && suit != SUIT.HEARTS){
+                value = 3;
+            }
+            if(trump == SUIT.HEARTS && suit != SUIT.DIAMONDS){
+                value = 3;
+            }
+
         }
-        
+        if(num == NUMBER.QUEEN) { value = 4;}
+        if(num == NUMBER.KING) { value = 5;}
+        if(num == NUMBER.ACE) { value = 6;}
+        if(num == NUMBER.JACK && suit == trump) {
+            value = 8;
+        }
+        if(num == NUMBER.JACK && suit != trump){
+            if(trump == SUIT.CLUBS && suit == SUIT.SPADES){
+                value = 7;
+            }
+            if(trump == SUIT.SPADES && suit == SUIT.CLUBS){
+                value = 7;
+            }
+            if(trump == SUIT.DIAMONDS && suit == SUIT.HEARTS){
+                value = 7;
+            }
+            if(trump == SUIT.HEARTS && suit == SUIT.DIAMONDS){
+                value = 7;
+            }
+        }
 
 
         return value;

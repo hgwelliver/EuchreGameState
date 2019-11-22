@@ -525,9 +525,8 @@ public class EuchreState extends GameState {
     public boolean isSelectTrump(int playerID, Card.SUIT suit){
         if(turn == playerID && gameStage == 2){
             // need input of what trump is selected
-            Card.SUIT deezNutz = Card.SUIT.CLUBS;
-            if(deezNutz != middleCardSuit){
-                currentTrumpSuit = deezNutz;
+            if(suit != middleCardSuit){
+                currentTrumpSuit = suit;
                 return true;
             }
             else{
@@ -702,25 +701,25 @@ public class EuchreState extends GameState {
         if(player1Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
             value[0] += 10;
         }
-        else if(player2Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
+        if(player2Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
             value[1] += 10;
         }
-        else if(player3Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
+        if(player3Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
             value[2] += 10;
         }
-        else if(player4Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
+        if(player4Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
             value[3] += 10;
         }
-        else if(player1Play.getSuit() == currentTrumpSuit){
+        if(player1Play.getSuit() == currentTrumpSuit){
             value[0] += 20;
         }
-        else if(player2Play.getSuit() == currentTrumpSuit){
+        if(player2Play.getSuit() == currentTrumpSuit){
             value[1] += 20;
         }
-        else if(player3Play.getSuit() == currentTrumpSuit){
+        if(player3Play.getSuit() == currentTrumpSuit){
             value[2] += 20;
         }
-        else if(player4Play.getSuit() == currentTrumpSuit){
+        if(player4Play.getSuit() == currentTrumpSuit){
             value[3] += 20;
         }
         int winner = 0;
