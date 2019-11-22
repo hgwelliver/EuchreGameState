@@ -35,7 +35,15 @@ public class EuchreLocalGame extends LocalGame {
             if(state.turn == playerNum) {
                 state.validMove(playerNum, playAct.getCardToPlay());
                 sendAllUpdatedState();
-
+                if(state.numPlays == 4){
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        // deez nutz
+                    }
+                    state.isTrickComplete();
+                    sendAllUpdatedState();
+                }
             }
         }
         else if(action instanceof EuchrePassAction){

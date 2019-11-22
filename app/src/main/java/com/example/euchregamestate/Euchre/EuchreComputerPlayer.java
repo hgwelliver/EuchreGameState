@@ -34,7 +34,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 game.sendAction(new EuchrePassAction(this));
             }
             else if(latestState.gameStage == 3){
-                Random rand = new Random();
+                /*Random rand = new Random();
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
 
                 ArrayList<Card> valid = new ArrayList<>();
@@ -54,12 +54,12 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                     int num = rand.nextInt(valid.size());
                     Card cardPlay = valid.get(num);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
-                }
-                /*
+                }*/
+
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
                 Card cardPlay = hand.get(0);
                 game.sendAction(new EuchrePlayCardAction(this, cardPlay));
-*/
+
             }
         }
     }

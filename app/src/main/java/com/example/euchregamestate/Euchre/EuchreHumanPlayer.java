@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.example.euchregamestate.GameFramework.GameHumanPlayer;
 import com.example.euchregamestate.GameFramework.GameMainActivity;
@@ -26,6 +27,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
+    private TextView redTrick, blueTrick, redScore, blueScore;
 
     private Activity myActivity;
 
@@ -64,6 +66,17 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             playerHands.add(leftPlayer);
             playerHands.add(rightPlayer);
             playerHands.add(kitty);
+            //set textviews
+
+            redTrick.setText("Red Trick Score: " + latestState.redTrickScore);
+
+
+            blueTrick.setText(" Blue Trick Score: " + latestState.blueTrickScore);
+
+
+            redScore.setText("Red Team  Score: " + latestState.redScore);
+            
+            blueScore.setText("Blue Team  Score: " + latestState.blueScore);
 
             //draw background for draw pile
             kitty.setImageResource(R.drawable.cardback);
@@ -197,6 +210,12 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         orderUpButton = (Button) myActivity.findViewById(R.id.orderUpButton);
         goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
+
+        redTrick = (TextView) myActivity.findViewById(R.id.redTricks);
+        blueTrick = (TextView) myActivity.findViewById(R.id.blueTricks);
+        redScore = (TextView) myActivity.findViewById(R.id.redScore);
+        blueScore = (TextView) myActivity.findViewById(R.id.blueScore);
+
 
         //cards on table
         //these do not need onClickListeners because they do not

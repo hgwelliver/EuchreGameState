@@ -2,6 +2,7 @@ package com.example.euchregamestate.Euchre;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Switch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,8 +45,19 @@ public class Card implements Serializable {
         return this.theNumber;
     }
 
-    public static int getValsVal(NUMBER num){
+    public static int getValsVal(NUMBER num, SUIT suit, SUIT trump){
         int value = 0;
+        if(num == NUMBER.NINE) { value = 1;}
+        if(num == NUMBER.TEN) { value = 2;}
+        if(num == NUMBER.QUEEN) { value = 3;}
+        if(num == NUMBER.KING) { value = 4;}
+        if(num == NUMBER.ACE) { value = 5;}
+        if(num == NUMBER.JACK && suit == trump) {
+            value = 6;
+        }
+        
+
+
         return value;
     }
 }

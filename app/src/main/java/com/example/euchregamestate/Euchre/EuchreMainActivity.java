@@ -1,6 +1,7 @@
 package com.example.euchregamestate.Euchre;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.euchregamestate.GameFramework.GameMainActivity;
 import com.example.euchregamestate.GameFramework.GamePlayer;
@@ -50,7 +51,6 @@ public class EuchreMainActivity extends GameMainActivity {
 
         // Set the initial information for the remote player
         defaultConfig.setRemoteData("Remote Player", "", 1); // red-on-yellow GUI
-
 
         //done!
         return defaultConfig;
