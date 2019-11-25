@@ -24,6 +24,9 @@ import java.util.ArrayList;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+/**
+ * @author Sierra, Mikey, Haley, and Alex
+ */
 public class EuchreHumanPlayer extends GameHumanPlayer {
 
     //instance variables

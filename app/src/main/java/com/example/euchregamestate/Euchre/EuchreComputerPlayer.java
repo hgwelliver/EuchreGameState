@@ -6,6 +6,9 @@ import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author Sierra, Mikey, Haley, and Alex
+ */
 public class EuchreComputerPlayer extends GameComputerPlayer {
 
     private static final String TAG = "EuchreComputerPlayer";
