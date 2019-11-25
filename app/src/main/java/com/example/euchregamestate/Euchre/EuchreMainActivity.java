@@ -22,6 +22,9 @@ import com.example.euchregamestate.R;
 
 import java.util.ArrayList;
 
+/**
+ * @author Sierra, Mikey, Haley, and Alex
+ */
 public class EuchreMainActivity extends GameMainActivity {
 
     //Tag for logging

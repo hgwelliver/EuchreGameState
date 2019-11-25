@@ -6,6 +6,9 @@ import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.GameFramework.utilities.Logger;
 
+/**
+ * @author Sierra, Mikey, Haley, and Alex
+ */
 public class EuchreLocalGame extends LocalGame {
     private EuchreState state;
     int playerNum;

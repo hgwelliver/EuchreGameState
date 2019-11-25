@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Sierra, Mikey, Haley, and Alex
+ */
 public class EuchreState extends GameState {
 
     // info about the resources each player has
@@ -179,7 +182,11 @@ public class EuchreState extends GameState {
         return  ArrayContents1;
     }
 
-    // method to deal
+    /**
+     * deal method
+     * clears player hands to begin with
+     * deals all the player hands and the middle card stack
+     */
     public boolean deal(){
         // deal cards when game is started and game stage is 0
 
@@ -217,7 +224,11 @@ public class EuchreState extends GameState {
             return true;
 
     }
-    // method to pass
+
+    /**
+     * pass method
+     * allows player to pass when deciding trump
+     */
     public boolean isPass(int playerID){
         // if there have been three passes and the user passes then the middle is turn invisible
         if(numPass == 3 && turn == playerID){
@@ -251,7 +262,11 @@ public class EuchreState extends GameState {
         }
         return false;
     }
-    // method to go alone
+
+    /**
+     * going alone method
+     * allows player to play cards without partner
+     */
     public boolean isGoingAlone(int playerID){
         // if it is a players turn and in round 1
         if(turn == playerID && gameStage == 1){
@@ -448,7 +463,13 @@ public class EuchreState extends GameState {
         }
         return false;
     }
-    // method order up trump
+
+    /**
+     * order up method
+     * allows player to order up the dealer which decides trump
+     * the dealer will pick up the middle card
+     * suit of middle card becomes the trump suit
+     */
     public boolean isOrderUpTrump(int playerID){
         if(turn == playerID && gameStage == 1 && dealer != playerID){
             currentTrumpSuit = middleCardSuit;
@@ -484,7 +505,13 @@ public class EuchreState extends GameState {
         }
         return false;
     }
-    // method for pick it up
+
+    /**
+     * pick it up method
+     * allows dealer to pick up the middle card which decides trump
+     * dealer must discard a card from their hand
+     * suit of middle card is trump suit
+     */
     public boolean isPickItUp(int playerID){
         if(turn == playerID && gameStage == 1 && dealer == playerID){
             currentTrumpSuit = middleCardSuit;
@@ -520,7 +547,11 @@ public class EuchreState extends GameState {
         }
         return false;
     }
-    // method for select trump
+
+    /**
+     * select trump method
+     * allows player to select a trump suit that isn't the suit of the middle card
+     */
     public boolean isSelectTrump(int playerID, Card.SUIT suit){
         if(turn == playerID && gameStage == 2){
             // need input of what trump is selected
@@ -542,7 +573,10 @@ public class EuchreState extends GameState {
         return false;
     }
 
-    // method for making a move
+    /**
+     * valid move method
+     * checks that player's move adheres to game rules
+     */
     public boolean validMove(int playerID, Card selectedCard){
         if(whoIsAlone == 1 && playerID == 2){
             numPlays++;
@@ -652,7 +686,12 @@ public class EuchreState extends GameState {
         }
         return false;
     }
-    // method for round complete
+
+    /**
+     * trick complete method
+     * checks if a round of playing one card is over
+     * keeps track of trick scores
+     */
     public void isTrickComplete(){
         // reset numPlayed
         numPlays = 0;
@@ -694,7 +733,11 @@ public class EuchreState extends GameState {
 
 
     }
-    // find round winner
+
+    /**
+     * trick winner method
+     * finds the winner of the trick round
+     */
     public int trickWinner(){
         Card.NUMBER one = player1Play.getValue();
         Card.NUMBER two = player2Play.getValue();
@@ -744,7 +787,11 @@ public class EuchreState extends GameState {
         return winner;
     }
 
-    // is round over
+    /**
+     * round over method
+     * checks that all 5 tricks have been played
+     * keeps track of scores for each team
+     */
     public void isRoundOver(){
         // reset the trick scores
         blueTrickScore = 0;
@@ -758,9 +805,9 @@ public class EuchreState extends GameState {
             }
         } else if (whoIsAlone == 2 || whoIsAlone == 4) {
             if (blueTrickScore == 5) {
-                redScore += 4;
+                blueScore += 4;
             } else if (blueTrickScore > 2) {
-                redScore += 1;
+                blueScore += 1;
             }
         } else {
             if (redTrickScore == 5) {
