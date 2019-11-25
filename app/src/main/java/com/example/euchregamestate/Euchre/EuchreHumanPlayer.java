@@ -73,28 +73,21 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         if ( (info != null) && (info instanceof EuchreState) ) {
             this.latestState = (EuchreState)info;
 
-            //maybe call updateGUI()
 
             playerHands.add(player);
             playerHands.add(topPlayer);
             playerHands.add(leftPlayer);
             playerHands.add(rightPlayer);
             playerHands.add(kitty);
+
             //set textviews
-
             redTrick.setText("Red Trick Score: " + latestState.redTrickScore);
-
-
             blueTrick.setText(" Blue Trick Score: " + latestState.blueTrickScore);
-
-
             redScore.setText("Red Team  Score: " + latestState.redScore);
-
             blueScore.setText("Blue Team  Score: " + latestState.blueScore);
 
-            //draw background for draw pile
+            //draw background to be used as placeholder for draw pile and other cards on the table
             kitty.setImageResource(R.drawable.cardback);
-
             player.setImageResource(R.drawable.cardback);
             topPlayer.setImageResource(R.drawable.cardback);
             rightPlayer.setImageResource(R.drawable.cardback);
@@ -128,6 +121,16 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             else{
                 rightPlayer.setImageResource(latestState.player4Play.getResourceId());
                 playerhand4.setImageResource(R.drawable.cardback);
+            }
+
+            if(latestState.gameStage == 1){
+                kitty.setImageResource(latestState.kittyTop.getResourceId());
+            }
+            else if(latestState.gameStage == 2){
+                kitty.setImageResource(R.drawable.cardback);
+            }
+            else if(latestState.gameStage == 3){
+                kitty.setImageResource(android.R.color.transparent);
             }
 
 
@@ -453,6 +456,9 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.SPADES));
+                //heartButton.setAlpha(0);
+                //diamondButton.setAlpha(0);
+                //clubButton.setAlpha(0);
             }
         });
 
@@ -460,20 +466,29 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.HEARTS));
+                //spadeButton.setAlpha(0);
+                //diamondButton.setAlpha(0);
+                //clubButton.setAlpha(0);
             }
         });
 
         diamondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.DIAMONDS));
+                game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.DIAMONDS));
+                //spadeButton.setAlpha(0);
+                //heartButton.setAlpha(0);
+                //clubButton.setAlpha(0);
             }
         });
 
         clubButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.CLUBS));
+                game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.CLUBS));
+                //spadeButton.setAlpha(0);
+                //diamondButton.setAlpha(0);
+                //heartButton.setAlpha(0);
             }
         });
 
