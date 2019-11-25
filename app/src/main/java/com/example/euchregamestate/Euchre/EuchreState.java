@@ -37,6 +37,7 @@ public class EuchreState extends GameState {
     protected Card player2Play;
     protected Card player3Play;
     protected Card player4Play;
+    protected Card kittyTop;
     protected Card.SUIT middleCardSuit;
     protected Card middleCard;
     protected boolean middleVisible;
@@ -115,6 +116,7 @@ public class EuchreState extends GameState {
         this.player2Play = other.player2Play;
         this.player3Play = other.player3Play;
         this.player4Play = other.player4Play;
+        this.kittyTop = other.kittyTop;
         this.currentTrumpSuit = other.currentTrumpSuit;
         this.numPlays = other.numPlays;
         // init deck of cards
@@ -138,9 +140,8 @@ public class EuchreState extends GameState {
 
     //playerNum = 1-4
     public ArrayList<Card> getPlayerHand(int playerNum){
-        //switch statememt for each player
         if(playerNum == 0){
-        return player1Hand;}
+            return player1Hand;}
         if(playerNum == 1){
             return player2Hand;}
         if(playerNum == 2){
@@ -148,6 +149,10 @@ public class EuchreState extends GameState {
         if(playerNum == 3){
             return player4Hand;}
         else{return null;}
+    }
+
+    public ArrayList<Card> getKittyTop(){
+        return kitty;
     }
 
     @Override
@@ -213,6 +218,7 @@ public class EuchreState extends GameState {
             for(int i = 0; i < 4; i++){
                 kitty.add(i , deck.cardDeck.get(20 + i));
             }
+            kittyTop = kitty.get(0);
             middleCard = deck.cardDeck.get(20);
             middleCardSuit = middleCard.getSuit();
 
