@@ -758,9 +758,9 @@ public class EuchreState extends GameState {
             }
         } else if (whoIsAlone == 2 || whoIsAlone == 4) {
             if (blueTrickScore == 5) {
-                redScore += 4;
+                blueScore += 4;
             } else if (blueTrickScore > 2) {
-                redScore += 1;
+                blueScore += 1;
             }
         } else {
             if (redTrickScore == 5) {
