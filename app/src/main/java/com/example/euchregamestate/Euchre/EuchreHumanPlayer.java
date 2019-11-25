@@ -68,10 +68,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         return v;
     }
 
+    /**
+     * receive info method
+     * being handed an updated game state
+     * latest truth of the game
+     * updateGUI
+     */
     @Override
-    //being handed an updated game state
-    //latest truth of the game
-    //updateGUI
     public void receiveInfo(GameInfo info){
         if ( (info != null) && (info instanceof EuchreState) ) {
             this.latestState = (EuchreState)info;
@@ -96,6 +99,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             rightPlayer.setImageResource(R.drawable.cardback);
             leftPlayer.setImageResource(R.drawable.cardback);
 
+            //sets middle cards to card backs and sets image for kitty in each gamestage
             if(latestState.player1Play == null){
                 player.setImageResource(android.R.color.transparent);
             }
@@ -267,6 +271,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
     }
 
+    /**
+     * set GUI method
+     * updates the interface
+     * sets onClick methods for the buttons and image views
+     */
     @Override
     public void setAsGui(GameMainActivity activity){
         // Load the layout resource for the new configuration
