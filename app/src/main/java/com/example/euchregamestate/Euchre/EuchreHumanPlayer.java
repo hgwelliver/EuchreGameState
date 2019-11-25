@@ -468,9 +468,14 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.SPADES));
-                //heartButton.setAlpha(0);
-                //diamondButton.setAlpha(0);
-                //clubButton.setAlpha(0);
+                /*heartButton.setAlpha(0);
+                diamondButton.setAlpha(0);
+                clubButton.setAlpha(0);
+
+                latestState.isRoundOver();
+                heartButton.setAlpha(1);
+                diamondButton.setAlpha(1);
+                clubButton.setAlpha(1);*/
             }
         });
 
@@ -478,9 +483,14 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.HEARTS));
-                //spadeButton.setAlpha(0);
-                //diamondButton.setAlpha(0);
-                //clubButton.setAlpha(0);
+                /*spadeButton.setAlpha(0);
+                diamondButton.setAlpha(0);
+                clubButton.setAlpha(0);
+
+                latestState.isRoundOver();
+                spadeButton.setAlpha(1);
+                diamondButton.setAlpha(1);
+                clubButton.setAlpha(1);*/
             }
         });
 
@@ -488,19 +498,29 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View view) {
                 game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.DIAMONDS));
-                //spadeButton.setAlpha(0);
-                //heartButton.setAlpha(0);
-                //clubButton.setAlpha(0);
+                /*spadeButton.setAlpha(0);
+                heartButton.setAlpha(0);
+                clubButton.setAlpha(0);
+
+                latestState.isRoundOver();
+                spadeButton.setAlpha(1);
+                heartButton.setAlpha(1);
+                clubButton.setAlpha(1);*/
             }
         });
 
         clubButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.CLUBS));
-                //spadeButton.setAlpha(0);
-                //diamondButton.setAlpha(0);
-                //heartButton.setAlpha(0);
+                /*game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.CLUBS));
+                spadeButton.setAlpha(0);
+                diamondButton.setAlpha(0);
+                heartButton.setAlpha(0);
+
+                latestState.isRoundOver();
+                spadeButton.setAlpha(1);
+                diamondButton.setAlpha(1);
+                heartButton.setAlpha(1);*/
             }
         });
 
