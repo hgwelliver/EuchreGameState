@@ -69,7 +69,7 @@ public class EuchreState extends GameState {
         this.teamDealer = 0;
         this.startGame = true;
         this.quit = false;
-        this.gameStage = 2;
+        this.gameStage = 0;
         this.numPass = 0;
         this.turn = 0;
         this.trickNum = 0;
@@ -161,8 +161,7 @@ public class EuchreState extends GameState {
                 "Going Alone Player: " + whoIsAlone + "\n" +
                 "Passes: " + numPass + " Who Called: " + whoCalled + "\n" +
                 "Trump Suit: " + currentTrumpSuit + "\n" +
-                "Number of Plays; " + numPlays + "\n" +
-                "Round is Over: " + isRoundOver() + "\n"
+                "Number of Plays; " + numPlays + "\n"
 
                 //passes, who is alone, suit, numPlays,
                 ;
@@ -527,6 +526,13 @@ public class EuchreState extends GameState {
             // need input of what trump is selected
             if(suit != middleCardSuit){
                 currentTrumpSuit = suit;
+                gameStage++;
+                if(dealer == 3){
+                    turn = 0;
+                }
+                else{
+                    turn = dealer + 1;
+                }
                 return true;
             }
             else{
@@ -739,46 +745,38 @@ public class EuchreState extends GameState {
     }
 
     // is round over
-    public boolean isRoundOver() {
+    public void isRoundOver(){
+        // reset the trick scores
+        blueTrickScore = 0;
+        redTrickScore = 0;
         // update score
         if (whoIsAlone == 1 || whoIsAlone == 3) {
             if (redTrickScore == 5) {
                 redScore += 4;
-                return true;
             } else if (redTrickScore > 2) {
                 redScore += 1;
-                return false;
             }
         } else if (whoIsAlone == 2 || whoIsAlone == 4) {
             if (blueTrickScore == 5) {
-                redScore += 4;
-                return true;
+                blueScore += 4;
             } else if (blueTrickScore > 2) {
-                redScore += 1;
-                return false;
+                blueScore += 1;
             }
         } else {
             if (redTrickScore == 5) {
                 redScore += 2;
-                return true;
             } else if (redTrickScore > 2 && whoCalled == 1) {
                 redScore += 2;
-                return false;
             } else if (redTrickScore > 2 && whoCalled == 0) {
                 redScore += 1;
-                return false;
             } else if (blueTrickScore == 5) {
                 blueScore += 2;
-                return true;
             } else if (blueTrickScore > 2 && whoCalled == 0) {
                 blueScore += 2;
-                return false;
             } else if (blueTrickScore > 2 && whoCalled == 1) {
-                redScore += 1;
-                return false;
+                blueScore += 1;
             }
         }
-        return false;
     }
 
     public void setTurn(int turn) {
