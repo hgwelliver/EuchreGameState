@@ -664,6 +664,10 @@ public class EuchreState extends GameState {
             trickWinner = trickWinner();
             dealer = trickWinner;
             turn = trickWinner + 1;
+            if(trickWinner == 3){
+                turn = 0;
+            }
+
             if(trickWinner == 0 | trickWinner == 2){
                 redTrickScore++;
             }

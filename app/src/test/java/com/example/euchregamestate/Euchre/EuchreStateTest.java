@@ -19,7 +19,15 @@ public class EuchreStateTest {
     }
 
     @Test
+    /**
+     * @author Sierra
+     */
     public void isPass() {
+        EuchreState testState = new EuchreState();
+        testState.gameStage = 1;
+        testState.turn = 2;
+        testState.isPass(3);
+        assertEquals(testState.numPass, 0);
     }
 
     @Test
@@ -68,7 +76,7 @@ public class EuchreStateTest {
         Card.SUIT selected = Card.SUIT.HEARTS;
         Card.SUIT actualSelected = Card.SUIT.HEARTS;
 
-        testState.isSelectTrump(1);
+        //testState.isSelectTrump(1);
 
         assertNotEquals(selected, actualSelected);
     }
