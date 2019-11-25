@@ -57,7 +57,8 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }*/
 
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
-                Card cardPlay = hand.get(0);
+
+                Card cardPlay = hand.get(1);
                 game.sendAction(new EuchrePlayCardAction(this, cardPlay));
 
             }

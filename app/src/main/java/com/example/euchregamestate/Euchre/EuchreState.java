@@ -663,11 +663,12 @@ public class EuchreState extends GameState {
         else{
             trickWinner = trickWinner();
             dealer = trickWinner;
-            turn = trickWinner + 1;
             if(trickWinner == 3){
                 turn = 0;
             }
-
+            else{
+                turn = trickWinner + 1;
+            }
             if(trickWinner == 0 | trickWinner == 2){
                 redTrickScore++;
             }
@@ -676,6 +677,10 @@ public class EuchreState extends GameState {
             }
         }
 
+        player1Hand.remove(player1Play);
+        player2Hand.remove(player2Play);
+        player3Hand.remove(player3Play);
+        player4Hand.remove(player4Play);
         player1Play = null;
         player2Play = null;
         player3Play = null;
