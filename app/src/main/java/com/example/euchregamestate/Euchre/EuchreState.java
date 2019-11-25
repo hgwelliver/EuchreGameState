@@ -69,7 +69,7 @@ public class EuchreState extends GameState {
         this.teamDealer = 0;
         this.startGame = true;
         this.quit = false;
-        this.gameStage = 2;
+        this.gameStage = 0;
         this.numPass = 0;
         this.turn = 0;
         this.trickNum = 0;
@@ -526,6 +526,13 @@ public class EuchreState extends GameState {
             // need input of what trump is selected
             if(suit != middleCardSuit){
                 currentTrumpSuit = suit;
+                gameStage++;
+                if(dealer == 3){
+                    turn = 0;
+                }
+                else{
+                    turn = dealer + 1;
+                }
                 return true;
             }
             else{

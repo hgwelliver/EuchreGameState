@@ -70,9 +70,10 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 else if(hand.get(3) != null){
                     cardPlay = hand.get(3);
                 }
-                else{
+                else {
                     cardPlay = hand.get(4);
                 }
+
 
                 game.sendAction(new EuchrePlayCardAction(this, cardPlay));
 
