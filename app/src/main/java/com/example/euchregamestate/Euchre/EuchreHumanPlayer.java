@@ -2,18 +2,11 @@ package com.example.euchregamestate.Euchre;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.euchregamestate.GameFramework.GameHumanPlayer;
@@ -22,8 +15,6 @@ import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
 import com.example.euchregamestate.R;
 
 import java.util.ArrayList;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * @author Sierra, Mikey, Haley, and Alex
@@ -369,11 +360,10 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 final Dialog helpMenu = new Dialog(myActivity);
                 helpMenu.setContentView(myActivity.getLayoutInflater().inflate(R.layout.help, null));
                 ImageView helpImage = (ImageView) helpMenu.findViewById(R.id.helpmenu_page_one);
-                helpImage.setImageResource(R.drawable.helpmenu_page_one);
-                Button closePopUpBtn = (Button) helpMenu.findViewById(R.id.closePopUp);
+                helpImage.setImageResource(R.drawable.euchre_help_menu);
 
                 //close the popup window on button click
-                closePopUpBtn.setOnClickListener(new View.OnClickListener() {
+                helpImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         helpMenu.dismiss();

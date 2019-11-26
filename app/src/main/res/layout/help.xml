@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/helpmenu_page_one"
-        android:layout_width="wrap_content"
-        android:layout_height="800dp"
+        android:layout_width="1200dp"
+        android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:padding="30dp"
-        app:srcCompat="@drawable/helpmenu_page_one" />
+        app:srcCompat="@drawable/euchre_help_menu" />
 
     <Button
         android:id="@+id/closePopUp"
