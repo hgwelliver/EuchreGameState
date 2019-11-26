@@ -182,22 +182,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             if(latestState.player1Play == null){
                 player.setImageResource(R.drawable.cardback);
             }
-            /*else{
-                *//*player.setImageResource(latestState.player1Play.getResourceId());*//*
-                if(handIndex0 == 0){
-                    playerhand1.setImageResource(android.R.color.transparent);
-                }
-                else if(handIndex1 == 1){
-                    playerhand2.setImageResource(android.R.color.transparent);
-                }
-                else if(handIndex2 == 2){
-                    playerhand3.setImageResource(android.R.color.transparent);
-                }
-                else if(handIndex3 == 3){
-                    playerhand4.setImageResource(android.R.color.transparent);
-                }
 
-            }*/
             //player.setBackgroundColor(Color.RED);
 
             if(latestState.player2Play == null){

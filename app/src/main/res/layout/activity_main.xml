@@ -306,9 +306,27 @@
                         android:translationX="500dp"
                         app:srcCompat="@drawable/cardback" />
 
+                    <TextView
+                        android:id="@+id/DiscardTextView"
+                        android:layout_width="225dp"
+                        android:layout_height="wrap_content"
+                        android:alpha="1"
+                        android:background="@android:color/background_light"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="5dp"
+                        android:text="Tap to discard a card"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        android:translationX="170dp"
+                        android:translationY="90dp" />
+
 
                 </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
