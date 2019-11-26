@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Euchre.help"></activity>
-        <activity android:name=".Euchre.EuchreMainActivity">
+        <activity android:name=".Euchre.EuchreMainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

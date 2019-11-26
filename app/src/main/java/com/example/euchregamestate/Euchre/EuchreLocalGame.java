@@ -6,6 +6,9 @@ import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.GameFramework.utilities.Logger;
 
+/**
+ * @author Sierra, Mikey, Haley, and Alex
+ */
 public class EuchreLocalGame extends LocalGame {
     private EuchreState state;
     int playerNum;
@@ -13,6 +16,10 @@ public class EuchreLocalGame extends LocalGame {
         state = new EuchreState();
     }
 
+    /**
+     * can move method
+     * checks if player can make a move when it is their turn
+     */
     @Override
     protected boolean canMove(int playerIdx) {
         //TODO  You will implement this method
@@ -25,6 +32,10 @@ public class EuchreLocalGame extends LocalGame {
         }
     }
 
+    /**
+     * make move method
+     * updates the state based on what action was taken
+     */
     @Override
     protected boolean makeMove(GameAction action) {
         playerNum = state.getTurn();
@@ -89,6 +100,10 @@ public class EuchreLocalGame extends LocalGame {
         return false;
     }
 
+    /**
+     * send updated state method
+     * sends the most recent state
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         //TODO  You will implement this method
@@ -102,6 +117,11 @@ public class EuchreLocalGame extends LocalGame {
         p.sendInfo(recent);
     }
 
+    /**
+     * game over method
+     * checks if the game is over based on the scores
+     * game is over if one team reaches a score of ten 
+     */
     @Override
     protected String checkIfGameOver() {
         //TODO  You will implement this method
