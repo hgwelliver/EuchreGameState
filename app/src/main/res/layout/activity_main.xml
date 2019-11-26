@@ -311,7 +311,7 @@
                         android:id="@+id/DiscardTextView"
                         android:layout_width="225dp"
                         android:layout_height="wrap_content"
-                        android:alpha="1"
+                        android:alpha="0"
                         android:background="@android:color/background_light"
                         android:fontFamily="sans-serif-smallcaps"
                         android:paddingLeft="10dp"

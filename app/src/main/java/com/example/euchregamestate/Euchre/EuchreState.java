@@ -528,6 +528,7 @@ public class EuchreState extends GameState {
                 // Card discard = card dealer taps
                 player1Hand.remove(discard);
                 player1Hand.add(middleCard);
+
             }
             else if(dealer == 2){
                 // dealer taps card to discard
