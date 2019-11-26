@@ -1,6 +1,7 @@
 package com.example.euchregamestate.Euchre;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -138,6 +139,36 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
             else if(latestState.gameStage == 3){
                 kitty.setImageResource(android.R.color.transparent);
+            }
+
+            //trump buttons alpha
+            if(latestState.gameStage <= 2){
+                //draw all trump suits
+                spadeButton.setAlpha(1);
+                diamondButton.setAlpha(1);
+                clubButton.setAlpha(1);
+                heartButton.setAlpha(1);
+            }
+            else{
+                //set all 4 trump buttons transparent
+                spadeButton.setAlpha(0);
+                diamondButton.setAlpha(0);
+                clubButton.setAlpha(0);
+                heartButton.setAlpha(0);
+
+                if(latestState.currentTrumpSuit == Card.SUIT.CLUBS){
+                    clubButton.setAlpha(1);
+                }
+                else if(latestState.currentTrumpSuit == Card.SUIT.HEARTS){
+                    heartButton.setAlpha(1);
+                }
+                else if(latestState.currentTrumpSuit == Card.SUIT.DIAMONDS){
+                    diamondButton.setAlpha(1);
+                }
+                else{
+                    spadeButton.setAlpha(1);
+                }
+
             }
 
 
@@ -332,30 +363,26 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
-        /*helpButton.setOnClickListener(new View.OnClickListener(){
+        helpButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                LinearLayout layout;
-
-                LayoutInflater layoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View customView = layoutInflater.inflate(R.layout.help,null);
-
-                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopUp);
-
-                PopupWindow pop = new PopupWindow(customView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
-                pop.showAtLocation(layout, Gravity.CENTER, 0, 0);
+                final Dialog helpMenu = new Dialog(myActivity);
+                helpMenu.setContentView(myActivity.getLayoutInflater().inflate(R.layout.help, null));
+                ImageView helpImage = (ImageView) helpMenu.findViewById(R.id.helpmenu_page_one);
+                helpImage.setImageResource(R.drawable.helpmenu_page_one);
+                Button closePopUpBtn = (Button) helpMenu.findViewById(R.id.closePopUp);
 
                 //close the popup window on button click
-                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                closePopUpBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        pop.dismiss();
+                        helpMenu.dismiss();
                     }
                 });
 
+                helpMenu.show();
             }
-        });*/
+        });
 
 
         //if(latestState.getTurn() ==0){//can only do actions on turn
