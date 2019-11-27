@@ -75,7 +75,7 @@ public class EuchreState extends GameState {
         this.quit = false;
         this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 0;
+        this.turn = 1;
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;

@@ -37,13 +37,13 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 game.sendAction(new EuchrePassAction(this));
             }
             else if(latestState.gameStage == 3){
-                /*Random rand = new Random();
+                Random rand = new Random();
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
 
                 ArrayList<Card> valid = new ArrayList<>();
 
                 for(int i = 0; i < hand.size(); i++){
-                    if(hand.get(i).getSuit() == latestState.currentSuit){
+                    if(hand.get(i).getSuit() == latestState.currentTrumpSuit){
                         valid.add(hand.get(i)); // adds card to possible valid plays
                     }
                 }
@@ -57,8 +57,9 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                     int num = rand.nextInt(valid.size());
                     Card cardPlay = valid.get(num);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
-                }*/
+                }
 
+                /*
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
                 Card cardPlay;
                 if(hand.get(0) != null){
@@ -79,7 +80,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
 
 
                 game.sendAction(new EuchrePlayCardAction(this, cardPlay));
-
+                */
             }
         }
     }
