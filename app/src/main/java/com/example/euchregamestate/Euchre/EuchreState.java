@@ -75,7 +75,7 @@ public class EuchreState extends GameState {
         this.quit = false;
         this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 1;
+        this.turn = 0;
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
@@ -714,13 +714,7 @@ public class EuchreState extends GameState {
         // if not, check whose turn is next
         else{
             trickWinner = trickWinner();
-            dealer = trickWinner;
-            if(trickWinner == 3){
-                turn = 0;
-            }
-            else{
-                turn = trickWinner + 1;
-            }
+            turn = trickWinner;
             if(trickWinner == 0 | trickWinner == 2){
                 redTrickScore++;
             }
