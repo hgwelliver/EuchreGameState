@@ -47,6 +47,7 @@ public class EuchreLocalGame extends LocalGame {
                 state.validMove(playerNum, playAct.getCardToPlay());
                 sendAllUpdatedState();
                 if(state.numPlays == 4){
+                    sendAllUpdatedState();
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
