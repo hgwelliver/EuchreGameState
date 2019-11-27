@@ -129,6 +129,7 @@
                     android:id="@+id/selectTrumpButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:alpha="0"
                     android:background="@android:color/white"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="Select Trump"
@@ -146,6 +147,7 @@
                         android:id="@+id/spadeButton"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:alpha="0"
                         android:background="@drawable/spades" />
 
                     <Button
@@ -155,6 +157,7 @@
                         android:layout_weight="1"
                         android:layout_x="25dp"
                         android:layout_y="25dp"
+                        android:alpha="0"
                         android:background="@drawable/hearts" />
 
                 </LinearLayout>
@@ -172,6 +175,7 @@
                         android:layout_weight="1"
                         android:layout_x="25dp"
                         android:layout_y="25dp"
+                        android:alpha="0"
                         android:background="@drawable/diamonds" />
 
                     <Button
@@ -181,6 +185,7 @@
                         android:layout_weight="1"
                         android:layout_x="25dp"
                         android:layout_y="25dp"
+                        android:alpha="0"
                         android:background="@drawable/clubs" />
 
                 </LinearLayout>
