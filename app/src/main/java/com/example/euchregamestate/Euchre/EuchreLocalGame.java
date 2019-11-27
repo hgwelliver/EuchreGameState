@@ -120,7 +120,7 @@ public class EuchreLocalGame extends LocalGame {
     /**
      * game over method
      * checks if the game is over based on the scores
-     * game is over if one team reaches a score of ten 
+     * game is over if one team reaches a score of ten
      */
     @Override
     protected String checkIfGameOver() {
