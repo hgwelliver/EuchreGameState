@@ -514,8 +514,9 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         clubButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.CLUBS));
-                spadeButton.setAlpha(0);
+                game.sendAction(new EuchreSelectTrumpAction(hp, Card.SUIT.CLUBS));
+
+                /*spadeButton.setAlpha(0);
                 diamondButton.setAlpha(0);
                 heartButton.setAlpha(0);
 
