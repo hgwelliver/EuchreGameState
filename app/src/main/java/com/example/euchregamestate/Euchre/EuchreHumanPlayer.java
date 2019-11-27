@@ -160,6 +160,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     spadeButton.setAlpha(1);
                 }
 
+
             }
 
 
