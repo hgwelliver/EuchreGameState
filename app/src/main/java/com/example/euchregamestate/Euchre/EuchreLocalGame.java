@@ -61,6 +61,11 @@ public class EuchreLocalGame extends LocalGame {
             EuchrePassAction passAct = (EuchrePassAction) action;
             playerNum = this.getPlayerIdx(passAct.getPlayer());
             if(state.turn == playerNum && (state.gameStage == 1 || state.gameStage == 2)){
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    // deez nutz
+                }
                 return state.isPass(playerNum);
             }
         }

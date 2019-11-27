@@ -75,13 +75,13 @@ public class EuchreState extends GameState {
         this.quit = false;
         this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 0;
+        this.turn = 1;
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
         this.redTrickScore = 0;
         this.blueTrickScore = 0;
-        this.currentTrumpSuit = Card.SUIT.DIAMONDS;
+        this.currentTrumpSuit = null;
         this.numPlays = 0;
         // init deck of cards
         this.deck = new CardDeck();
