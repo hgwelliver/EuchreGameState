@@ -81,7 +81,7 @@ public class EuchreState extends GameState {
         this.blueScore = 0;
         this.redTrickScore = 0;
         this.blueTrickScore = 0;
-        this.currentTrumpSuit = Card.SUIT.DIAMONDS;
+        this.currentTrumpSuit = null;
         this.numPlays = 0;
         // init deck of cards
         this.deck = new CardDeck();
@@ -473,7 +473,7 @@ public class EuchreState extends GameState {
     /**
      * order up method
      * allows player to order up the dealer which decides trump
-     * the dealer will pick up the middle card
+     * the dealer will now have the middle card in their hand
      * suit of middle card becomes the trump suit
      */
     public boolean isOrderUpTrump(int playerID){
@@ -481,31 +481,18 @@ public class EuchreState extends GameState {
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
             if(dealer == 1){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player1Hand.remove(discard);
-                player1Hand.add(middleCard);
-            }
-            else if(dealer == 2){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player2Hand.remove(discard);
+                // remove a card from the player's hand and add the middle card
+                player2Hand.remove(2);
                 player2Hand.add(middleCard);
             }
-            else if(dealer == 3){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player3Hand.remove(discard);
+            else if(dealer == 2){
+                // remove a card from the player's hand and add the middle card
+                player3Hand.remove(2);
                 player3Hand.add(middleCard);
             }
-            else if(dealer == 4){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player4Hand.remove(discard);
+            else if(dealer == 3){
+                // remove a card from the player's hand and add the middle card
+                player4Hand.remove(2);
                 player4Hand.add(middleCard);
             }
         }
@@ -528,6 +515,7 @@ public class EuchreState extends GameState {
                 // Card discard = card dealer taps
                 player1Hand.remove(discard);
                 player1Hand.add(middleCard);
+
             }
             else if(dealer == 2){
                 // dealer taps card to discard
@@ -713,13 +701,7 @@ public class EuchreState extends GameState {
         // if not, check whose turn is next
         else{
             trickWinner = trickWinner();
-            dealer = trickWinner;
-            if(trickWinner == 3){
-                turn = 0;
-            }
-            else{
-                turn = trickWinner + 1;
-            }
+            turn = trickWinner;
             if(trickWinner == 0 | trickWinner == 2){
                 redTrickScore++;
             }
@@ -829,6 +811,15 @@ public class EuchreState extends GameState {
             } else if (blueTrickScore > 2 && whoCalled == 1) {
                 blueScore += 1;
             }
+        }
+        //update dealer and turn
+        if(dealer == 3){
+            dealer = 0;
+            turn = dealer + 1;
+        }
+        else{
+            dealer++;
+            turn = dealer + 1;
         }
     }
 

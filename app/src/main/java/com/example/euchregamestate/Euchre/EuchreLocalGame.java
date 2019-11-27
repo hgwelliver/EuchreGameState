@@ -47,6 +47,7 @@ public class EuchreLocalGame extends LocalGame {
                 state.validMove(playerNum, playAct.getCardToPlay());
                 sendAllUpdatedState();
                 if(state.numPlays == 4){
+                    sendAllUpdatedState();
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
@@ -61,6 +62,11 @@ public class EuchreLocalGame extends LocalGame {
             EuchrePassAction passAct = (EuchrePassAction) action;
             playerNum = this.getPlayerIdx(passAct.getPlayer());
             if(state.turn == playerNum && (state.gameStage == 1 || state.gameStage == 2)){
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    // deez nutz
+                }
                 return state.isPass(playerNum);
             }
         }
@@ -120,7 +126,7 @@ public class EuchreLocalGame extends LocalGame {
     /**
      * game over method
      * checks if the game is over based on the scores
-     * game is over if one team reaches a score of ten 
+     * game is over if one team reaches a score of ten
      */
     @Override
     protected String checkIfGameOver() {
