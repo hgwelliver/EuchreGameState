@@ -826,6 +826,8 @@ public class EuchreState extends GameState {
     public void setTurn(int turn) {
         this.turn = turn;
     }
+
+
 }
 
 

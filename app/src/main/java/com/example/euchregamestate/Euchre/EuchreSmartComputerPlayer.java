@@ -32,7 +32,8 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 game.sendAction(new EuchrePassAction(this));
             }
             else if(latestState.gameStage == 3){
-                ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
+                ArrayList<Card> currentHand = latestState.getPlayerHand(playerNum);
+                ArrayList<Card> hand = getValidHand(currentHand);
                 Card cardPlay;
 
                 Card[] middle = new Card[4];//middle copy to check if will be winning after playing max and losing
@@ -239,6 +240,26 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 }
             }
             return index;
+        }
+    }
+
+
+
+    public ArrayList<Card> getValidHand(ArrayList<Card> hand){
+        ArrayList<Card> validHand = new ArrayList<>();
+        if(latestState.numPlays ==0 | latestState.firstPlayedSuit == null){
+            return hand;
+        }
+        for(int i = 0; i< hand.size();i++){
+            if(hand.get(i).getSuit() == latestState.firstPlayedSuit){
+                validHand.add(hand.get(i));
+            }
+        }
+        if(hand.isEmpty()){
+            return hand;
+        }
+        else{
+            return validHand;
         }
     }
 }
