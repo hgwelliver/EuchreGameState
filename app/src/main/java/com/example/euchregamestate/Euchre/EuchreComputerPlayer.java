@@ -34,7 +34,28 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
             sleep(1);
             // send an action from this computer player
             if(latestState.gameStage == 1 || latestState.gameStage == 2){
-                game.sendAction(new EuchrePassAction(this));
+                if(latestState.gameStage == 1){
+                    game.sendAction(new EuchrePassAction(this));
+                }
+                else if(latestState.numPass == 7){
+                    Card.SUIT computerSuit;
+                    if(latestState.kittyTop.getSuit() == Card.SUIT.CLUBS){
+                        computerSuit = Card.SUIT.HEARTS;
+                    }
+                    else if(latestState.kittyTop.getSuit() == Card.SUIT.DIAMONDS){
+                        computerSuit = Card.SUIT.HEARTS;
+                    }
+                    else if(latestState.kittyTop.getSuit() == Card.SUIT.SPADES){
+                        computerSuit = Card.SUIT.HEARTS;
+                    }
+                    else{
+                        computerSuit = Card.SUIT.SPADES;
+                    }
+                    game.sendAction(new EuchreSelectTrumpAction(this, computerSuit));
+                }
+                else{
+                    game.sendAction(new EuchrePassAction(this));
+                }
             }
             else if(latestState.gameStage == 3){
                 Random rand = new Random();
@@ -59,28 +80,6 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
 
-                /*
-                ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
-                Card cardPlay;
-                if(hand.get(0) != null){
-                    cardPlay = hand.get(0);
-                }
-                else if(hand.get(1) != null){
-                    cardPlay = hand.get(1);
-                }
-                else if(hand.get(2) != null){
-                    cardPlay = hand.get(2);
-                }
-                else if(hand.get(3) != null){
-                    cardPlay = hand.get(3);
-                }
-                else {
-                    cardPlay = hand.get(4);
-                }
-
-
-                game.sendAction(new EuchrePlayCardAction(this, cardPlay));
-                */
             }
         }
     }

@@ -75,7 +75,7 @@ public class EuchreState extends GameState {
         this.quit = false;
         this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 0;
+        this.turn = 1;
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
@@ -620,7 +620,7 @@ public class EuchreState extends GameState {
                     return true;
                 }
                 else if(playerID == 3){
-                    player2Play = selectedCard;
+                    player4Play = selectedCard;
                     // card goes to middle
                     firstPlayedSuit = player4Play.getSuit();
                     numPlays++;
@@ -659,21 +659,25 @@ public class EuchreState extends GameState {
                 if(playerID == 0){
                     player1Play = selectedCard;
                     numPlays++;
+                    firstPlayedSuit = null;
                     return true;
                 }
                 else if(playerID == 1){
                     player2Play = selectedCard;
                     numPlays++;
+                    firstPlayedSuit = null;
                     return true;
                 }
                 else if(playerID == 2){
                     player3Play = selectedCard;
                     numPlays++;
+                    firstPlayedSuit = null;
                     return true;
                 }
                 else if(playerID == 3){
                     player4Play = selectedCard;
                     numPlays++;
+                    firstPlayedSuit = null;
                     return true;
                 }
             }
@@ -693,7 +697,18 @@ public class EuchreState extends GameState {
         trickNum++;
         int trickWinner;
         if(trickNum == 5){
+            // reset everything for new round
+            currentTrumpSuit = null;
+            numPass = 0;
             isRoundOver();
+            if(dealer == 3){
+                dealer = 0;
+                turn = 1;
+            }
+            else{
+                dealer++;
+                turn = dealer + 1;
+            }
             gameStage = 0;
             deal();
             trickNum = 0;

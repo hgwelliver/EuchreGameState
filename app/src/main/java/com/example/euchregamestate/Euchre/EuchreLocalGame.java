@@ -6,12 +6,16 @@ import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.GameFramework.utilities.Logger;
 
+import java.util.ArrayList;
+import java.util.Timer;
+
 /**
  * @author Sierra, Mikey, Haley, and Alex
  */
 public class EuchreLocalGame extends LocalGame {
     private EuchreState state;
     int playerNum;
+    boolean waiting;
     public EuchreLocalGame(){
         state = new EuchreState();
     }
@@ -44,14 +48,38 @@ public class EuchreLocalGame extends LocalGame {
             EuchrePlayCardAction playAct = (EuchrePlayCardAction) action;
             playerNum = this.getPlayerIdx(playAct.getPlayer());
             if(state.turn == playerNum && state.gameStage == 3) {
-                state.validMove(playerNum, playAct.getCardToPlay());
-                sendAllUpdatedState();
+                if(playerNum != 0){
+                    state.validMove(playerNum, playAct.getCardToPlay());
+                    sendAllUpdatedState();
+                }
+                else {
+                    int firstSuits = 0;
+                    ArrayList<Card> cHand = state.getPlayerHand(playerNum);
+                    for (int i = 0; i < cHand.size(); i++) {
+                        if (cHand.get(i).getSuit() == state.firstPlayedSuit) {
+                            firstSuits++;
+                        }
+                    }
+                    if (firstSuits != 0) {
+                        if (state.firstPlayedSuit == playAct.getCardToPlay().getSuit()) {
+                            state.validMove(playerNum, playAct.getCardToPlay());
+                            sendAllUpdatedState();
+                        }
+                    } else {
+                        state.validMove(playerNum, playAct.getCardToPlay());
+                        sendAllUpdatedState();
+                    }
+                }
                 if(state.numPlays == 4){
                     sendAllUpdatedState();
+                    /*getTimer().setInterval(3000);
+                    getTimer().start();
+                    waiting = true;
+                    timerTicked();*/
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
-                        // deez nutz
+                        // do nothing
                     }
                     state.isTrickComplete();
                     sendAllUpdatedState();
@@ -63,9 +91,9 @@ public class EuchreLocalGame extends LocalGame {
             playerNum = this.getPlayerIdx(passAct.getPlayer());
             if(state.turn == playerNum && (state.gameStage == 1 || state.gameStage == 2)){
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    // deez nutz
+                    // do nothing
                 }
                 return state.isPass(playerNum);
             }
@@ -138,6 +166,13 @@ public class EuchreLocalGame extends LocalGame {
             return "Blue Team Won" ;
         }
         return null;
+    }
+
+    @Override
+    protected  void timerTicked(){
+        getTimer().stop();
+        waiting = false;
+        sendAllUpdatedState();
     }
 
 }
