@@ -827,11 +827,22 @@ public class EuchreState extends GameState {
                 blueScore += 1;
             }
         }
+        //update dealer and turn
+        if(dealer == 3){
+            dealer = 0;
+            turn = dealer + 1;
+        }
+        else{
+            dealer++;
+            turn = dealer + 1;
+        }
     }
 
     public void setTurn(int turn) {
         this.turn = turn;
     }
+
+
 }
 
 
