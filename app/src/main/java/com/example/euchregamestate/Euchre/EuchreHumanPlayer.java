@@ -88,35 +88,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             leftPlayer.setImageResource(R.drawable.cardback);
 
             //sets middle cards to card backs and sets image for kitty in each gamestage
-            if(latestState.player1Play == null){
-                player.setImageResource(android.R.color.transparent);
-            }
-            else{
-                player.setImageResource(latestState.player1Play.getResourceId());
-                playerhand1.setImageResource(R.drawable.cardback);
-            }
-
-            if(latestState.player2Play == null){
-                leftPlayer.setImageResource(android.R.color.transparent);
-            }
-            else{
-                leftPlayer.setImageResource(latestState.player2Play.getResourceId());
-                playerhand2.setImageResource(R.drawable.cardback);
-            }
-            if(latestState.player3Play == null){
-                topPlayer.setImageResource(android.R.color.transparent);
-            }
-            else{
-                topPlayer.setImageResource(latestState.player3Play.getResourceId());
-                playerhand3.setImageResource(R.drawable.cardback);
-            }
-            if(latestState.player4Play == null){
-                rightPlayer.setImageResource(android.R.color.transparent);
-            }
-            else{
-                rightPlayer.setImageResource(latestState.player4Play.getResourceId());
-                playerhand4.setImageResource(R.drawable.cardback);
-            }
 
             if(latestState.gameStage <= 1){
                 kitty.setImageResource(latestState.kittyTop.getResourceId());
@@ -128,6 +99,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
                 selectTrumpButton.setAlpha(0);
 
+                // kitty interaction buttons enabled
+                orderUpButton.setAlpha(1);
+                pickItUpButton.setAlpha(1);
+                goingAloneButton.setAlpha(1);
+                passButton.setAlpha(1);
             }
             else if(latestState.gameStage == 2){
                 kitty.setImageResource(R.drawable.cardback);
@@ -143,8 +119,30 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 diamondButton.setAlpha(1);
                 clubButton.setAlpha(1);
                 heartButton.setAlpha(1);
+                if(latestState.kittyTop.getSuit() == Card.SUIT.SPADES){
+                    spadeButton.setAlpha(0);
+                }
+                if(latestState.kittyTop.getSuit() == Card.SUIT.DIAMONDS){
+                    diamondButton.setAlpha(0);
+                }
+                if(latestState.kittyTop.getSuit() == Card.SUIT.CLUBS){
+                    clubButton.setAlpha(0);
+                }
+                if(latestState.kittyTop.getSuit() == Card.SUIT.HEARTS){
+                    heartButton.setAlpha(0);
+                }
+
 
                 selectTrumpButton.setAlpha(1);
+
+                // kitty interaction buttons disabled
+                orderUpButton.setAlpha(0);
+                pickItUpButton.setAlpha(0);
+                goingAloneButton.setAlpha(0);
+                if(latestState.turn == latestState.dealer){
+                    // pass button disabled to stick the dealer
+                    passButton.setAlpha(0);
+                }
             }
             else{
                 //set all 4 trump buttons transparent
@@ -169,17 +167,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
             }
 
-
-
-
-            //draw everything here based on what is in the latest state
-            //playerhand1.setImageResource(R.drawable.ace_d);
-
             //arraylist of cards
             ArrayList<Card> p1Hand = latestState.getPlayerHand(0);
-            ArrayList<Card> p2Hand = latestState.getPlayerHand(1);
-            ArrayList<Card> p3Hand = latestState.getPlayerHand(2);
-            ArrayList<Card> p4Hand = latestState.getPlayerHand(3);
 
             //shows dealed cards
             if(p1Hand.size() > 0){
@@ -223,35 +212,31 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             if(latestState.player1Play == null){
                 player.setImageResource(R.drawable.cardback);
             }
-
-            //player.setBackgroundColor(Color.RED);
+            else{
+                player.setImageResource(latestState.player1Play.getResourceId());
+            }
 
             if(latestState.player2Play == null){
                 leftPlayer.setImageResource(R.drawable.cardback);
             }
             else{
                 leftPlayer.setImageResource(latestState.player2Play.getResourceId());
-                //leftPlayer.setBackgroundColor(Color.YELLOW);
             }
-            //leftPlayer.setBackgroundColor(Color.BLUE);
+
 
             if(latestState.player3Play == null){
                 topPlayer.setImageResource(R.drawable.cardback);
             }
             else{
                 topPlayer.setImageResource(latestState.player3Play.getResourceId());
-                //topPlayer.setBackgroundColor(Color.YELLOW);
             }
-            //topPlayer.setBackgroundColor(Color.RED);
 
             if(latestState.player4Play == null){
                 rightPlayer.setImageResource(R.drawable.cardback);
             }
             else{
                 rightPlayer.setImageResource(latestState.player4Play.getResourceId());
-                //rightPlayer.setBackgroundColor(Color.YELLOW);
             }
-            //rightPlayer.setBackgroundColor(Color.BLUE);
 
             int lightBlue = 0xff33b5e5;
             int yellow = 0xffffbb33;
@@ -424,36 +409,42 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View v) {
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
-
             }
         });
 
         playerhand2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
-
+                if(latestState.player1Hand.size() > 1){
+                    game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
+                }
             }
         });
 
         playerhand3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
+                if(latestState.player1Hand.size() > 2){
+                    game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
+                }
             }
         });
 
         playerhand4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
+                if(latestState.player1Hand.size() > 3){
+                    game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
+                }
             }
         });
 
         playerhand5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
+                if(latestState.player1Hand.size() > 4){
+                    game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
+                }
             }
         });
 
