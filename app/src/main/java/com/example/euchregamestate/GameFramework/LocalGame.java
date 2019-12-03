@@ -402,7 +402,7 @@ public abstract class LocalGame implements Game, Tickable {
     /**
      * sends a timer action to the game
      */
-    public final void tick(GameTimer timer) {
+    public  void tick(GameTimer timer) {
         sendAction(new TimerAction(timer));
     }
 

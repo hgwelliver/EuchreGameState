@@ -409,7 +409,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View v) {
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
-                //game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(0)));
             }
         });
 

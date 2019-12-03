@@ -4,7 +4,9 @@ import com.example.euchregamestate.GameFramework.GamePlayer;
 import com.example.euchregamestate.GameFramework.LocalGame;
 import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
+import com.example.euchregamestate.GameFramework.utilities.GameTimer;
 import com.example.euchregamestate.GameFramework.utilities.Logger;
+import com.example.euchregamestate.GameFramework.utilities.Tickable;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -12,7 +14,7 @@ import java.util.Timer;
 /**
  * @author Sierra, Mikey, Haley, and Alex
  */
-public class EuchreLocalGame extends LocalGame {
+public class EuchreLocalGame extends LocalGame implements Tickable {
     private EuchreState state;
     int playerNum;
     boolean waiting;
@@ -72,17 +74,10 @@ public class EuchreLocalGame extends LocalGame {
                 }
                 if(state.numPlays == 4){
                     sendAllUpdatedState();
-                    /*getTimer().setInterval(3000);
-                    getTimer().start();
-                    waiting = true;
-                    timerTicked();*/
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        // do nothing
-                    }
-                    state.isTrickComplete();
-                    sendAllUpdatedState();
+                    GameTimer pause = new GameTimer(this);
+                    pause.setInterval(3000);
+                    pause.start();
+                    
                 }
             }
         }
@@ -170,9 +165,18 @@ public class EuchreLocalGame extends LocalGame {
 
     @Override
     protected  void timerTicked(){
-        getTimer().stop();
-        waiting = false;
-        sendAllUpdatedState();
+        //state.isTrickComplete();
+        //sendAllUpdatedState();
+    }
+
+    @Override
+    public final void tick(GameTimer timer)
+    {
+        timer.stop();
+        if(state.numPlays == 4) {
+            state.isTrickComplete();
+            sendAllUpdatedState();
+        }
     }
 
 }
