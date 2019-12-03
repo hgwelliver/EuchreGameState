@@ -117,7 +117,7 @@ public class EuchreLocalGame extends LocalGame {
             EuchrePickItUpAction pickAct = (EuchrePickItUpAction) action;
             playerNum = this.getPlayerIdx(pickAct.getPlayer());
             if(state.turn == playerNum){
-                return state.isPickItUp(playerNum);
+                return state.isPickItUp(playerNum, pickAct.getCardToDiscard());
             }
         }
         else if(action instanceof EuchreGoingAloneAction){

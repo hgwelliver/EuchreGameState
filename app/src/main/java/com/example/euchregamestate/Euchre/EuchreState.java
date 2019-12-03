@@ -313,7 +313,7 @@ public class EuchreState extends GameState {
             else if(teamDealer == 0 && playerID == dealer){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
-                isPickItUp(dealer);
+                //isPickItUp(dealer);
                 middleVisible = false;
                 whoCalled = 0;
                 whoIsAlone = dealer;
@@ -328,7 +328,7 @@ public class EuchreState extends GameState {
             else if(teamDealer == 1 && playerID == dealer){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
-                isPickItUp(dealer);
+                //isPickItUp(dealer);
                 whoCalled = 1;
                 whoIsAlone = dealer;
                 middleVisible = false;
@@ -505,14 +505,14 @@ public class EuchreState extends GameState {
      * dealer must discard a card from their hand
      * suit of middle card is trump suit
      */
-    public boolean isPickItUp(int playerID){
+    public boolean isPickItUp(int playerID, Card discard){
         if(turn == playerID && gameStage == 1 && dealer == playerID){
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
             if(dealer == 0){
                 //discard card that player taps
-                int index = 0;
-                Card discard = new Card(player1Hand.get(index).getSuit(), player1Hand.get(index).getValue(), player1Hand.get(index).getResourceId());
+                //int index = 0;
+                //Card discard = new Card(player1Hand.get(index).getSuit(), player1Hand.get(index).getValue(), player1Hand.get(index).getResourceId());
                 if(player1Hand.get(0) == discard){
                     player1Hand.remove(0);
                     player1Hand.add(middleCard);
