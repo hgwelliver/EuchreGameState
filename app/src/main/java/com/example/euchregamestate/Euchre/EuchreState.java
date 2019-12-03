@@ -509,33 +509,44 @@ public class EuchreState extends GameState {
         if(turn == playerID && gameStage == 1 && dealer == playerID){
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
-            if(dealer == 1){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player1Hand.remove(discard);
-                player1Hand.add(middleCard);
-
+            if(dealer == 0){
+                //discard card that player taps
+                int index = 0;
+                Card discard = new Card(player1Hand.get(index).getSuit(), player1Hand.get(index).getValue(), player1Hand.get(index).getResourceId());
+                if(player1Hand.get(0) == discard){
+                    player1Hand.remove(0);
+                    player1Hand.add(middleCard);
+                }
+                else if(player1Hand.get(1) == discard){
+                    player1Hand.remove(1);
+                    player1Hand.add(middleCard);
+                }
+                else if(player1Hand.get(2) == discard){
+                    player1Hand.remove(2);
+                    player1Hand.add(middleCard);
+                }
+                else if(player1Hand.get(3) == discard){
+                    player1Hand.remove(3);
+                    player1Hand.add(middleCard);
+                }
+                else if(player1Hand.get(4) == discard){
+                    player1Hand.remove(4);
+                    player1Hand.add(middleCard);
+                }
             }
-            else if(dealer == 2){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player2Hand.remove(discard);
+            else if(dealer == 1){
+                // remove a card from the player's hand and add the middle card
+                player2Hand.remove(2);
                 player2Hand.add(middleCard);
             }
-            else if(dealer == 3){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player3Hand.remove(discard);
+            else if(dealer == 2){
+                // remove a card from the player's hand and add the middle card
+                player3Hand.remove(2);
                 player3Hand.add(middleCard);
             }
-            else if(dealer == 4){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player4Hand.remove(discard);
+            else if(dealer == 3){
+                // remove a card from the player's hand and add the middle card
+                player4Hand.remove(2);
                 player4Hand.add(middleCard);
             }
         }
@@ -797,10 +808,26 @@ public class EuchreState extends GameState {
      */
     public void isRoundOver(){
         // reset the trick scores
-        blueTrickScore = 0;
-        redTrickScore = 0;
+        int trickSum = blueTrickScore + redTrickScore;
+        if(trickSum == 5) {
+            blueTrickScore = 0;
+            redTrickScore = 0;
+        }
         // update score
-        if (whoIsAlone == 1 || whoIsAlone == 3) {
+        if (redTrickScore == 5) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 1) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 0) {
+            redScore += 1;
+        } else if (blueTrickScore == 5) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 0) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 1) {
+            blueScore += 1;
+        }
+        /*if (whoIsAlone == 1 || whoIsAlone == 3) {
             if (redTrickScore == 5) {
                 redScore += 4;
             } else if (redTrickScore > 2) {
@@ -826,7 +853,7 @@ public class EuchreState extends GameState {
             } else if (blueTrickScore > 2 && whoCalled == 1) {
                 blueScore += 1;
             }
-        }
+        }*/
         //update dealer and turn
         if(dealer == 3){
             dealer = 0;
