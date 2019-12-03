@@ -59,6 +59,7 @@ public class EuchreState extends GameState {
     protected boolean quit; // get rid later
     protected int gameStage; // 0 for deal, 1 for deciding middle card, 2 for deciding trump, 3 for playing cards
     protected int numPass; // count number of passes
+    protected boolean pickIt;
     // random number generator
     protected Random rand = new Random();
 
@@ -83,14 +84,9 @@ public class EuchreState extends GameState {
         this.blueTrickScore = 0;
         this.currentTrumpSuit = null;
         this.numPlays = 0;
+        this.pickIt = false;
         // init deck of cards
         this.deck = new CardDeck();
-        //Collections.shuffle(deck.cardDeck);
-        //player1Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(0),deck.cardDeck.get(1),deck.cardDeck.get(2),deck.cardDeck.get(3),deck.cardDeck.get(4)));
-        //player2Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(5),deck.cardDeck.get(6),deck.cardDeck.get(7),deck.cardDeck.get(8),deck.cardDeck.get(9)));
-        //player3Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(10),deck.cardDeck.get(11),deck.cardDeck.get(12),deck.cardDeck.get(13),deck.cardDeck.get(14)));
-        //player4Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(15),deck.cardDeck.get(16),deck.cardDeck.get(17),deck.cardDeck.get(18),deck.cardDeck.get(19)));
-        //kitty = new ArrayList<>(Arrays.asList(deck.cardDeck.get(20),deck.cardDeck.get(21),deck.cardDeck.get(22),deck.cardDeck.get(23)));
         deal();
     }
 
@@ -119,8 +115,7 @@ public class EuchreState extends GameState {
         this.kittyTop = other.kittyTop;
         this.currentTrumpSuit = other.currentTrumpSuit;
         this.numPlays = other.numPlays;
-        // init deck of cards
-
+        this.pickIt = other.pickIt;
     }
 
     public void setPlay(int ID, Card c){

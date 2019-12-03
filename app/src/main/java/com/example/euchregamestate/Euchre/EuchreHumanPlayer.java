@@ -383,7 +383,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         pickItUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.sendAction(new EuchrePickItUpAction(hp));
+
 
             }
         });
