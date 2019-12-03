@@ -73,7 +73,7 @@ public class EuchreState extends GameState {
         this.teamDealer = 0;
         this.startGame = true;
         this.quit = false;
-        this.gameStage = 0;
+        this.gameStage = 2;
         this.numPass = 0;
         this.turn = 1;
         this.trickNum = 0;
@@ -81,17 +81,11 @@ public class EuchreState extends GameState {
         this.blueScore = 0;
         this.redTrickScore = 0;
         this.blueTrickScore = 0;
-        this.currentTrumpSuit = null;
+        this.currentTrumpSuit = Card.SUIT.HEARTS;
         this.numPlays = 0;
         // init deck of cards
         this.deck = new CardDeck();
-        //Collections.shuffle(deck.cardDeck);
-        //player1Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(0),deck.cardDeck.get(1),deck.cardDeck.get(2),deck.cardDeck.get(3),deck.cardDeck.get(4)));
-        //player2Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(5),deck.cardDeck.get(6),deck.cardDeck.get(7),deck.cardDeck.get(8),deck.cardDeck.get(9)));
-        //player3Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(10),deck.cardDeck.get(11),deck.cardDeck.get(12),deck.cardDeck.get(13),deck.cardDeck.get(14)));
-        //player4Hand = new ArrayList<>(Arrays.asList(deck.cardDeck.get(15),deck.cardDeck.get(16),deck.cardDeck.get(17),deck.cardDeck.get(18),deck.cardDeck.get(19)));
-        //kitty = new ArrayList<>(Arrays.asList(deck.cardDeck.get(20),deck.cardDeck.get(21),deck.cardDeck.get(22),deck.cardDeck.get(23)));
-        deal();
+         deal();
     }
 
     //copy constructor

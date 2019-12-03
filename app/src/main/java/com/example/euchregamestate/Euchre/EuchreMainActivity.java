@@ -49,11 +49,16 @@ public class EuchreMainActivity extends GameMainActivity {
                 return new EuchreComputerPlayer(name);
             }
         });
+        playerTypes.add(new GamePlayerType("Computer Player (smart)") {
+            public GamePlayer createPlayer(String name) {
+                return new EuchreSmartComputerPlayer(name);
+            }
+        });
 
 
 
         // Create a game configuration class for Tic-tac-toe
-        GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Tic-Tac-Toe", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Euchre", PORT_NUMBER);
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0); // yellow-on-blue GUI
