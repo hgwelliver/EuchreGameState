@@ -97,7 +97,8 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
             EuchreOrderUpAction orderAct = (EuchreOrderUpAction) action;
             playerNum = this.getPlayerIdx(orderAct.getPlayer());
             if(state.turn == playerNum  && state.gameStage == 1){
-                return state.isOrderUpTrump(playerNum);
+                state.isOrderUpTrump(playerNum);
+                sendAllUpdatedState();
             }
         }
         else if(action instanceof EuchreSelectTrumpAction){
