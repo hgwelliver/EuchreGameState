@@ -111,8 +111,9 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
         else if(action instanceof EuchrePickItUpAction){
             EuchrePickItUpAction pickAct = (EuchrePickItUpAction) action;
             playerNum = this.getPlayerIdx(pickAct.getPlayer());
-            if(state.turn == playerNum){
-                return state.isPickItUp(playerNum);
+            if(state.turn == playerNum && state.gameStage == 1){
+                state.isPickItUp(playerNum, pickAct.getCardToDiscard());
+                sendAllUpdatedState();
             }
         }
         else if(action instanceof EuchreGoingAloneAction){

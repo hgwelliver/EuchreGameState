@@ -32,7 +32,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
-    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton;
+    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton, discardView;
 
     private Activity myActivity;
 
@@ -299,6 +299,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
         helpButton = (Button) myActivity.findViewById(R.id.helpMenuButton);
         resetButton = (Button) myActivity.findViewById(R.id.resetButton);
+        discardView = (TextView) myActivity.findViewById(R.id.DiscardTextView);
 
         redTrick = (TextView) myActivity.findViewById(R.id.redTricks);
         blueTrick = (TextView) myActivity.findViewById(R.id.blueTricks);
@@ -383,8 +384,12 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         pickItUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                latestState.pickIt = true;
+                discardView.setAlpha(1);
+                passButton.setAlpha(0);
+                pickItUpButton.setAlpha(0);
+                orderUpButton.setAlpha(0);
+                goingAloneButton.setAlpha(0);
             }
         });
 
@@ -409,6 +414,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View v) {
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
+                if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                    game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(0)));
+                    latestState.pickIt = false;
+                    discardView.setAlpha(0);
+                }
             }
         });
 
@@ -417,6 +427,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 1){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
+                    if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                        game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(1)));
+                        latestState.pickIt = false;
+                        discardView.setAlpha(0);
+                    }
                 }
             }
         });
@@ -426,6 +441,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 2){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
+                    if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                        game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(2)));
+                        latestState.pickIt = false;
+                        discardView.setAlpha(0);
+                    }
                 }
             }
         });
@@ -435,6 +455,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 3){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
+                    if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                        game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(3)));
+                        latestState.pickIt = false;
+                        discardView.setAlpha(0);
+                    }
                 }
             }
         });
@@ -444,6 +469,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 4){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
+                }
+                if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                    game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(4)));
+                    latestState.pickIt = false;
+                    discardView.setAlpha(0);
                 }
             }
         });

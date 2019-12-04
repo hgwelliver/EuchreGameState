@@ -314,7 +314,6 @@ public class EuchreState extends GameState {
             else if(teamDealer == 0 && playerID == dealer){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
-                isPickItUp(dealer);
                 middleVisible = false;
                 whoCalled = 0;
                 whoIsAlone = dealer;
@@ -330,7 +329,6 @@ public class EuchreState extends GameState {
             else if(teamDealer == 1 && playerID == dealer){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
-                isPickItUp(dealer);
                 whoCalled = 1;
                 whoIsAlone = dealer;
                 middleVisible = false;
@@ -490,16 +488,22 @@ public class EuchreState extends GameState {
                 // remove a card from the player's hand and add the middle card
                 player2Hand.remove(2);
                 player2Hand.add(middleCard);
+                turn = 2;
+                gameStage = 3;
             }
             else if(dealer == 2){
                 // remove a card from the player's hand and add the middle card
                 player3Hand.remove(2);
                 player3Hand.add(middleCard);
+                turn = 3;
+                gameStage = 3;
             }
             else if(dealer == 3){
                 // remove a card from the player's hand and add the middle card
                 player4Hand.remove(2);
                 player4Hand.add(middleCard);
+                turn = 0;
+                gameStage = 3;
             }
         }
         return false;
@@ -511,49 +515,42 @@ public class EuchreState extends GameState {
      * dealer must discard a card from their hand
      * suit of middle card is trump suit
      */
-    public boolean isPickItUp(int playerID){
+    public boolean isPickItUp(int playerID, Card discard){
         if(turn == playerID && gameStage == 1 && dealer == playerID){
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
             if(dealer == 0){
                 //discard card that player taps
-                int index = 0;
-                Card discard = new Card(player1Hand.get(index).getSuit(), player1Hand.get(index).getValue(), player1Hand.get(index).getResourceId());
                 if(player1Hand.get(0) == discard){
                     player1Hand.remove(0);
                     player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
                 }
                 else if(player1Hand.get(1) == discard){
                     player1Hand.remove(1);
                     player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
                 }
                 else if(player1Hand.get(2) == discard){
                     player1Hand.remove(2);
                     player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
                 }
                 else if(player1Hand.get(3) == discard){
                     player1Hand.remove(3);
                     player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
                 }
                 else if(player1Hand.get(4) == discard){
                     player1Hand.remove(4);
                     player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
                 }
-            }
-            else if(dealer == 1){
-                // remove a card from the player's hand and add the middle card
-                player2Hand.remove(2);
-                player2Hand.add(middleCard);
-            }
-            else if(dealer == 2){
-                // remove a card from the player's hand and add the middle card
-                player3Hand.remove(2);
-                player3Hand.add(middleCard);
-            }
-            else if(dealer == 3){
-                // remove a card from the player's hand and add the middle card
-                player4Hand.remove(2);
-                player4Hand.add(middleCard);
             }
         }
         return false;
@@ -864,14 +861,14 @@ public class EuchreState extends GameState {
         }*/
 
         //update dealer and turn
-        if(dealer == 3){
+        /*if(dealer == 3){
             dealer = 0;
             turn = dealer + 1;
         }
         else{
             dealer++;
             turn = dealer + 1;
-        }
+        }*/
     }
 
     public void setTurn(int turn) {
