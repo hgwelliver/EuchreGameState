@@ -83,5 +83,4 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
             }
         }
     }
-
 }
