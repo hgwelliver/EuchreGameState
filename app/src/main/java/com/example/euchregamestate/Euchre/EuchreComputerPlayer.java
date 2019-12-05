@@ -79,7 +79,6 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                     Card cardPlay = valid.get(num);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
-
             }
         }
     }

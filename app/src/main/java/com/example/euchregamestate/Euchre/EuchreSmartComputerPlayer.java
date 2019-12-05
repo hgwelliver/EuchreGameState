@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
+    private static final long serialVersionUID = -2242980258970485343L;
     private static final String TAG = "EuchreSmartComputerPlayer";
 
     protected EuchreState latestState = null;
@@ -36,7 +37,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 ArrayList<Card> hand = getValidHand(currentHand);
                 Card cardPlay;
 
-                Card[] middle = new Card[4];//middle copy to check if will be winning after playing max and losing
+                Card[] middle = new Card[4]; //middle copy to check if will be winning after playing max and losing
                 int i;
                 for( i = 0; i < 4; i++){ //copies middle
                     if(latestState.currentMiddle.get(i) != null) {
@@ -80,10 +81,12 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
             }
         }
     }
-    public int getCurrentWinner(EuchreState s, Card[] middle){//returns player number for whos winning, if first player then it will be their player num
+
+    //returns player number for whos winning, if first player then it will be their player num
+    public int getCurrentWinner(EuchreState s, Card[] middle){
         int winner = this.playerNum;
         int playedNull = 0;
-        int[] nullVals = new int[4];//logs null values in middle
+        int[] nullVals = new int[4]; //logs null values in middle
         int i;
         for( i = 0; i < 4; i++){
             if(middle[i] == null){
@@ -94,7 +97,9 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 nullVals[i] = 1;
             }
         }
-        if(playedNull == 4){//no cards have been played
+
+        //no cards have been played
+        if(playedNull == 4){
             return this.playerNum;
         }
         else {
@@ -166,8 +171,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 value[3] = 0;
             }
 
-
-            int winVal = 0;//find winner
+            int winVal = 0; //find winner
             for(i = 0; i < 4; i++){
                 if(value[i] > winVal){
                     winVal = value[i];
@@ -175,20 +179,17 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 }
             }
 
-
-
-
-
-
             return winner;
         }
 
     }
+
     public int getBestCard(ArrayList<Card> hand,EuchreState s, boolean highCard){
         int index = 0;
         int maxVal = 0;//if losing
 
         int[] values = new int[5];
+
         /*
         Card.NUMBER one = hand.get(0).getValue();
         Card.NUMBER two =hand.get(1).getValue();
@@ -209,6 +210,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
         ArrayList<Card.SUIT>  suitArr = new ArrayList<>();
         suitArr.addAll(suitList);
         */
+
         for(int i = 0; i < hand.size(); i++){//initializes values
             int temp = Card.getValsVal(hand.get(i).getValue(),hand.get(i).getSuit(),s.currentTrumpSuit);
             if(hand.get(i).getSuit() == s.currentTrumpSuit | temp == 7){

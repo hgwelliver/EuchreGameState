@@ -7,6 +7,7 @@ import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
  * @author Sierra, Mikey, Haley, and Alex
  */
 public class EuchreGoingAloneAction extends GameAction {
+    private static final long serialVersionUID = -2242980258970485343L;
     public EuchreGoingAloneAction(GamePlayer player){
         super(player);
     }
