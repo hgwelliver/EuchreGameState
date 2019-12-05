@@ -73,16 +73,17 @@ public class EuchreState extends GameState {
         this.teamDealer = 0;
         this.startGame = true;
         this.quit = false;
-        this.gameStage = 2;
+        this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 1;
+        this.turn = rand.nextInt(3);
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
         this.redTrickScore = 0;
         this.blueTrickScore = 0;
-        this.currentTrumpSuit = Card.SUIT.HEARTS;
+        this.currentTrumpSuit = null;
         this.numPlays = 0;
+        this.firstPlayedSuit = null;
         // init deck of cards
         this.deck = new CardDeck();
          deal();
@@ -112,6 +113,7 @@ public class EuchreState extends GameState {
         this.player4Play = other.player4Play;
         this.kittyTop = other.kittyTop;
         this.currentTrumpSuit = other.currentTrumpSuit;
+        this.firstPlayedSuit = other.firstPlayedSuit;
         this.numPlays = other.numPlays;
         // init deck of cards
 
@@ -688,6 +690,7 @@ public class EuchreState extends GameState {
         // reset numPlayed
         numPlays = 0;
         // find if the round is over
+        currentMiddle.clear();
         trickNum++;
         int trickWinner;
         if(trickNum == 5){
@@ -723,6 +726,7 @@ public class EuchreState extends GameState {
         player2Hand.remove(player2Play);
         player3Hand.remove(player3Play);
         player4Hand.remove(player4Play);
+
         player1Play = null;
         player2Play = null;
         player3Play = null;

@@ -57,7 +57,7 @@ public class EuchreMainActivity extends GameMainActivity {
 
 
 
-        // Create a game configuration class for Tic-tac-toe
+        // Create a game configuration class for Euchre
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Euchre", PORT_NUMBER);
 
         // Add the default players
