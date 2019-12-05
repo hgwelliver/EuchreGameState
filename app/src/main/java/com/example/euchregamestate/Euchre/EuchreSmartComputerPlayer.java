@@ -4,13 +4,13 @@ import com.example.euchregamestate.GameFramework.GameComputerPlayer;
 import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
 
 import java.util.ArrayList;
-
 /**
  * @Author: Alex, Mikey
  */
+public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
+    private static final long serialVersionUID = -2242980258970485343L;
 
-public class EuchreSmartComputerPlayer extends GameComputerPlayer {
-    private static final String TAG = "EuchreSmartComputerPlayer";
+
 
     protected EuchreState latestState = null;
 
@@ -112,10 +112,12 @@ public class EuchreSmartComputerPlayer extends GameComputerPlayer {
             }
         }
     }
-    public int getCurrentWinner(EuchreState s, Card[] middle){//returns player number for whos winning, if first player then it will be their player num
+
+    //returns player number for whos winning, if first player then it will be their player num
+    public int getCurrentWinner(EuchreState s, Card[] middle){
         int winner = this.playerNum;
         int playedNull = 0;
-        int[] nullVals = new int[4];//logs null values in middle
+        int[] nullVals = new int[4]; //logs null values in middle
         int i;
 
         for( i = 0; i < 4; i++){
@@ -127,7 +129,9 @@ public class EuchreSmartComputerPlayer extends GameComputerPlayer {
                 nullVals[i] = 1;
             }
         }
-        if(playedNull == 4){//no cards have been played
+
+        //no cards have been played
+        if(playedNull == 4){
             return this.playerNum;
         }
         else {
@@ -199,8 +203,7 @@ public class EuchreSmartComputerPlayer extends GameComputerPlayer {
                 value[3] = 0;
             }
 
-
-            int winVal = 0;//find winner
+            int winVal = 0; //find winner
             for(i = 0; i < 4; i++){
                 if(value[i] > winVal){
                     winVal = value[i];
@@ -208,15 +211,11 @@ public class EuchreSmartComputerPlayer extends GameComputerPlayer {
                 }
             }
 
-
-
-
-
-
             return winner;
         }
 
     }
+
     public int getBestCard(ArrayList<Card> hand,EuchreState s, boolean highCard){
         int index = 0;
         int maxVal = 0;//if losing

@@ -17,14 +17,18 @@ import java.util.Random;
  */
 public class EuchreState extends GameState {
 
-    // info about the resources each player has
+    /**
+     *  info about the resources each player has
+     */
     public CardDeck deck;
     protected ArrayList<Card> player1Hand = new ArrayList<>();
     protected ArrayList<Card> player2Hand = new ArrayList<>();
     protected ArrayList<Card> player3Hand = new ArrayList<>();
     protected ArrayList<Card> player4Hand = new ArrayList<>();
-    // info about the state of resources
-    //protected ArrayList<Card> deckList = new ArrayList<>();
+
+    /**
+     * info about the state of resources
+     */
     // whose turn
     protected int turn; // 1/5 for player 1, 2/6 for player 2, 3/7 for player 3, 4/8 for player 4
     protected int dealer; // 1 for player 1, 2 for player 2, 3 for player 3, 4 for player 4
@@ -59,6 +63,7 @@ public class EuchreState extends GameState {
     protected boolean quit; // get rid later
     protected int gameStage; // 0 for deal, 1 for deciding middle card, 2 for deciding trump, 3 for playing cards
     protected int numPass; // count number of passes
+    protected boolean pickIt;
     // random number generator
     protected Random rand = new Random();
 
@@ -83,10 +88,12 @@ public class EuchreState extends GameState {
         this.blueTrickScore = 0;
         this.currentTrumpSuit = null;
         this.numPlays = 0;
+        this.pickIt = false;
         this.firstPlayedSuit = null;
         // init deck of cards
         this.deck = new CardDeck();
-         deal();
+        deal();
+
     }
 
     //copy constructor
@@ -115,8 +122,7 @@ public class EuchreState extends GameState {
         this.currentTrumpSuit = other.currentTrumpSuit;
         this.firstPlayedSuit = other.firstPlayedSuit;
         this.numPlays = other.numPlays;
-        // init deck of cards
-
+        this.pickIt = other.pickIt;
     }
 
     public void setPlay(int ID, Card c){
@@ -165,15 +171,12 @@ public class EuchreState extends GameState {
                 "Going Alone Player: " + whoIsAlone + "\n" +
                 "Passes: " + numPass + " Who Called: " + whoCalled + "\n" +
                 "Trump Suit: " + currentTrumpSuit + "\n" +
-                "Number of Plays; " + numPlays + "\n"
-
-                //passes, who is alone, suit, numPlays,
-                ;
+                "Number of Plays; " + numPlays + "\n";
         return string;
     }
 
-    public String ArrayToString(ArrayList<Card> Arr){//where object is card object
-        String ArrayContents1 ="";//contents of array
+    public String ArrayToString(ArrayList<Card> Arr){ //where object is card object
+        String ArrayContents1 =""; //contents of array
         for(int i =0; i< Arr.size(); i++){
             Card card = Arr.get(i);
 
@@ -190,41 +193,42 @@ public class EuchreState extends GameState {
      */
     public boolean deal(){
         // deal cards when game is started and game stage is 0
+        // need to clear everything
+        player1Hand.clear();
+        player2Hand.clear();
+        player3Hand.clear();
+        player4Hand.clear();
+        kitty.clear();
+        currentMiddle.clear();
 
+        // shuffle deck
+        Collections.shuffle(deck.cardDeck);
 
-            // need to clear everything
-            player1Hand.clear();
-            player2Hand.clear();
-            player3Hand.clear();
-            player4Hand.clear();
-            kitty.clear();
-            currentMiddle.clear();
-            // shuffle deck
-            Collections.shuffle(deck.cardDeck);
-            // deal cards to each player
-            // player 1's hand
-            for(int i = 0; i < 5; i++){
-                player1Hand.add(i, deck.cardDeck.get(i));
-                player2Hand.add(  i, deck.cardDeck.get(5 + i));
-                player3Hand.add( i, deck.cardDeck.get(10 + i));
-                player4Hand.add( i, deck.cardDeck.get(15 + i));
+        // deal cards to each player
+        // player 1's hand
+        for (int i = 0; i < 5; i++) {
+            player1Hand.add(i, deck.cardDeck.get(i));
+            player2Hand.add(i, deck.cardDeck.get(5 + i));
+            player3Hand.add(i, deck.cardDeck.get(10 + i));
+            player4Hand.add(i, deck.cardDeck.get(15 + i));
 
-            }
+        }
 
-            for(int i = 0; i < 4; i++){
-                kitty.add(i , deck.cardDeck.get(20 + i));
-            }
-            kittyTop = kitty.get(0);
-            middleCard = deck.cardDeck.get(20);
-            middleCardSuit = middleCard.getSuit();
+        for (int i = 0; i < 4; i++) {
+            kitty.add(i, deck.cardDeck.get(20 + i));
+        }
+        kittyTop = kitty.get(0);
+        middleCard = deck.cardDeck.get(20);
+        middleCardSuit = middleCard.getSuit();
 
-            // make middle card visible
-            middleVisible = true;
-            // change game state to 1
-            gameStage++;
-            // print that cards are dealt
-            return true;
+        // make middle card visible
+        middleVisible = true;
 
+        // change game state to 1
+        gameStage++;
+
+        // print that cards are dealt
+        return true;
     }
 
     /**
@@ -246,6 +250,7 @@ public class EuchreState extends GameState {
             middleVisible = false;
             return true;
         }
+
         // if numPass is not three or 7 then they can pass normally
         else if(numPass < 7 && numPass != 3 && turn == playerID){
             numPass++;
@@ -258,6 +263,7 @@ public class EuchreState extends GameState {
             }
             return true;
         }
+
         // if numPass is 7 then the user cannot pass
         else if(numPass == 7 && turn == playerID){
             return false;
@@ -289,6 +295,7 @@ public class EuchreState extends GameState {
                 }
                 return true;
             }
+
             if(teamDealer == 1 && (playerID == 1 || playerID == 3) && (playerID != dealer)){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
@@ -305,11 +312,11 @@ public class EuchreState extends GameState {
                 }
                 return true;
             }
+
             // if the player is the dealer
             else if(teamDealer == 0 && playerID == dealer){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
-                isPickItUp(dealer);
                 middleVisible = false;
                 whoCalled = 0;
                 whoIsAlone = dealer;
@@ -321,10 +328,10 @@ public class EuchreState extends GameState {
                 }
                 return true;
             }
+
             else if(teamDealer == 1 && playerID == dealer){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
-                isPickItUp(dealer);
                 whoCalled = 1;
                 whoIsAlone = dealer;
                 middleVisible = false;
@@ -336,6 +343,7 @@ public class EuchreState extends GameState {
                 }
                 return true;
             }
+
             // non-dealing team goes alone
             else if(teamDealer == 0 && (playerID == 1 || playerID == 3)){
                 // set trump to suit of middle card
@@ -451,6 +459,7 @@ public class EuchreState extends GameState {
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
                 whoCalled = 0;
+
                 if(playerID == 0){
                     whoIsAlone = 0;
                     player3Hand.clear();
@@ -480,16 +489,22 @@ public class EuchreState extends GameState {
                 // remove a card from the player's hand and add the middle card
                 player2Hand.remove(2);
                 player2Hand.add(middleCard);
+                turn = 2;
+                gameStage = 3;
             }
             else if(dealer == 2){
                 // remove a card from the player's hand and add the middle card
                 player3Hand.remove(2);
                 player3Hand.add(middleCard);
+                turn = 3;
+                gameStage = 3;
             }
             else if(dealer == 3){
                 // remove a card from the player's hand and add the middle card
                 player4Hand.remove(2);
                 player4Hand.add(middleCard);
+                turn = 0;
+                gameStage = 3;
             }
         }
         return false;
@@ -501,38 +516,42 @@ public class EuchreState extends GameState {
      * dealer must discard a card from their hand
      * suit of middle card is trump suit
      */
-    public boolean isPickItUp(int playerID){
+    public boolean isPickItUp(int playerID, Card discard){
         if(turn == playerID && gameStage == 1 && dealer == playerID){
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
-            if(dealer == 1){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player1Hand.remove(discard);
-                player1Hand.add(middleCard);
-
-            }
-            else if(dealer == 2){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player2Hand.remove(discard);
-                player2Hand.add(middleCard);
-            }
-            else if(dealer == 3){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player3Hand.remove(discard);
-                player3Hand.add(middleCard);
-            }
-            else if(dealer == 4){
-                // dealer taps card to discard
-                Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h); // place holder for when we find out how to set to tapped card
-                // Card discard = card dealer taps
-                player4Hand.remove(discard);
-                player4Hand.add(middleCard);
+            if(dealer == 0){
+                //discard card that player taps
+                if(player1Hand.get(0) == discard){
+                    player1Hand.remove(0);
+                    player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
+                }
+                else if(player1Hand.get(1) == discard){
+                    player1Hand.remove(1);
+                    player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
+                }
+                else if(player1Hand.get(2) == discard){
+                    player1Hand.remove(2);
+                    player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
+                }
+                else if(player1Hand.get(3) == discard){
+                    player1Hand.remove(3);
+                    player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
+                }
+                else if(player1Hand.get(4) == discard){
+                    player1Hand.remove(4);
+                    player1Hand.add(middleCard);
+                    turn++;
+                    gameStage = 3;
+                }
             }
         }
         return false;
@@ -795,10 +814,28 @@ public class EuchreState extends GameState {
      */
     public void isRoundOver(){
         // reset the trick scores
-        blueTrickScore = 0;
-        redTrickScore = 0;
+        int trickSum = blueTrickScore + redTrickScore;
+        if(trickSum == 5) {
+            blueTrickScore = 0;
+            redTrickScore = 0;
+        }
         // update score
-        if (whoIsAlone == 1 || whoIsAlone == 3) {
+        if (redTrickScore == 5) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 1) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 0) {
+            redScore += 1;
+        } else if (blueTrickScore == 5) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 0) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 1) {
+            blueScore += 1;
+        }
+
+        //going alone code
+        /*if (whoIsAlone == 1 || whoIsAlone == 3) {
             if (redTrickScore == 5) {
                 redScore += 4;
             } else if (redTrickScore > 2) {
@@ -824,22 +861,22 @@ public class EuchreState extends GameState {
             } else if (blueTrickScore > 2 && whoCalled == 1) {
                 blueScore += 1;
             }
-        }
+        }*/
+
         //update dealer and turn
-        if(dealer == 3){
+        /*if(dealer == 3){
             dealer = 0;
             turn = dealer + 1;
         }
         else{
             dealer++;
             turn = dealer + 1;
-        }
+        }*/
     }
 
     public void setTurn(int turn) {
         this.turn = turn;
     }
-
 
 }
 

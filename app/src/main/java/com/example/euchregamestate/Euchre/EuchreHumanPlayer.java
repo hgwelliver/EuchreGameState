@@ -32,7 +32,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
-    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton;
+    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton, discardView;
 
     private Activity myActivity;
 
@@ -132,7 +132,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     heartButton.setAlpha(0);
                 }
 
-
                 selectTrumpButton.setAlpha(1);
 
                 // kitty interaction buttons disabled
@@ -165,6 +164,21 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 }
 
 
+            }
+
+            if(latestState.gameStage == 2){
+                pickItUpButton.setAlpha(0);
+                orderUpButton.setAlpha(0);
+                goingAloneButton.setAlpha(0);
+                selectTrumpButton.setAlpha(1);
+            }
+
+            if(latestState.gameStage == 3){
+                passButton.setAlpha(0);
+                pickItUpButton.setAlpha(0);
+                orderUpButton.setAlpha(0);
+                goingAloneButton.setAlpha(0);
+                selectTrumpButton.setAlpha(1);
             }
 
             //arraylist of cards
@@ -238,6 +252,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 rightPlayer.setImageResource(latestState.player4Play.getResourceId());
             }
 
+            //initializes colors to be used on the GUI
             int lightBlue = 0xff33b5e5;
             int yellow = 0xffffbb33;
             int red = 0xffcc0000;
@@ -299,6 +314,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
         helpButton = (Button) myActivity.findViewById(R.id.helpMenuButton);
         resetButton = (Button) myActivity.findViewById(R.id.resetButton);
+        discardView = (TextView) myActivity.findViewById(R.id.DiscardTextView);
 
         redTrick = (TextView) myActivity.findViewById(R.id.redTricks);
         blueTrick = (TextView) myActivity.findViewById(R.id.blueTricks);
@@ -330,7 +346,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         diamondButton = (Button) myActivity.findViewById(R.id.diamondButton);
         spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
 
-        //quits game
+        //quits game on click
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -339,6 +355,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //restarts game on click
         resetButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -349,6 +366,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //displays help button on click
         helpButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -369,9 +387,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
-
-        //if(latestState.getTurn() ==0){//can only do actions on turn
-
+        //allows the user to pass on click
         passButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -380,14 +396,20 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //allows the user to pick it up on click
         pickItUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.sendAction(new EuchrePickItUpAction(hp));
-
+                latestState.pickIt = true;
+                discardView.setAlpha(1);
+                passButton.setAlpha(0);
+                pickItUpButton.setAlpha(0);
+                orderUpButton.setAlpha(0);
+                goingAloneButton.setAlpha(0);
             }
         });
 
+        //allows the user to order up on click
         orderUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -396,6 +418,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //allows the user to go alone on click
         goingAloneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -404,11 +427,16 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
-        //when the cards in player hand are clicked
+        //when the cards in player hand are clicked (playerhand1 through playerhand5)
         playerhand1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
+                if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                    game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(0)));
+                    latestState.pickIt = false;
+                    discardView.setAlpha(0);
+                }
             }
         });
 
@@ -417,6 +445,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 1){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
+                    if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                        game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(1)));
+                        latestState.pickIt = false;
+                        discardView.setAlpha(0);
+                    }
                 }
             }
         });
@@ -426,6 +459,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 2){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
+                    if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                        game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(2)));
+                        latestState.pickIt = false;
+                        discardView.setAlpha(0);
+                    }
                 }
             }
         });
@@ -435,6 +473,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 3){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
+                    if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                        game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(3)));
+                        latestState.pickIt = false;
+                        discardView.setAlpha(0);
+                    }
                 }
             }
         });
@@ -445,9 +488,15 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 if(latestState.player1Hand.size() > 4){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
                 }
+                if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                    game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(4)));
+                    latestState.pickIt = false;
+                    discardView.setAlpha(0);
+                }
             }
         });
 
+        //trump selection buttons
         spadeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
