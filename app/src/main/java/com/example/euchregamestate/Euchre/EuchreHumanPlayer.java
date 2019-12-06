@@ -387,6 +387,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        /**
+         * External Citation
+         * Date: 19 November 2019
+         * Problem: Could not get a pop-up window to work correctly
+         * Resource: Dr. Tribelhorn
+         * Solution: Tribelhorn helped to solve the issue
+         */
         //displays help button on click
         helpButton.setOnClickListener(new View.OnClickListener(){
             @Override
