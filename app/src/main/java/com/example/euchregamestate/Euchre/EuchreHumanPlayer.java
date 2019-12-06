@@ -86,7 +86,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             leftPlayer.setImageResource(R.drawable.cardback);
 
             //sets middle cards to card backs and sets image for kitty in each gamestage
-
             if(latestState.gameStage <= 1){
                 kitty.setImageResource(latestState.kittyTop.getResourceId());
 
@@ -164,7 +163,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
             }
 
-            //managing buttons based on game stage
+            //managing buttons based on dealer and game stage
             if(latestState.dealer == 0){
                 //can pick it up but cant order up
                 //cant pass in game stage two
@@ -180,8 +179,15 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(1);
                 }
+                if(latestState.gameStage == 3){
+                    pickItUpButton.setAlpha(0);
+                    orderUpButton.setAlpha(0);
+                    goingAloneButton.setAlpha(0);
+                    selectTrumpButton.setAlpha(1);
+                }
             }
 
+            //managing buttons based on dealer and game stage
             if(latestState.dealer != 0){
                 //cant pick it up but can order up
                 if(latestState.gameStage == 1){
@@ -194,6 +200,12 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
                     goingAloneButton.setAlpha(1);
+                    selectTrumpButton.setAlpha(1);
+                }
+                if(latestState.gameStage == 3){
+                    pickItUpButton.setAlpha(0);
+                    orderUpButton.setAlpha(0);
+                    goingAloneButton.setAlpha(0);
                     selectTrumpButton.setAlpha(1);
                 }
             }
