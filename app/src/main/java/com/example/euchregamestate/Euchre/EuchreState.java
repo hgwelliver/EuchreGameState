@@ -105,9 +105,6 @@ public class EuchreState extends GameState {
         this.gameStage = other.gameStage;
         this.numPass = other.numPass;
         this.turn = other.turn;
-        if(this.turn > 3){
-            this.turn = 0;
-        }
         this.trickNum = other.trickNum;
         this.redScore = other.redScore;
         this.blueScore = other.blueScore;
@@ -197,6 +194,9 @@ public class EuchreState extends GameState {
     public boolean deal(){
         // deal cards when game is started and game stage is 0
         // need to clear everything
+        if(turn == 4){
+            turn = 0;
+        }
         player1Hand.clear();
         player2Hand.clear();
         player3Hand.clear();

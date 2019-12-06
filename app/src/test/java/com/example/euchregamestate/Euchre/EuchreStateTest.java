@@ -17,7 +17,20 @@ public class EuchreStateTest {
     }
 
     @Test
+    /**
+     * @author Sierra
+     */
     public void deal() {
+        EuchreState testState = new EuchreState();
+        testState.gameStage = 0;
+        testState.deal();
+        //test size of each player's hand
+        assertEquals(testState.player1Hand.size(), 5);
+        assertEquals(testState.player2Hand.size(), 5);
+        assertEquals(testState.player3Hand.size(), 5);
+        assertEquals(testState.player4Hand.size(), 5);
+        //test that gamestage changes
+        assertEquals(testState.gameStage, 1);
     }
 
     @Test
@@ -123,11 +136,36 @@ public class EuchreStateTest {
 
     @Test
     public void isTrickComplete() {
-
+        EuchreState testState = new EuchreState();
+        testState.trickNum = 5;
+        Card playedCard1 = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h);
+        Card playedCard2 = new Card(Card.SUIT.HEARTS, Card.NUMBER.ACE, R.drawable.ace_h);
+        Card playedCard3 = new Card(Card.SUIT.SPADES, Card.NUMBER.ACE, R.drawable.ace_s);
+        Card playedCard4 = new Card(Card.SUIT.CLUBS, Card.NUMBER.ACE, R.drawable.ace_c);
+        testState.player1Play = playedCard1;
+        testState.player2Play = playedCard2;
+        testState.player3Play = playedCard3;
+        testState.player4Play = playedCard4;
+        testState.isTrickComplete();
+        //test that trump suit is null now
+        assertEquals(testState.currentTrumpSuit, null);
+        //test that gamestage goes to zero
+        assertEquals(testState.numPass, 0);
     }
 
     @Test
+    /**
+     * @author Sierra
+     */
     public void isRoundOver() {
-
+        EuchreState testState = new EuchreState();
+        testState.gameStage = 3;
+        testState.redTrickScore = 3;
+        testState.blueTrickScore = 2;
+        testState.redScore = 0;
+        testState.whoCalled = 0;
+        testState.isRoundOver();
+        //test that red team gets 1 point
+        assertEquals(testState.redScore, 1);
     }
 }
