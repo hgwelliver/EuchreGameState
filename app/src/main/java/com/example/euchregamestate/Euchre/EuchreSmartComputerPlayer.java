@@ -32,7 +32,29 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
             sleep(1);
             // send an action from this computer player
             if(latestState.gameStage == 1 || latestState.gameStage == 2){
+
+                if(latestState.gameStage == 1) {
+                    game.sendAction(new EuchrePassAction(this));
+                }
+                else if(latestState.numPass == 7){
+                    Card.SUIT computerSuit;
+                    if(latestState.kittyTop.getSuit() == Card.SUIT.CLUBS){
+                        computerSuit = Card.SUIT.HEARTS;
+                    }
+                    else if(latestState.kittyTop.getSuit() == Card.SUIT.DIAMONDS){
+                        computerSuit = Card.SUIT.HEARTS;
+                    }
+                    else if(latestState.kittyTop.getSuit() == Card.SUIT.SPADES){
+                        computerSuit = Card.SUIT.HEARTS;
+                    }
+                    else{
+                        computerSuit = Card.SUIT.SPADES;
+                    }
+                    game.sendAction(new EuchreSelectTrumpAction(this, computerSuit));
+                }
+                else{
                 game.sendAction(new EuchrePassAction(this));
+                }
             }
             else if(latestState.gameStage == 3){
                 ArrayList<Card> currentHand = latestState.getPlayerHand(playerNum);
