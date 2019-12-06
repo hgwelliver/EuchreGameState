@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,7 +66,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         if ( (info != null) && (info instanceof EuchreState) ) {
             this.latestState = (EuchreState)info;
 
-
             playerHands.add(player);
             playerHands.add(topPlayer);
             playerHands.add(leftPlayer);
@@ -88,7 +86,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             leftPlayer.setImageResource(R.drawable.cardback);
 
             //sets middle cards to card backs and sets image for kitty in each gamestage
-
             if(latestState.gameStage <= 1){
                 kitty.setImageResource(latestState.kittyTop.getResourceId());
 
@@ -166,7 +163,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
             }
 
-            //managing buttons based on game stage
+            //managing buttons based on dealer and game stage
             if(latestState.dealer == 0){
                 //can pick it up but cant order up
                 //cant pass in game stage two
@@ -182,8 +179,15 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(1);
                 }
+                if(latestState.gameStage == 3){
+                    pickItUpButton.setAlpha(0);
+                    orderUpButton.setAlpha(0);
+                    goingAloneButton.setAlpha(0);
+                    selectTrumpButton.setAlpha(1);
+                }
             }
 
+            //managing buttons based on dealer and game stage
             if(latestState.dealer != 0){
                 //cant pick it up but can order up
                 if(latestState.gameStage == 1){
@@ -198,9 +202,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(1);
                 }
+                if(latestState.gameStage == 3){
+                    pickItUpButton.setAlpha(0);
+                    orderUpButton.setAlpha(0);
+                    goingAloneButton.setAlpha(0);
+                    selectTrumpButton.setAlpha(1);
+                }
             }
-
-
 
             //arraylist of cards
             ArrayList<Card> p1Hand = latestState.getPlayerHand(0);
@@ -367,6 +375,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         diamondButton = (Button) myActivity.findViewById(R.id.diamondButton);
         spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
 
+        /**
+         * External Citation
+         * Date: 29 October 2019
+         * Problem: Did not know how to quit or restart an activity
+         * Resource: https://stackoverflow.com/questions/1397361/how-to-restart-activity-in-android
+         * Solution: Used the code in this post as a reference for both the quit and restart buttons
+         */
         //quits game on click
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -387,6 +402,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        /**
+         * External Citation
+         * Date: 14 November 2019
+         * Problem: Could not get a pop-up window to work correctly
+         * Resource: Dr. Tribelhorn
+         * Solution: Tribelhorn helped to solve the issue
+         */
         //displays help button on click
         helpButton.setOnClickListener(new View.OnClickListener(){
             @Override

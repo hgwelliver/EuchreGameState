@@ -3,7 +3,6 @@ package com.example.euchregamestate.Euchre;
 import com.example.euchregamestate.GameFramework.GamePlayer;
 import com.example.euchregamestate.GameFramework.LocalGame;
 import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
-import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.GameFramework.utilities.GameTimer;
 import com.example.euchregamestate.GameFramework.utilities.Logger;
 import com.example.euchregamestate.GameFramework.utilities.Tickable;
@@ -84,6 +83,7 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
         else if(action instanceof EuchrePassAction){
             EuchrePassAction passAct = (EuchrePassAction) action;
             playerNum = this.getPlayerIdx(passAct.getPlayer());
+            if(state.getTurn() > 3){state.turn = 0;}
             if(state.turn == playerNum && (state.gameStage == 1 || state.gameStage == 2)){
                 try {
                     Thread.sleep(500);
@@ -155,9 +155,8 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
      */
     @Override
     protected String checkIfGameOver() {
-        //TODO  You will implement this method
         if(state.redScore >= 10){
-            return "Red Team Won ";
+            return "Red Team Won";
         }
         if(state.blueScore >= 10){
             return "Blue Team Won" ;

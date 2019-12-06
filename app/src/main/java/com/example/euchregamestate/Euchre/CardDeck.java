@@ -2,7 +2,6 @@ package com.example.euchregamestate.Euchre;
 import com.example.euchregamestate.R;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
