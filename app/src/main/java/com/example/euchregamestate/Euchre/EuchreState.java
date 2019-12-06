@@ -80,7 +80,7 @@ public class EuchreState extends GameState {
         this.quit = false;
         this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 1;
+        this.turn = rand.nextInt(3);
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
@@ -89,9 +89,11 @@ public class EuchreState extends GameState {
         this.currentTrumpSuit = null;
         this.numPlays = 0;
         this.pickIt = false;
+        this.firstPlayedSuit = null;
         // init deck of cards
         this.deck = new CardDeck();
         deal();
+
     }
 
     //copy constructor
@@ -121,6 +123,7 @@ public class EuchreState extends GameState {
         this.player4Play = other.player4Play;
         this.kittyTop = other.kittyTop;
         this.currentTrumpSuit = other.currentTrumpSuit;
+        this.firstPlayedSuit = other.firstPlayedSuit;
         this.numPlays = other.numPlays;
         this.pickIt = other.pickIt;
     }
@@ -361,7 +364,6 @@ public class EuchreState extends GameState {
                 middleVisible = false;
                 return true;
             }
-
             else if(teamDealer == 1 && (playerID == 0 || playerID == 2)){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
@@ -379,7 +381,6 @@ public class EuchreState extends GameState {
                 return true;
             }
         }
-
         else if(turn == playerID && gameStage == 2){
             // if the player is on the dealing team and not the dealer
             if(teamDealer == 0 && (playerID == 0 || playerID == 2) && (playerID != dealer)){
@@ -711,8 +712,17 @@ public class EuchreState extends GameState {
         // reset numPlayed
         numPlays = 0;
         // find if the round is over
+        currentMiddle.clear();
         trickNum++;
         int trickWinner;
+            trickWinner = trickWinner();
+            turn = trickWinner;
+            if(trickWinner == 0 | trickWinner == 2){
+                redTrickScore++;
+            }
+            else if(trickWinner == 1 | trickWinner == 3){
+                blueTrickScore++;
+            }
         if(trickNum == 5){
             // reset everything for new round
             currentTrumpSuit = null;
@@ -730,22 +740,11 @@ public class EuchreState extends GameState {
             deal();
             trickNum = 0;
         }
-        // if not, check whose turn is next
-        else{
-            trickWinner = trickWinner();
-            turn = trickWinner;
-            if(trickWinner == 0 | trickWinner == 2){
-                redTrickScore++;
-            }
-            else if(trickWinner == 1 | trickWinner == 3){
-                blueTrickScore++;
-            }
-        }
-
         player1Hand.remove(player1Play);
         player2Hand.remove(player2Play);
         player3Hand.remove(player3Play);
         player4Hand.remove(player4Play);
+
         player1Play = null;
         player2Play = null;
         player3Play = null;
@@ -772,16 +771,16 @@ public class EuchreState extends GameState {
         value[1] = Card.getValsVal(two, twoSuit, currentTrumpSuit);
         value[2] = Card.getValsVal(three, threeSuit, currentTrumpSuit);
         value[3] = Card.getValsVal(four, fourSuit, currentTrumpSuit);
-        if(player1Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
+        if(player1Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit && value[0] != 7){
             value[0] += 10;
         }
-        if(player2Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
+        if(player2Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit && value[0] != 7){
             value[1] += 10;
         }
-        if(player3Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
+        if(player3Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit && value[0] != 7){
             value[2] += 10;
         }
-        if(player4Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit){
+        if(player4Play.getSuit() == firstPlayedSuit && firstPlayedSuit != currentTrumpSuit && value[0] != 7){
             value[3] += 10;
         }
         if(player1Play.getSuit() == currentTrumpSuit || value[0] == 7){
@@ -813,12 +812,7 @@ public class EuchreState extends GameState {
      * keeps track of scores for each team
      */
     public void isRoundOver(){
-        // reset the trick scores
-        int trickSum = blueTrickScore + redTrickScore;
-        if(trickSum == 5) {
-            blueTrickScore = 0;
-            redTrickScore = 0;
-        }
+
         // update score
         if (redTrickScore == 5) {
             redScore += 2;
@@ -834,6 +828,12 @@ public class EuchreState extends GameState {
             blueScore += 1;
         }
 
+        // reset the trick scores
+        int trickSum = blueTrickScore + redTrickScore;
+        if(trickSum == 5) {
+            blueTrickScore = 0;
+            redTrickScore = 0;
+        }
         //going alone code
         /*if (whoIsAlone == 1 || whoIsAlone == 3) {
             if (redTrickScore == 5) {

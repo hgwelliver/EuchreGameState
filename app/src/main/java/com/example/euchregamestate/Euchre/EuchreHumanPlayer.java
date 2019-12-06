@@ -132,7 +132,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     heartButton.setAlpha(0);
                 }
 
-
                 selectTrumpButton.setAlpha(1);
 
                 // kitty interaction buttons disabled
@@ -166,6 +165,42 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
 
             }
+
+            //managing buttons based on game stage
+            if(latestState.dealer == 0){
+                //can pick it up but cant order up
+                //cant pass in game stage two
+                if(latestState.gameStage == 1){
+                    pickItUpButton.setAlpha(1);
+                    orderUpButton.setAlpha(0);
+                    goingAloneButton.setAlpha(1);
+                    selectTrumpButton.setAlpha(0);
+                }
+                if(latestState.gameStage == 2){
+                    pickItUpButton.setAlpha(0);
+                    orderUpButton.setAlpha(0);
+                    goingAloneButton.setAlpha(1);
+                    selectTrumpButton.setAlpha(1);
+                }
+            }
+
+            if(latestState.dealer != 0){
+                //cant pick it up but can order up
+                if(latestState.gameStage == 1){
+                    pickItUpButton.setAlpha(0);
+                    orderUpButton.setAlpha(1);
+                    goingAloneButton.setAlpha(1);
+                    selectTrumpButton.setAlpha(0);
+                }
+                if(latestState.gameStage == 2){
+                    pickItUpButton.setAlpha(0);
+                    orderUpButton.setAlpha(0);
+                    goingAloneButton.setAlpha(1);
+                    selectTrumpButton.setAlpha(1);
+                }
+            }
+
+
 
             //arraylist of cards
             ArrayList<Card> p1Hand = latestState.getPlayerHand(0);
@@ -208,7 +243,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
 
             player.setBackgroundColor(Color.YELLOW);
-            //switching card and cardback when playing a card
+            //switching card and card back when playing a card
             if(latestState.player1Play == null){
                 player.setImageResource(R.drawable.cardback);
             }
@@ -238,6 +273,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 rightPlayer.setImageResource(latestState.player4Play.getResourceId());
             }
 
+            //initializes colors to be used on the GUI
             int lightBlue = 0xff33b5e5;
             int yellow = 0xffffbb33;
             int red = 0xffcc0000;
@@ -331,7 +367,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         diamondButton = (Button) myActivity.findViewById(R.id.diamondButton);
         spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
 
-        //quits game
+        //quits game on click
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -340,6 +376,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //restarts game on click
         resetButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -350,6 +387,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //displays help button on click
         helpButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -370,9 +408,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
-
-        //if(latestState.getTurn() ==0){//can only do actions on turn
-
+        //allows the user to pass on click
         passButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -381,6 +417,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //allows the user to pick it up on click
         pickItUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -393,6 +430,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //allows the user to order up on click
         orderUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -401,6 +439,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //allows the user to go alone on click
         goingAloneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -409,7 +448,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
-        //when the cards in player hand are clicked
+        //when the cards in player hand are clicked (playerhand1 through playerhand5)
         playerhand1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -478,6 +517,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //trump selection buttons
         spadeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
