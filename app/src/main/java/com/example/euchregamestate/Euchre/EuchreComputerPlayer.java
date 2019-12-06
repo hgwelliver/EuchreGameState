@@ -4,7 +4,6 @@ import com.example.euchregamestate.GameFramework.GameComputerPlayer;
 import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author Sierra, Mikey, Haley, and Alex
@@ -20,7 +19,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
     }
 
     protected void receiveInfo(GameInfo info){
-        //If we no game-state, ignore
+        // If we know game-state, ignore
         if (!(info instanceof EuchreState)) {
             return;
         }
@@ -28,7 +27,6 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
         latestState = (EuchreState) info;
         // set the player num
         int playerNum = this.playerNum;
-        // do what it do
         if(latestState.turn == playerNum){
             // pause for one second
             sleep(1);
@@ -58,7 +56,6 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }
             }
             else if(latestState.gameStage == 3){
-                Random rand = new Random();
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
 
                 ArrayList<Card> valid = new ArrayList<>();

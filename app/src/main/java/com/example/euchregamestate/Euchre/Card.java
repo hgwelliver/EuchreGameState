@@ -80,7 +80,6 @@ public class Card implements Serializable {
             }
         }
 
-
         return value;
     }
 }
