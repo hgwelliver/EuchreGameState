@@ -103,6 +103,9 @@ public class EuchreState extends GameState {
         this.gameStage = other.gameStage;
         this.numPass = other.numPass;
         this.turn = other.turn;
+        if(this.turn > 3){
+            this.turn = 0;
+        }
         this.trickNum = other.trickNum;
         this.redScore = other.redScore;
         this.blueScore = other.blueScore;
@@ -236,7 +239,7 @@ public class EuchreState extends GameState {
         // if there have been three passes and the user passes then the middle is turn invisible
         if(numPass == 3 && turn == playerID){
             numPass++;
-            // make sure turn goes back to 1 if player is 4
+            // make sure turn goes back to 0 if player is 4
             if(turn == 3){
                 turn = 0;
             }
