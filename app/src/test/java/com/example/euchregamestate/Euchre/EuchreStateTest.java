@@ -69,7 +69,7 @@ public class EuchreStateTest {
         testState.turn = 2;
         testState.isOrderUpTrump(2);
         //test size of player1's hand
-        assertEquals(testState.player1Hand.size(), 6);
+        assertEquals(testState.player1Hand.size(), 5);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class EuchreStateTest {
         testState.turn = 1;
         testState.isPickItUp(1);
         //test size of player1's hand
-        assertEquals(testState.player1Hand.size(), 6);
+        assertEquals(testState.player1Hand.size(), 5);
     }
 
     @Test

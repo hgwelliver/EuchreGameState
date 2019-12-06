@@ -80,7 +80,7 @@ public class EuchreState extends GameState {
         this.quit = false;
         this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 1;
+        this.turn = rand.nextInt(3);
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
@@ -89,9 +89,11 @@ public class EuchreState extends GameState {
         this.currentTrumpSuit = null;
         this.numPlays = 0;
         this.pickIt = false;
+        this.firstPlayedSuit = null;
         // init deck of cards
         this.deck = new CardDeck();
         deal();
+
     }
 
     //copy constructor
@@ -118,6 +120,7 @@ public class EuchreState extends GameState {
         this.player4Play = other.player4Play;
         this.kittyTop = other.kittyTop;
         this.currentTrumpSuit = other.currentTrumpSuit;
+        this.firstPlayedSuit = other.firstPlayedSuit;
         this.numPlays = other.numPlays;
         this.pickIt = other.pickIt;
     }
@@ -358,7 +361,6 @@ public class EuchreState extends GameState {
                 middleVisible = false;
                 return true;
             }
-
             else if(teamDealer == 1 && (playerID == 0 || playerID == 2)){
                 // set trump to suit of middle card
                 currentTrumpSuit = middleCardSuit;
@@ -376,7 +378,6 @@ public class EuchreState extends GameState {
                 return true;
             }
         }
-
         else if(turn == playerID && gameStage == 2){
             // if the player is on the dealing team and not the dealer
             if(teamDealer == 0 && (playerID == 0 || playerID == 2) && (playerID != dealer)){
@@ -708,6 +709,7 @@ public class EuchreState extends GameState {
         // reset numPlayed
         numPlays = 0;
         // find if the round is over
+        currentMiddle.clear();
         trickNum++;
         int trickWinner;
             trickWinner = trickWinner();
@@ -739,6 +741,7 @@ public class EuchreState extends GameState {
         player2Hand.remove(player2Play);
         player3Hand.remove(player3Play);
         player4Hand.remove(player4Play);
+
         player1Play = null;
         player2Play = null;
         player3Play = null;

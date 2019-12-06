@@ -27,7 +27,6 @@ import java.util.ArrayList;
  */
 public class EuchreMainActivity extends GameMainActivity {
 
-    //Tag for logging
     public static final int PORT_NUMBER = 5213;
 
     @Override
@@ -36,7 +35,7 @@ public class EuchreMainActivity extends GameMainActivity {
         // Define the allowed player types
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
-        // yellow-on-blue GUI
+        // human player
         playerTypes.add(new GamePlayerType("Local Human Player ") {
             public GamePlayer createPlayer(String name) {
                 return new EuchreHumanPlayer(name, R.layout.activity_main);
@@ -50,13 +49,12 @@ public class EuchreMainActivity extends GameMainActivity {
             }
         });
 
-        //smart computer player
+        // smart computer player
         playerTypes.add(new GamePlayerType("Computer Player (smart)"){
            public GamePlayer createPlayer(String name){
                return new EuchreSmartComputerPlayer(name);
            }
         });
-
 
         // Create a game configuration class for Euchre
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Euchre", PORT_NUMBER);
@@ -68,7 +66,7 @@ public class EuchreMainActivity extends GameMainActivity {
         defaultConfig.addPlayer("Computer3", 1);
 
         // Set the initial information for the remote player
-        defaultConfig.setRemoteData("Remote Player", "", 1); 
+        defaultConfig.setRemoteData("Remote Player", "", 1);
 
         //done!
         return defaultConfig;
@@ -87,8 +85,6 @@ public class EuchreMainActivity extends GameMainActivity {
 
         return new EuchreLocalGame();
     }
-
-
 
 }
 
