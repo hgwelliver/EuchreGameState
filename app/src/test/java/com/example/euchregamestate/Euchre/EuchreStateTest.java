@@ -27,11 +27,12 @@ public class EuchreStateTest {
     public void isPass() {
         EuchreState testState = new EuchreState();
         testState.gameStage = 1;
+        testState.dealer = 0;
         testState.turn = 3;
-        testState.isPass(3);
         testState.numPass = 3;
-        //test correct numPasses
-        assertEquals(testState.numPass, 3);
+        testState.isPass(3);
+        //test that gamestage moves to next gamestage
+        assertEquals(testState.gameStage, 2);
         //test that turn goes back to zero
         assertEquals(testState.turn, 0);
     }
@@ -79,9 +80,10 @@ public class EuchreStateTest {
     public void isPickItUp() {
         EuchreState testState = new EuchreState();
         testState.gameStage = 1;
-        testState.dealer = 1;
-        testState.turn = 1;
-        testState.isPickItUp(1);
+        testState.dealer = 0;
+        testState.turn = 3;
+        Card discard = new Card(Card.SUIT.HEARTS, Card.NUMBER.TEN, R.drawable.ten_h);
+        testState.isPickItUp(1, discard);
         //test size of player1's hand
         assertEquals(testState.player1Hand.size(), 5);
     }
@@ -121,9 +123,11 @@ public class EuchreStateTest {
 
     @Test
     public void isTrickComplete() {
+
     }
 
     @Test
     public void isRoundOver() {
+
     }
 }
