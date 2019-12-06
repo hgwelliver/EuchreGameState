@@ -84,6 +84,7 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
         else if(action instanceof EuchrePassAction){
             EuchrePassAction passAct = (EuchrePassAction) action;
             playerNum = this.getPlayerIdx(passAct.getPlayer());
+            if(state.getTurn() > 3){state.turn = 0;}
             if(state.turn == playerNum && (state.gameStage == 1 || state.gameStage == 2)){
                 try {
                     Thread.sleep(500);
