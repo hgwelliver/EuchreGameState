@@ -168,18 +168,21 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 //can pick it up but cant order up
                 //cant pass in game stage two
                 if(latestState.gameStage == 1){
+                    passButton.setAlpha(1);
                     pickItUpButton.setAlpha(1);
                     orderUpButton.setAlpha(0);
                     goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(0);
                 }
                 if(latestState.gameStage == 2){
+                    passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
                     goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(1);
                 }
                 if(latestState.gameStage == 3){
+                    passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
                     goingAloneButton.setAlpha(0);
@@ -191,18 +194,21 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             if(latestState.dealer != 0){
                 //cant pick it up but can order up
                 if(latestState.gameStage == 1){
+                    passButton.setAlpha(1);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(1);
                     goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(0);
                 }
                 if(latestState.gameStage == 2){
+                    passButton.setAlpha(1);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
                     goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(1);
                 }
                 if(latestState.gameStage == 3){
+                    passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
                     goingAloneButton.setAlpha(0);

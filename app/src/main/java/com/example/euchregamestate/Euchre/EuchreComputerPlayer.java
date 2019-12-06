@@ -57,8 +57,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                     game.sendAction(new EuchrePassAction(this));
                 }
             }
-            else if(latestState.gameStage == 3){
-                Random rand = new Random();
+             if(latestState.gameStage == 3){
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
 
                 ArrayList<Card> valid = new ArrayList<>();
@@ -70,10 +69,12 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }
                 // if valid array is empty then any card is valid
                 if(valid.isEmpty()){
-                        Card cardPlay = hand.get(0);
-                        game.sendAction(new EuchrePlayCardAction(this, cardPlay));
+                    sleep(1);
+                    Card cardPlay = hand.get(0);
+                    game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
                 else {
+                    sleep(1);
                     Card cardPlay = valid.get(0);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
