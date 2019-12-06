@@ -1,11 +1,6 @@
 package com.example.euchregamestate.Euchre;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.widget.Switch;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Card class - information for creating a Card object

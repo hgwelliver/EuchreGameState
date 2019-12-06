@@ -1,15 +1,9 @@
 package com.example.euchregamestate.Euchre;
 
-import android.widget.Switch;
-
 import com.example.euchregamestate.GameFramework.infoMessage.GameState;
-import com.example.euchregamestate.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 /**

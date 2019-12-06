@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -66,7 +65,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     public void receiveInfo(GameInfo info){
         if ( (info != null) && (info instanceof EuchreState) ) {
             this.latestState = (EuchreState)info;
-
 
             playerHands.add(player);
             playerHands.add(topPlayer);
@@ -199,8 +197,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     selectTrumpButton.setAlpha(1);
                 }
             }
-
-
 
             //arraylist of cards
             ArrayList<Card> p1Hand = latestState.getPlayerHand(0);
@@ -367,6 +363,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         diamondButton = (Button) myActivity.findViewById(R.id.diamondButton);
         spadeButton = (Button) myActivity.findViewById(R.id.spadeButton);
 
+        /**
+         * External Citation
+         * Date: 29 October 2019
+         * Problem: Did not know how to quit or restart an activity
+         * Resource: https://stackoverflow.com/questions/1397361/how-to-restart-activity-in-android
+         * Solution: Used the code in this post as a reference for both the quit and restart buttons
+         */
         //quits game on click
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -389,7 +392,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
         /**
          * External Citation
-         * Date: 19 November 2019
+         * Date: 14 November 2019
          * Problem: Could not get a pop-up window to work correctly
          * Resource: Dr. Tribelhorn
          * Solution: Tribelhorn helped to solve the issue

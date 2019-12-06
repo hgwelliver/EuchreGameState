@@ -1,24 +1,10 @@
 package com.example.euchregamestate.Euchre;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.widget.TextView;
-
 import com.example.euchregamestate.GameFramework.GameMainActivity;
 import com.example.euchregamestate.GameFramework.GamePlayer;
-import com.example.euchregamestate.GameFramework.LocalGame;
 import com.example.euchregamestate.GameFramework.gameConfiguration.GameConfig;
 import com.example.euchregamestate.GameFramework.gameConfiguration.GamePlayerType;
 import com.example.euchregamestate.R;
-
 
 import java.util.ArrayList;
 

@@ -3,7 +3,6 @@ package com.example.euchregamestate.Euchre;
 import com.example.euchregamestate.GameFramework.GamePlayer;
 import com.example.euchregamestate.GameFramework.LocalGame;
 import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
-import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import com.example.euchregamestate.GameFramework.utilities.GameTimer;
 import com.example.euchregamestate.GameFramework.utilities.Logger;
 import com.example.euchregamestate.GameFramework.utilities.Tickable;
