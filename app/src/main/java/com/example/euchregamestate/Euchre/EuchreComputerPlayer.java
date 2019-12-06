@@ -70,13 +70,11 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }
                 // if valid array is empty then any card is valid
                 if(valid.isEmpty()){
-                    int num = rand.nextInt(hand.size());
-                    Card cardPlay = hand.get(num);
-                    game.sendAction(new EuchrePlayCardAction(this, cardPlay));
+                        Card cardPlay = hand.get(0);
+                        game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
                 else {
-                    int num = rand.nextInt(valid.size());
-                    Card cardPlay = valid.get(num);
+                    Card cardPlay = valid.get(0);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
             }

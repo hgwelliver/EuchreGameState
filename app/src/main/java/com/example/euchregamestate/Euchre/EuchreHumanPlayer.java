@@ -243,7 +243,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
 
             player.setBackgroundColor(Color.YELLOW);
-            //switching card and cardback when playing a card
+            //switching card and card back when playing a card
             if(latestState.player1Play == null){
                 player.setImageResource(R.drawable.cardback);
             }
