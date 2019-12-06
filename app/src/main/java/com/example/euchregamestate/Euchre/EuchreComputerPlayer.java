@@ -67,10 +67,12 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }
                 // if valid array is empty then any card is valid
                 if(valid.isEmpty()){
-                        Card cardPlay = hand.get(0);
-                        game.sendAction(new EuchrePlayCardAction(this, cardPlay));
+                    sleep(1);
+                    Card cardPlay = hand.get(0);
+                    game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
                 else {
+                    sleep(1);
                     Card cardPlay = valid.get(0);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
