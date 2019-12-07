@@ -40,7 +40,6 @@ public class EuchreState extends GameState {
     protected Card.SUIT middleCardSuit;
     protected Card middleCard;
     protected boolean middleVisible;
-    protected int whoIsAlone;
     protected Card.SUIT currentTrumpSuit;
     protected Card.SUIT firstPlayedSuit; // suit of first card played in each trick
     protected int numPlays; // how many cards have been played this trick
@@ -367,26 +366,6 @@ public class EuchreState extends GameState {
      * checks that player's move adheres to game rules
      */
     public boolean validMove(int playerID, Card selectedCard){
-        if(whoIsAlone == 1 && playerID == 2){
-            numPlays++;
-            turn++;
-            return true;
-        }
-        else if(whoIsAlone == 2 && playerID == 3){
-            numPlays++;
-            turn = 1;
-            return true;
-        }
-        else if(whoIsAlone == 3 && playerID == 0){
-            numPlays++;
-            turn++;
-            return true;
-        }
-        else if(whoIsAlone == 4 && playerID == 1){
-            numPlays++;
-            turn++;
-            return true;
-        }
         // turn == playerID
         if(gameStage == 3){
             if(numPlays == 0){
@@ -668,34 +647,20 @@ public class EuchreState extends GameState {
      * keeps track of scores for each team
      */
     public void isRoundOver(){
-        //going alone code
-        if (whoIsAlone == 1 || whoIsAlone == 3) {
-            if (redTrickScore == 5) {
-                redScore += 4;
-            } else if (redTrickScore > 2) {
-                redScore += 1;
-            }
-        } else if (whoIsAlone == 2 || whoIsAlone == 4) {
-            if (blueTrickScore == 5) {
-                blueScore += 4;
-            } else if (blueTrickScore > 2) {
-                blueScore += 1;
-            }
-        } else {
-            if (redTrickScore == 5) {
-                redScore += 2;
-            } else if (redTrickScore > 2 && whoCalled == 1) {
-                redScore += 2;
-            } else if (redTrickScore > 2 && whoCalled == 0) {
-                redScore += 1;
-            } else if (blueTrickScore == 5) {
-                blueScore += 2;
-            } else if (blueTrickScore > 2 && whoCalled == 0) {
-                blueScore += 2;
-            } else if (blueTrickScore > 2 && whoCalled == 1) {
-                blueScore += 1;
-            }
+        if (redTrickScore == 5) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 1) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 0) {
+            redScore += 1;
+        } else if (blueTrickScore == 5) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 0) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 1) {
+            blueScore += 1;
         }
+
         // reset the trick scores
         int trickSum = blueTrickScore + redTrickScore;
         if(trickSum == 5) {
