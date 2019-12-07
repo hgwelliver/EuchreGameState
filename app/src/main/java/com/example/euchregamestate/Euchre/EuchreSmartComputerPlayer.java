@@ -52,16 +52,13 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                     game.sendAction(new EuchreSelectTrumpAction(this, computerSuit));
                 }
                 else{
-                game.sendAction(new EuchrePassAction(this));
+                    game.sendAction(new EuchrePassAction(this));
                 }
             }
             else if(latestState.gameStage == 3){
                 ArrayList<Card> currentHand = latestState.getPlayerHand(playerNum);
                 ArrayList<Card> hand = getValidHand(currentHand);
                 Card cardPlay;
-
-
-
 
                 Card[] middle = new Card[4];//middle copy to check if will be winning after playing max and losing
 
@@ -76,11 +73,11 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 if(winner % 2 ==  playerNum %2){//team is winning
                     if(winner == playerNum){
                         int play = getBestCard(hand,latestState,false);
-                        cardPlay =hand.get(play);
+                        cardPlay = hand.get(play);
                     }
                     else{
                         int play = getBestCard(hand,latestState,true);
-                        cardPlay =hand.get(play);
+                        cardPlay = hand.get(play);
                     }
                 }
                 else{
@@ -278,21 +275,21 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
 
 
 
-    public ArrayList<Card> getValidHand(ArrayList<Card> hand){//needs work
+    public ArrayList<Card> getValidHand(ArrayList<Card> cHand){//needs work
         ArrayList<Card> validHand = new ArrayList<>();
-        if(latestState.numPlays ==0 | latestState.firstPlayedSuit == null){
-            return hand;
+        if(latestState.numPlays == 0 | latestState.firstPlayedSuit == null){
+            return cHand;
         }
-        for(int i = 0; i< hand.size();i++){
-            if(hand.get(i).getSuit() == latestState.firstPlayedSuit){
-                validHand.add(hand.get(i));
+        for(int i = 0; i< cHand.size();i++){
+            if(cHand.get(i).getSuit() == latestState.firstPlayedSuit){
+                validHand.add(cHand.get(i));
             }
-            else if(Card.getValsVal(hand.get(i).getValue(),hand.get(i).getSuit(),latestState.currentTrumpSuit) == 7){//if its a jack of opposite of trump
-                validHand.add(hand.get(i));
+            else if(Card.getValsVal(cHand.get(i).getValue(),cHand.get(i).getSuit(),latestState.currentTrumpSuit) == 7){//if its a jack of opposite of trump
+                validHand.add(cHand.get(i));
             }
         }
         if(validHand.isEmpty()){
-            return hand;
+            return cHand;
         }
         else{
             return validHand;
