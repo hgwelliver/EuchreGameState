@@ -4,6 +4,7 @@ import com.example.euchregamestate.GameFramework.GameComputerPlayer;
 import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author Sierra, Mikey, Haley, and Alex
@@ -19,7 +20,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
     }
 
     protected void receiveInfo(GameInfo info){
-        // If we know game-state, ignore
+        //If we no game-state, ignore
         if (!(info instanceof EuchreState)) {
             return;
         }

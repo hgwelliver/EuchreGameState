@@ -31,7 +31,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
-    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton, discardView;
+    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton,
+            discardView, dealerText;
 
     private Activity myActivity;
 
@@ -77,6 +78,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             blueTrick.setText(" Blue Trick Score: " + latestState.blueTrickScore);
             redScore.setText("Red Team  Score: " + latestState.redScore);
             blueScore.setText("Blue Team  Score: " + latestState.blueScore);
+            dealerText.setText("Dealer: Bottom Player");
 
             //draw background to be used as placeholder for draw pile and other cards on the table
             kitty.setImageResource(R.drawable.cardback);
@@ -165,6 +167,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
             //managing buttons based on dealer and game stage
             if(latestState.dealer == 0){
+                //sets the dealer text view so the use knows which player is the dealer
+                dealerText.setText("Dealer: Bottom Player" );
                 //can pick it up but cant order up
                 //cant pass in game stage two
                 if(latestState.gameStage == 1){
@@ -178,7 +182,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
-                    goingAloneButton.setAlpha(1);
+                    goingAloneButton.setAlpha(0);
                     selectTrumpButton.setAlpha(1);
                 }
                 if(latestState.gameStage == 3){
@@ -189,6 +193,21 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     selectTrumpButton.setAlpha(1);
                 }
             }
+
+            //Dealer: 0 = bottom, 1 = left, 2 = top, 3 = right
+            else if(latestState.dealer == 1){
+                dealerText.setText("Dealer: Left Player" );
+            }
+
+            else if(latestState.dealer == 2){
+                dealerText.setText("Dealer: Top Player" );
+            }
+
+            else if(latestState.dealer == 2){
+                dealerText.setText("Dealer: Right Player" );
+            }
+
+
 
             //managing buttons based on dealer and game stage
             if(latestState.dealer != 0){
@@ -355,6 +374,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         blueTrick = (TextView) myActivity.findViewById(R.id.blueTricks);
         redScore = (TextView) myActivity.findViewById(R.id.redScore);
         blueScore = (TextView) myActivity.findViewById(R.id.blueScore);
+        dealerText = (TextView) myActivity.findViewById(R.id.dealerText);
         selectTrumpButton = (TextView) myActivity.findViewById(R.id.selectTrumpButton);
 
 

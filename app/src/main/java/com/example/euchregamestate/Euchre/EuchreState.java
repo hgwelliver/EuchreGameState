@@ -168,7 +168,7 @@ public class EuchreState extends GameState {
      * clears player hands to begin with
      * deals all the player hands and the middle card stack
      */
-    public boolean deal(){
+    public void deal(){
         // deal cards when game is started and game stage is 0
         // need to clear everything
         if(turn == 4){
@@ -199,8 +199,12 @@ public class EuchreState extends GameState {
             player2Hand.add(i, deck.cardDeck.get(5 + i));
             player3Hand.add(i, deck.cardDeck.get(10 + i));
             player4Hand.add(i, deck.cardDeck.get(15 + i));
-
         }
+        int p1 = player1Hand.size();
+        int p2 = player2Hand.size();
+        int p3 = player3Hand.size();
+        int p4 = player4Hand.size();
+        int total = p1 + p2 + p3 + p4;
 
         for (int i = 0; i < 4; i++) {
             kitty.add(i, deck.cardDeck.get(20 + i));
@@ -214,11 +218,7 @@ public class EuchreState extends GameState {
 
         // change game state to 1
         gameStage++;
-
-        // print that cards are dealt
-        return true;
     }
-
     /**
      * pass method
      * allows player to pass when deciding trump
@@ -470,7 +470,7 @@ public class EuchreState extends GameState {
      * suit of middle card becomes the trump suit
      */
     public boolean isOrderUpTrump(int playerID){
-        if(turn == playerID && gameStage == 1 && dealer != playerID){
+        if(turn == playerID && gameStage == 1 && dealer != 0){
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
             if(dealer == 1){
@@ -713,6 +713,16 @@ public class EuchreState extends GameState {
             else if(trickWinner == 1 | trickWinner == 3){
                 blueTrickScore++;
             }
+        player1Hand.remove(player1Play);
+        player2Hand.remove(player2Play);
+        player3Hand.remove(player3Play);
+        player4Hand.remove(player4Play);
+
+        player1Play = null;
+        player2Play = null;
+        player3Play = null;
+        player4Play = null;
+
         if(trickNum == 5){
             // reset everything for new round
             currentTrumpSuit = null;
@@ -730,15 +740,9 @@ public class EuchreState extends GameState {
             deal();
             trickNum = 0;
         }
-        player1Hand.remove(player1Play);
-        player2Hand.remove(player2Play);
-        player3Hand.remove(player3Play);
-        player4Hand.remove(player4Play);
 
-        player1Play = null;
-        player2Play = null;
-        player3Play = null;
-        player4Play = null;
+
+
     }
 
     /**
@@ -800,31 +804,8 @@ public class EuchreState extends GameState {
      * keeps track of scores for each team
      */
     public void isRoundOver(){
-
-        // update score
-        if (redTrickScore == 5) {
-            redScore += 2;
-        } else if (redTrickScore > 2 && whoCalled == 1) {
-            redScore += 2;
-        } else if (redTrickScore > 2 && whoCalled == 0) {
-            redScore += 1;
-        } else if (blueTrickScore == 5) {
-            blueScore += 2;
-        } else if (blueTrickScore > 2 && whoCalled == 0) {
-            blueScore += 2;
-        } else if (blueTrickScore > 2 && whoCalled == 1) {
-            blueScore += 1;
-        }
-
-        // reset the trick scores
-        int trickSum = blueTrickScore + redTrickScore;
-        if(trickSum == 5) {
-            blueTrickScore = 0;
-            redTrickScore = 0;
-        }
-
         //going alone code
-        /*if (whoIsAlone == 1 || whoIsAlone == 3) {
+        if (whoIsAlone == 1 || whoIsAlone == 3) {
             if (redTrickScore == 5) {
                 redScore += 4;
             } else if (redTrickScore > 2) {
@@ -850,19 +831,14 @@ public class EuchreState extends GameState {
             } else if (blueTrickScore > 2 && whoCalled == 1) {
                 blueScore += 1;
             }
-        }*/
-
-        //update dealer and turn
-        /*if(dealer == 3){
-            dealer = 0;
-            turn = dealer + 1;
         }
-        else{
-            dealer++;
-            turn = dealer + 1;
-        }*/
+        // reset the trick scores
+        int trickSum = blueTrickScore + redTrickScore;
+        if(trickSum == 5) {
+            blueTrickScore = 0;
+            redTrickScore = 0;
+        }
     }
-
 }
 
 
