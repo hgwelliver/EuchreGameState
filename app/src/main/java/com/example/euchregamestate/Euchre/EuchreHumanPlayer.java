@@ -204,7 +204,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 dealerText.setText("Dealer: Top Player" );
             }
 
-            else if(latestState.dealer == 2){
+            else if(latestState.dealer == 3){
                 dealerText.setText("Dealer: Right Player" );
             }
 
