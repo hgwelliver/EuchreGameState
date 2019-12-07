@@ -235,6 +235,50 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 }
             }
 
+            //winning condition - red team
+            if(latestState.redScore >= 10){
+                //Red Team wins
+                final Dialog redWin = new Dialog(myActivity);
+                redWin.setContentView(myActivity.getLayoutInflater().inflate(R.layout.red_win, null));
+                ImageView redWinImage = (ImageView) redWin.findViewById(R.id.helpmenu_page_one);
+                redWinImage.setImageResource(R.drawable.red_team_wins);
+
+                //close the popup window on button click
+                redWinImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //restart program
+                        Intent intent = myActivity.getIntent();
+                        myActivity.finish();
+                        myActivity.startActivity(intent);
+                    }
+                });
+
+                redWin.show();
+            }
+
+            //winning condition - blue team
+            if(latestState.blueScore >= 10){
+                //Blue Team Wins
+                final Dialog blueWin = new Dialog(myActivity);
+                blueWin.setContentView(myActivity.getLayoutInflater().inflate(R.layout.blue_win, null));
+                ImageView blueWinImage = (ImageView) blueWin.findViewById(R.id.helpmenu_page_one);
+                blueWinImage.setImageResource(R.drawable.blue_team_wins);
+
+                //close the popup window on button click
+                blueWinImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //restart program
+                        Intent intent = myActivity.getIntent();
+                        myActivity.finish();
+                        myActivity.startActivity(intent);
+                    }
+                });
+
+                blueWin.show();
+            }
+
             //arraylist of cards
             ArrayList<Card> p1Hand = latestState.getPlayerHand(0);
 

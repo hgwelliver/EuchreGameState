@@ -148,13 +148,14 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
      */
     @Override
     protected String checkIfGameOver() {
-        if(state.redScore >= 10){
+        /*if(state.redScore >= 10){
             return "Red Team Won";
         }
         if(state.blueScore >= 10){
             return "Blue Team Won" ;
         }
-        return null;
+        return null;*/
+        return "";
     }
 
     @Override

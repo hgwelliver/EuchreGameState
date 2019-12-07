@@ -4,7 +4,6 @@ import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 /**
  * @author Sierra, Mikey, Haley, and Alex
@@ -50,7 +49,6 @@ public class EuchreState extends GameState {
     protected int blueScore;
     protected int redTrickScore;
     protected int blueTrickScore;
-    protected boolean isRoundOver;
     // current state of timer
     // current stage of game
     protected boolean startGame;
@@ -59,7 +57,6 @@ public class EuchreState extends GameState {
     protected int numPass; // count number of passes
     protected boolean pickIt;
     // random number generator
-    protected Random rand = new Random();
 
     public int getTurn() {
         return turn;
@@ -832,6 +829,7 @@ public class EuchreState extends GameState {
             redTrickScore = 0;
         }
     }
+
 }
 
 
