@@ -72,6 +72,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 if(valid.isEmpty()){
                         Card cardPlay = hand.get(0);
                         game.sendAction(new EuchrePlayCardAction(this, cardPlay));
+                        return;
                 }
                 else {
                     Card cardPlay = valid.get(0);

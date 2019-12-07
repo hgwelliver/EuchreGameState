@@ -51,7 +51,9 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
             if(state.turn == playerNum && state.gameStage == 3) {
                 if(playerNum != 0){
                     state.validMove(playerNum, playAct.getCardToPlay());
-                    sendAllUpdatedState();
+                    if(state.numPlays < 4) {
+                        sendAllUpdatedState();
+                    }
                 }
                 else {
                     int firstSuits = 0;
@@ -72,10 +74,11 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
                     }
                 }
                 if(state.numPlays == 4){
+                    state.isTrickComplete();
                     sendAllUpdatedState();
-                    GameTimer pause = new GameTimer(this);
+                    /*GameTimer pause = new GameTimer(this);
                     pause.setInterval(3000);
-                    pause.start();
+                    pause.start();*/
                     
                 }
             }
@@ -124,10 +127,6 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
                 return state.isGoingAlone(playerNum);
             }
         }
-        else if(action instanceof EuchreDealAction){
-            EuchreDealAction dealAct = (EuchreDealAction) action;
-            return state.deal();
-        }
         return false;
     }
 
@@ -175,8 +174,8 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
     {
         timer.stop();
         if(state.numPlays == 4) {
-            state.isTrickComplete();
-            sendAllUpdatedState();
+            //state.isTrickComplete();
+            //sendAllUpdatedState();
         }
     }
 
