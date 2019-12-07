@@ -11,8 +11,7 @@ import java.util.ArrayList;
 //makes all possible cards
 public class CardDeck implements Serializable {
 
-    //creates an array for all cards
-    //public Card[] cardDeck = new Card[23];
+    //creates an array list for all cards
     public ArrayList<Card> cardDeck = new ArrayList<>();
     //creating all cards...assigns a suit, number, and image to each card respectively
     //heart cards

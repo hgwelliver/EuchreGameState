@@ -31,7 +31,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     private ImageView playerhand1, playerhand2, playerhand3, playerhand4, playerhand5;
     private ArrayList<ImageView> playerHands = new ArrayList<ImageView>();
     private ImageView player, rightPlayer, leftPlayer, topPlayer, kitty;
-    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton, discardView;
+    private TextView redTrick, blueTrick, redScore, blueScore, selectTrumpButton,
+            discardView, dealerText;
 
     private Activity myActivity;
 
@@ -65,7 +66,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     public void receiveInfo(GameInfo info){
         if ( (info != null) && (info instanceof EuchreState) ) {
             this.latestState = (EuchreState)info;
-
+            //adds image views to all the cards in the middle
             playerHands.add(player);
             playerHands.add(topPlayer);
             playerHands.add(leftPlayer);
@@ -77,6 +78,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             blueTrick.setText(" Blue Trick Score: " + latestState.blueTrickScore);
             redScore.setText("Red Team  Score: " + latestState.redScore);
             blueScore.setText("Blue Team  Score: " + latestState.blueScore);
+            dealerText.setText("Dealer: Bottom Player");
 
             //draw background to be used as placeholder for draw pile and other cards on the table
             kitty.setImageResource(R.drawable.cardback);
@@ -87,8 +89,10 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
             //sets middle cards to card backs and sets image for kitty in each gamestage
             if(latestState.gameStage <= 1){
+                //sets the image for the kitty card in the middle
                 kitty.setImageResource(latestState.kittyTop.getResourceId());
 
+                //make other buttons invisible
                 spadeButton.setAlpha(0);
                 diamondButton.setAlpha(0);
                 clubButton.setAlpha(0);
@@ -103,9 +107,11 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 passButton.setAlpha(1);
             }
             else if(latestState.gameStage == 2){
+                //set kitty card to cardback since it is no longer in use
                 kitty.setImageResource(R.drawable.cardback);
             }
             else if(latestState.gameStage == 3){
+                //make kitty card invisible during game play
                 kitty.setImageResource(android.R.color.transparent);
             }
 
@@ -116,6 +122,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 diamondButton.setAlpha(1);
                 clubButton.setAlpha(1);
                 heartButton.setAlpha(1);
+                //makes suit of kitty card invisible for gamestage 2 since it is no longer valid to select
                 if(latestState.kittyTop.getSuit() == Card.SUIT.SPADES){
                     spadeButton.setAlpha(0);
                 }
@@ -147,6 +154,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 clubButton.setAlpha(0);
                 heartButton.setAlpha(0);
 
+                //show which suit is the trump suit by setting the alpha of the trump button
                 if(latestState.currentTrumpSuit == Card.SUIT.CLUBS){
                     clubButton.setAlpha(1);
                 }
@@ -165,6 +173,8 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
 
             //managing buttons based on dealer and game stage
             if(latestState.dealer == 0){
+                //sets the dealer text view so the use knows which player is the dealer
+                dealerText.setText("Dealer: Bottom Player" );
                 //can pick it up but cant order up
                 //cant pass in game stage two
                 if(latestState.gameStage == 1){
@@ -190,6 +200,21 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 }
             }
 
+            //Dealer: 0 = bottom, 1 = left, 2 = top, 3 = right
+            else if(latestState.dealer == 1){
+                dealerText.setText("Dealer: Left Player" );
+            }
+
+            else if(latestState.dealer == 2){
+                dealerText.setText("Dealer: Top Player" );
+            }
+
+            else if(latestState.dealer == 2){
+                dealerText.setText("Dealer: Right Player" );
+            }
+
+
+
             //managing buttons based on dealer and game stage
             if(latestState.dealer != 0){
                 //cant pick it up but can order up
@@ -214,6 +239,50 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     goingAloneButton.setAlpha(0);
                     selectTrumpButton.setAlpha(1);
                 }
+            }
+
+            //winning condition - red team
+            if(latestState.redScore >= 10){
+                //Red Team wins
+                final Dialog redWin = new Dialog(myActivity);
+                redWin.setContentView(myActivity.getLayoutInflater().inflate(R.layout.red_win, null));
+                ImageView redWinImage = (ImageView) redWin.findViewById(R.id.helpmenu_page_one);
+                redWinImage.setImageResource(R.drawable.red_team_wins);
+
+                //close the popup window on button click
+                redWinImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //restart program
+                        Intent intent = myActivity.getIntent();
+                        myActivity.finish();
+                        myActivity.startActivity(intent);
+                    }
+                });
+
+                redWin.show();
+            }
+
+            //winning condition - blue team
+            if(latestState.blueScore >= 10){
+                //Blue Team Wins
+                final Dialog blueWin = new Dialog(myActivity);
+                blueWin.setContentView(myActivity.getLayoutInflater().inflate(R.layout.blue_win, null));
+                ImageView blueWinImage = (ImageView) blueWin.findViewById(R.id.helpmenu_page_one);
+                blueWinImage.setImageResource(R.drawable.blue_team_wins);
+
+                //close the popup window on button click
+                blueWinImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //restart program
+                        Intent intent = myActivity.getIntent();
+                        myActivity.finish();
+                        myActivity.startActivity(intent);
+                    }
+                });
+
+                blueWin.show();
             }
 
             //arraylist of cards
@@ -256,7 +325,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 playerhand5.setImageResource(R.drawable.cardback);
             }
 
-            player.setBackgroundColor(Color.YELLOW);
+            player.setBackgroundColor(Color.YELLOW); //indicates turn
             //switching card and card back when playing a card
             if(latestState.player1Play == null){
                 player.setImageResource(R.drawable.cardback);
@@ -355,6 +424,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         blueTrick = (TextView) myActivity.findViewById(R.id.blueTricks);
         redScore = (TextView) myActivity.findViewById(R.id.redScore);
         blueScore = (TextView) myActivity.findViewById(R.id.blueScore);
+        dealerText = (TextView) myActivity.findViewById(R.id.dealerText);
         selectTrumpButton = (TextView) myActivity.findViewById(R.id.selectTrumpButton);
 
 
@@ -368,7 +438,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         kitty = (ImageView) myActivity.findViewById(R.id.kitty);
 
 
-        //cards in hand
+        //cards in human player's hand
         playerhand1 = (ImageView) myActivity.findViewById(R.id.playerhand1);
         playerhand2 = (ImageView) myActivity.findViewById(R.id.playerhand2);
         playerhand3 = (ImageView) myActivity.findViewById(R.id.playerhand3);
@@ -477,10 +547,12 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         });
 
         //when the cards in player hand are clicked (playerhand1 through playerhand5)
+        //first card of human player hand
         playerhand1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(0)));
+                //go through pick it up action if human player discards first card
                 if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
                     game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(0)));
                     latestState.pickIt = false;
@@ -489,11 +561,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //second card of human player hand
         playerhand2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 1){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(1)));
+                    //go through pick it up action if human player discards second card
                     if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
                         game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(1)));
                         latestState.pickIt = false;
@@ -503,11 +577,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //third card of human player hand
         playerhand3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 2){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(2)));
+                    //go through pick it up action if human player discards third card
                     if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
                         game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(2)));
                         latestState.pickIt = false;
@@ -517,11 +593,13 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //fourth card of human player hand
         playerhand4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 3){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(3)));
+                    //go through pick it up action if human player discards fourth card
                     if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
                         game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(3)));
                         latestState.pickIt = false;
@@ -531,17 +609,20 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             }
         });
 
+        //fifth card of human player hand
         playerhand5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(latestState.player1Hand.size() > 4){
                     game.sendAction(new EuchrePlayCardAction(hp,latestState.player1Hand.get(4)));
+                    //go through pick it up action if human player discards fifth card
+                    if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
+                        game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(4)));
+                        latestState.pickIt = false;
+                        discardView.setAlpha(0);
+                    }
                 }
-                if(latestState.pickIt == true && latestState.gameStage == 1 && latestState.dealer == 0){
-                    game.sendAction(new EuchrePickItUpAction(hp, latestState.player1Hand.get(4)));
-                    latestState.pickIt = false;
-                    discardView.setAlpha(0);
-                }
+
             }
         });
 

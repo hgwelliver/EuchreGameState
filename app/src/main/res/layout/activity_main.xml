@@ -50,18 +50,6 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/blueScore"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/white"
-                        android:fontFamily="sans-serif-smallcaps"
-                        android:gravity="right"
-                        android:text="Blue Team Score: 0"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp" />
-
-                    <TextView
                         android:id="@+id/redTricks"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -69,6 +57,18 @@
                         android:fontFamily="sans-serif-smallcaps"
                         android:gravity="right"
                         android:text="Red Trick Score: 0"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/blueScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:gravity="right"
+                        android:text="Blue Team Score: 0"
                         android:textAlignment="center"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
@@ -84,6 +84,18 @@
                         android:textAlignment="center"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/dealerText"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@android:color/background_light"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:gravity="center"
+                        android:text="Dealer: Bottom Player"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18dp"
+                        android:translationY="13dp" />
 
                     <Button
                         android:id="@+id/helpMenuButton"
