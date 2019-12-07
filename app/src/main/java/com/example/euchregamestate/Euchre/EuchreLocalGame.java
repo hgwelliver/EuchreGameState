@@ -62,12 +62,43 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
                         if (cHand.get(i).getSuit() == state.firstPlayedSuit) {
                             firstSuits++;
                         }
+                        if(state.firstPlayedSuit == Card.SUIT.DIAMONDS && playAct.getCardToPlay().getSuit() == Card.SUIT.HEARTS){
+                            firstSuits++;
+                        }
+                        if(state.firstPlayedSuit == Card.SUIT.HEARTS && playAct.getCardToPlay().getSuit() == Card.SUIT.DIAMONDS){
+                            firstSuits++;
+                        }
+                        if(state.firstPlayedSuit == Card.SUIT.CLUBS && playAct.getCardToPlay().getSuit() == Card.SUIT.SPADES){
+                            firstSuits++;
+                        }
+                        if(state.firstPlayedSuit == Card.SUIT.SPADES && playAct.getCardToPlay().getSuit() == Card.SUIT.CLUBS){
+                            firstSuits++;
+                        }
                     }
                     //must play card with matching suit of first played suit
                     if (firstSuits != 0) {
                         if (state.firstPlayedSuit == playAct.getCardToPlay().getSuit()) {
                             state.validMove(playerNum, playAct.getCardToPlay());
                             sendAllUpdatedState();
+                        }
+                        if(playAct.getCardToPlay().getValue() == Card.NUMBER.JACK){
+                            if(state.firstPlayedSuit == Card.SUIT.DIAMONDS && playAct.getCardToPlay().getSuit() == Card.SUIT.HEARTS){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+                            if(state.firstPlayedSuit == Card.SUIT.HEARTS && playAct.getCardToPlay().getSuit() == Card.SUIT.DIAMONDS){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+                            if(state.firstPlayedSuit == Card.SUIT.CLUBS && playAct.getCardToPlay().getSuit() == Card.SUIT.SPADES){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+                            if(state.firstPlayedSuit == Card.SUIT.SPADES && playAct.getCardToPlay().getSuit() == Card.SUIT.CLUBS){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+
                         }
                     }
                     //can play whatever if cards in hand don't match first played suit
@@ -125,14 +156,6 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
             if(state.turn == playerNum && state.gameStage == 1){
                 state.isPickItUp(playerNum, pickAct.getCardToDiscard());
                 sendAllUpdatedState();
-            }
-        }
-        //goingAloneAction
-        else if(action instanceof EuchreGoingAloneAction){
-            EuchreGoingAloneAction aloneAct = (EuchreGoingAloneAction) action;
-            playerNum = this.getPlayerIdx(aloneAct.getPlayer());
-            if(state.turn == playerNum){
-                return state.isGoingAlone(playerNum);
             }
         }
         return false;

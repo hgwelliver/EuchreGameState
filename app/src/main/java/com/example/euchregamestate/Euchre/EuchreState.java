@@ -40,7 +40,6 @@ public class EuchreState extends GameState {
     protected Card.SUIT middleCardSuit;
     protected Card middleCard;
     protected boolean middleVisible;
-    protected int whoIsAlone;
     protected Card.SUIT currentTrumpSuit;
     protected Card.SUIT firstPlayedSuit; // suit of first card played in each trick
     protected int numPlays; // how many cards have been played this trick
@@ -58,7 +57,6 @@ public class EuchreState extends GameState {
     protected int gameStage; // 0 for deal, 1 for deciding middle card, 2 for deciding trump, 3 for playing cards
     protected int numPass; // count number of passes
     protected boolean pickIt;
-    // random number generator
 
     public int getTurn() {
         return turn;
@@ -141,8 +139,7 @@ public class EuchreState extends GameState {
                 "Dealer: " + dealer + ", Team of Dealer: " + teamDealer + "\n" +
                 "Red Score, Tricks: " + redScore + ", " + redTrickScore + "\n" +
                 "Blue Score, Tricks: " + blueScore +", "+ blueTrickScore + "\n" +
-                "Game Stage: " + gameStage + "\n" +
-                "Going Alone Player: " + whoIsAlone + "\n" +
+                "Game Stage: " + gameStage + "\n"  +
                 "Passes: " + numPass + " Who Called: " + whoCalled + "\n" +
                 "Trump Suit: " + currentTrumpSuit + "\n" +
                 "Number of Plays; " + numPlays + "\n";
@@ -197,11 +194,6 @@ public class EuchreState extends GameState {
             player3Hand.add(i, deck.cardDeck.get(10 + i));
             player4Hand.add(i, deck.cardDeck.get(15 + i));
         }
-        int p1 = player1Hand.size();
-        int p2 = player2Hand.size();
-        int p3 = player3Hand.size();
-        int p4 = player4Hand.size();
-        int total = p1 + p2 + p3 + p4;
 
         for (int i = 0; i < 4; i++) {
             kitty.add(i, deck.cardDeck.get(20 + i));
@@ -257,216 +249,12 @@ public class EuchreState extends GameState {
     }
 
     /**
-     * going alone method
-     * allows player to play cards without partner
-     */
-    public boolean isGoingAlone(int playerID){
-        // if it is a players turn and in round 1
-        if(turn == playerID && gameStage == 1){
-            // if the player is on the dealing team and not the dealer
-            if(teamDealer == 0 && (playerID == 0 || playerID == 2) && (playerID != dealer)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                isOrderUpTrump(dealer);
-                middleVisible = false;
-                whoCalled = 0;
-                if(dealer == 0){
-                    whoIsAlone = 2;
-                    player1Hand.clear();
-                }
-                else{
-                    whoIsAlone = 0;
-                    player3Hand.clear();
-                }
-                return true;
-            }
-
-            if(teamDealer == 1 && (playerID == 1 || playerID == 3) && (playerID != dealer)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                isOrderUpTrump(dealer);
-                middleVisible = false;
-                whoCalled = 1;
-                if(dealer == 1){
-                    whoIsAlone = 3;
-                    player2Hand.clear();
-                }
-                else{
-                    whoIsAlone = 1;
-                    player4Hand.clear();
-                }
-                return true;
-            }
-
-            // if the player is the dealer
-            else if(teamDealer == 0 && playerID == dealer){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                middleVisible = false;
-                whoCalled = 0;
-                whoIsAlone = dealer;
-                if(dealer == 0){
-                    player3Hand.clear();
-                }
-                else{
-                    player1Hand.clear();
-                }
-                return true;
-            }
-
-            else if(teamDealer == 1 && playerID == dealer){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                whoCalled = 1;
-                whoIsAlone = dealer;
-                middleVisible = false;
-                if(dealer == 2){
-                    player4Hand.clear();
-                }
-                else{
-                    player2Hand.clear();
-                }
-                return true;
-            }
-
-            // non-dealing team goes alone
-            else if(teamDealer == 0 && (playerID == 1 || playerID == 3)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                isOrderUpTrump(dealer);
-                whoCalled = 1;
-                if(playerID == 1){
-                    whoIsAlone = 1;
-                    player4Hand.clear();
-                }
-                else{
-                    whoIsAlone = 3;
-                    player2Hand.clear();
-                }
-                middleVisible = false;
-                return true;
-            }
-            else if(teamDealer == 1 && (playerID == 0 || playerID == 2)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                isOrderUpTrump(dealer);
-                whoCalled = 0;
-                if(playerID == 0){
-                    whoIsAlone = 0;
-                    player3Hand.clear();
-                }
-                else{
-                    whoIsAlone = 2;
-                    player1Hand.clear();
-                }
-                middleVisible = false;
-                return true;
-            }
-        }
-        else if(turn == playerID && gameStage == 2){
-            // if the player is on the dealing team and not the dealer
-            if(teamDealer == 0 && (playerID == 0 || playerID == 2) && (playerID != dealer)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                middleVisible = false;
-                whoCalled = 0;
-                if(dealer == 0){
-                    whoIsAlone = 2;
-                    player1Hand.clear();
-                }
-                else{
-                    whoIsAlone = 0;
-                    player3Hand.clear();
-                }
-                return true;
-            }
-            if(teamDealer == 1 && (playerID == 1 || playerID == 3) && (playerID != dealer)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                middleVisible = false;
-                whoCalled = 1;
-                if(dealer == 1){
-                    whoIsAlone = 3;
-                    player2Hand.clear();
-                }
-                else{
-                    whoIsAlone = 1;
-                    player4Hand.clear();
-                }
-                return true;
-            }
-            // if the player is the dealer
-            else if(teamDealer == 0 && playerID == dealer){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                middleVisible = false;
-                whoCalled = 0;
-                whoIsAlone = dealer;
-                if(dealer == 0){
-                    player3Hand.clear();
-                }
-                else{
-                    player1Hand.clear();
-                }
-                return true;
-            }
-            else if(teamDealer == 1 && playerID == dealer){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                whoCalled = 1;
-                whoIsAlone = dealer;
-                middleVisible = false;
-                if(dealer == 1){
-                    player4Hand.clear();
-                }
-                else{
-                    player2Hand.clear();
-                }
-                return true;
-            }
-            // non-dealing team goes alone
-            else if(teamDealer == 0 && (playerID == 1 || playerID == 3)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                whoCalled = 1;
-                if(playerID == 1){
-                    whoIsAlone = 1;
-                    player4Hand.clear();
-                }
-                else{
-                    whoIsAlone = 3;
-                    player2Hand.clear();
-                }
-                middleVisible = false;
-                return true;
-            }
-            else if(teamDealer == 1 && (playerID == 0 || playerID == 2)){
-                // set trump to suit of middle card
-                currentTrumpSuit = middleCardSuit;
-                whoCalled = 0;
-
-                if(playerID == 0){
-                    whoIsAlone = 0;
-                    player3Hand.clear();
-                }
-                else{
-                    whoIsAlone = 2;
-                    player1Hand.clear();
-                }
-                middleVisible = false;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * order up method
      * allows player to order up the dealer which decides trump
      * the dealer will now have the middle card in their hand
      * suit of middle card becomes the trump suit
      */
-    public boolean isOrderUpTrump(int playerID){
+    public void isOrderUpTrump(int playerID){
         if(turn == playerID && gameStage == 1 && dealer != 0){
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
@@ -492,7 +280,6 @@ public class EuchreState extends GameState {
                 gameStage = 3;
             }
         }
-        return false;
     }
 
     /**
@@ -572,26 +359,6 @@ public class EuchreState extends GameState {
      * checks that player's move adheres to game rules
      */
     public boolean validMove(int playerID, Card selectedCard){
-        if(whoIsAlone == 1 && playerID == 2){
-            numPlays++;
-            turn++;
-            return true;
-        }
-        else if(whoIsAlone == 2 && playerID == 3){
-            numPlays++;
-            turn = 1;
-            return true;
-        }
-        else if(whoIsAlone == 3 && playerID == 0){
-            numPlays++;
-            turn++;
-            return true;
-        }
-        else if(whoIsAlone == 4 && playerID == 1){
-            numPlays++;
-            turn++;
-            return true;
-        }
         // turn == playerID
         if(gameStage == 3){
             if(numPlays == 0){
@@ -771,7 +538,7 @@ public class EuchreState extends GameState {
         currentMiddle.clear();
         trickNum++;
         try {
-            sleep(100);//display all four cards before determining winner
+            sleep(200);//display all four cards before determining winner
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -875,34 +642,20 @@ public class EuchreState extends GameState {
      * keeps track of scores for each team
      */
     public void isRoundOver(){
-        //going alone code
-        if (whoIsAlone == 1 || whoIsAlone == 3) {
-            if (redTrickScore == 5) {
-                redScore += 4;
-            } else if (redTrickScore > 2) {
-                redScore += 1;
-            }
-        } else if (whoIsAlone == 2 || whoIsAlone == 4) {
-            if (blueTrickScore == 5) {
-                blueScore += 4;
-            } else if (blueTrickScore > 2) {
-                blueScore += 1;
-            }
-        } else {
-            if (redTrickScore == 5) {
-                redScore += 2;
-            } else if (redTrickScore > 2 && whoCalled == 1) {
-                redScore += 2;
-            } else if (redTrickScore > 2 && whoCalled == 0) {
-                redScore += 1;
-            } else if (blueTrickScore == 5) {
-                blueScore += 2;
-            } else if (blueTrickScore > 2 && whoCalled == 0) {
-                blueScore += 2;
-            } else if (blueTrickScore > 2 && whoCalled == 1) {
-                blueScore += 1;
-            }
+        if (redTrickScore == 5) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 1) {
+            redScore += 2;
+        } else if (redTrickScore > 2 && whoCalled == 0) {
+            redScore += 1;
+        } else if (blueTrickScore == 5) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 0) {
+            blueScore += 2;
+        } else if (blueTrickScore > 2 && whoCalled == 1) {
+            blueScore += 1;
         }
+
         // reset the trick scores
         int trickSum = blueTrickScore + redTrickScore;
         if(trickSum == 5) {

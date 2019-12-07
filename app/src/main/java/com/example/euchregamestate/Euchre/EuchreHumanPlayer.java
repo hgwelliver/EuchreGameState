@@ -24,7 +24,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
     //instance variables
     private static final String TAG = "EuchreHumanPlayer";
 
-    private Button passButton, pickItUpButton, orderUpButton, goingAloneButton,
+    private Button passButton, pickItUpButton, orderUpButton,
             quitButton;
     private Button helpButton, resetButton;
     private Button spadeButton, clubButton, heartButton, diamondButton;
@@ -103,7 +103,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 // kitty interaction buttons enabled
                 orderUpButton.setAlpha(1);
                 pickItUpButton.setAlpha(1);
-                goingAloneButton.setAlpha(1);
                 passButton.setAlpha(1);
             }
             else if(latestState.gameStage == 2){
@@ -141,7 +140,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 // kitty interaction buttons disabled
                 orderUpButton.setAlpha(0);
                 pickItUpButton.setAlpha(0);
-                goingAloneButton.setAlpha(0);
                 if(latestState.turn == latestState.dealer){
                     // pass button disabled to stick the dealer
                     passButton.setAlpha(0);
@@ -181,21 +179,18 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     passButton.setAlpha(1);
                     pickItUpButton.setAlpha(1);
                     orderUpButton.setAlpha(0);
-                    goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(0);
                 }
                 if(latestState.gameStage == 2){
                     passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
-                    goingAloneButton.setAlpha(0);
                     selectTrumpButton.setAlpha(1);
                 }
                 if(latestState.gameStage == 3){
                     passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
-                    goingAloneButton.setAlpha(0);
                     selectTrumpButton.setAlpha(1);
                 }
             }
@@ -222,21 +217,18 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     passButton.setAlpha(1);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(1);
-                    goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(0);
                 }
                 if(latestState.gameStage == 2){
                     passButton.setAlpha(1);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
-                    goingAloneButton.setAlpha(1);
                     selectTrumpButton.setAlpha(1);
                 }
                 if(latestState.gameStage == 3){
                     passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
-                    goingAloneButton.setAlpha(0);
                     selectTrumpButton.setAlpha(1);
                 }
             }
@@ -414,7 +406,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
         passButton = (Button) myActivity.findViewById(R.id.passButton);
         pickItUpButton = (Button) myActivity.findViewById(R.id.pickItUpButton);
         orderUpButton = (Button) myActivity.findViewById(R.id.orderUpButton);
-        goingAloneButton = (Button) myActivity.findViewById(R.id.aloneButton);
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
         helpButton = (Button) myActivity.findViewById(R.id.helpMenuButton);
         resetButton = (Button) myActivity.findViewById(R.id.resetButton);
@@ -524,7 +515,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                 passButton.setAlpha(0);
                 pickItUpButton.setAlpha(0);
                 orderUpButton.setAlpha(0);
-                goingAloneButton.setAlpha(0);
             }
         });
 
@@ -533,15 +523,6 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
             @Override
             public void onClick(View v) {
                 game.sendAction(new EuchreOrderUpAction(hp));
-
-            }
-        });
-
-        //allows the user to go alone on click
-        goingAloneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                game.sendAction(new EuchreGoingAloneAction(hp));
 
             }
         });
