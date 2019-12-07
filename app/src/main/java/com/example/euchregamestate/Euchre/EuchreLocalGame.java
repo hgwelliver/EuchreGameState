@@ -70,12 +70,10 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
                     }
                 }
                 if(state.numPlays == 4){
-                    state.isTrickComplete();
                     sendAllUpdatedState();
-                    /*GameTimer pause = new GameTimer(this);
+                    GameTimer pause = new GameTimer(this);
                     pause.setInterval(3000);
-                    pause.start();*/
-                    
+                    pause.start();
                 }
             }
         }
@@ -176,8 +174,8 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
     {
         timer.stop();
         if(state.numPlays == 4) {
-            //state.isTrickComplete();
-            //sendAllUpdatedState();
+            state.isTrickComplete();
+            sendAllUpdatedState();
         }
     }
 
