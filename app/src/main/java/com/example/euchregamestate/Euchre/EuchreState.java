@@ -763,13 +763,15 @@ public class EuchreState extends GameState {
      * keeps track of trick scores
      */
     public void isTrickComplete()  {
+        if(numPlays!=4){return;}
+        if(player1Play == null | player2Play == null | player3Play == null | player4Play == null){return;}//should only call when all have played
         // reset numPlayed
         numPlays = 0;
         // find if the round is over
         currentMiddle.clear();
         trickNum++;
         try {
-            sleep(200);//display all four cards before determining winner
+            sleep(100);//display all four cards before determining winner
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -782,7 +784,7 @@ public class EuchreState extends GameState {
             else if(trickWinner == 1 | trickWinner == 3){
                 blueTrickScore++;
             }
-        player1Hand.remove(player1Play);
+        player1Hand.remove(player1Play);//clear middle
         player2Hand.remove(player2Play);
         player3Hand.remove(player3Play);
         player4Hand.remove(player4Play);

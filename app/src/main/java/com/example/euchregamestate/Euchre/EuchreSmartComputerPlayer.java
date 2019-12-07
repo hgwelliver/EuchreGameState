@@ -16,7 +16,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
         super(name);
     }
     protected void receiveInfo(GameInfo info){
-        //If we no game-state, ignore
+        //If not game-state, ignore
         if (!(info instanceof EuchreState)) {
             return;
         }
@@ -105,7 +105,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                     winner = getCurrentWinner(latestState, middle);//finds if you would win with card "temp"
 
 
-                    if (playerNum == 0){
+                    if (playerNum == 0){//resets as card isnot played quite yet
                         latestState.player1Play = null;
                     }
                     if (playerNum == 1){
@@ -164,7 +164,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
             Card.SUIT twoSuit;
             Card.SUIT threeSuit;
             Card.SUIT fourSuit;
-            int[] value = new int[4];
+            int[] value = new int[4];//uses trickwinner logic to find current winning value
             if(nullVals[0] == 1){
                 one =  s.player1Play.getValue();
                 oneSuit = s.player1Play.getSuit();

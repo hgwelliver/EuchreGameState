@@ -189,7 +189,7 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
     public final void tick(GameTimer timer)
     {
         timer.stop();
-        if(state.numPlays == 4) {
+        if(state.player1Play != null && state.player2Play != null && state.player3Play != null && state.player4Play != null) {
             state.isTrickComplete();
             sendAllUpdatedState();
         }
