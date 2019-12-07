@@ -20,7 +20,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
     }
 
     protected void receiveInfo(GameInfo info){
-        //If we no game-state, ignore
+        //If not an instance of game-state, ignore
         if (!(info instanceof EuchreState)) {
             return;
         }
@@ -32,10 +32,12 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
             // pause for one second
             sleep(1);
             // send an action from this computer player
+            //go through pass and select trump actions in gamestage 1 and 2
             if(latestState.gameStage == 1 || latestState.gameStage == 2){
                 if(latestState.gameStage == 1){
                     game.sendAction(new EuchrePassAction(this));
                 }
+                //select trump actions
                 else if(latestState.numPass == 7){
                     Card.SUIT computerSuit;
                     if(latestState.kittyTop.getSuit() == Card.SUIT.CLUBS){
@@ -56,6 +58,7 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                     game.sendAction(new EuchrePassAction(this));
                 }
             }
+            //go through playCard actions in gamestage 3
             else if(latestState.gameStage == 3){
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
 
@@ -68,11 +71,13 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }
                 // if valid array is empty then any card is valid
                 if(valid.isEmpty()){
+                    //pause the CP's action
                     sleep(1);
                     Card cardPlay = hand.get(0);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
                 else {
+                    //pause the CP's action
                     sleep(1);
                     Card cardPlay = valid.get(0);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
