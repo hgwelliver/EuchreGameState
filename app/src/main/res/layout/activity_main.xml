@@ -229,15 +229,6 @@
                     android:textSize="16sp"
                     android:translationY="20dp" />
 
-                <Button
-                    android:id="@+id/aloneButton"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="Going Alone"
-                    android:textSize="16sp"
-                    android:translationY="20dp" />
-
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="100dp" />
