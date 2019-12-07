@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 /**
  * Card class - information for creating a Card object
+ * Gets info about a specific card
  * @author Mikey Ant, Haley Welliver, Sierra Nieland, Alex Rogers
  */
-//gets info about a specific card
 public class Card implements Serializable {
-
+    //instance variables
     int pictureID;
     public enum SUIT { HEARTS, SPADES, CLUBS, DIAMONDS }
     public enum NUMBER { NINE, TEN, ACE, JACK, QUEEN, KING }

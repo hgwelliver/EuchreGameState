@@ -5,6 +5,8 @@ import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static java.lang.Thread.sleep;
+
 /**
  * @author Sierra, Mikey, Haley, and Alex
  */
@@ -596,7 +598,25 @@ public class EuchreState extends GameState {
                 if(playerID == 0){
                     player1Play = selectedCard;
                     // card goes to middle
-                    firstPlayedSuit = player1Play.getSuit();
+                    //checks suit of the jack if played first and sets first played suit to the correct suit
+                    //according to which suit is trump
+                    if(selectedCard.getValue() == Card.NUMBER.JACK){
+                        if(currentTrumpSuit == Card.SUIT.DIAMONDS && selectedCard.getSuit() == Card.SUIT.HEARTS){
+                            firstPlayedSuit = Card.SUIT.DIAMONDS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.HEARTS && selectedCard.getSuit() == Card.SUIT.DIAMONDS){
+                            firstPlayedSuit = Card.SUIT.HEARTS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.CLUBS && selectedCard.getSuit() == Card.SUIT.SPADES){
+                            firstPlayedSuit = Card.SUIT.CLUBS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.SPADES && selectedCard.getSuit() == Card.SUIT.CLUBS){
+                            firstPlayedSuit = Card.SUIT.SPADES;
+                        }
+                    }
+                    else{
+                        firstPlayedSuit = player1Play.getSuit();
+                    }
                     numPlays++;
                     turn++;
                     return true;
@@ -604,7 +624,25 @@ public class EuchreState extends GameState {
                 else if(playerID == 1){
                     player2Play = selectedCard;
                     // card goes to middle
-                    firstPlayedSuit = player2Play.getSuit();
+                    //checks suit of the jack if played first and sets first played suit to the correct suit
+                    //according to which suit is trump
+                    if(selectedCard.getValue() == Card.NUMBER.JACK){
+                        if(currentTrumpSuit == Card.SUIT.DIAMONDS && selectedCard.getSuit() == Card.SUIT.HEARTS){
+                            firstPlayedSuit = Card.SUIT.DIAMONDS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.HEARTS && selectedCard.getSuit() == Card.SUIT.DIAMONDS){
+                            firstPlayedSuit = Card.SUIT.HEARTS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.CLUBS && selectedCard.getSuit() == Card.SUIT.SPADES){
+                            firstPlayedSuit = Card.SUIT.CLUBS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.SPADES && selectedCard.getSuit() == Card.SUIT.CLUBS){
+                            firstPlayedSuit = Card.SUIT.SPADES;
+                        }
+                    }
+                    else{
+                        firstPlayedSuit = player2Play.getSuit();
+                    }
                     numPlays++;
                     turn++;
                     return true;
@@ -612,7 +650,25 @@ public class EuchreState extends GameState {
                 else if(playerID == 2){
                     player3Play = selectedCard;
                     // card goes to middle
-                    firstPlayedSuit = player3Play.getSuit();
+                    //checks suit of the jack if played first and sets first played suit to the correct suit
+                    //according to which suit is trump
+                    if(selectedCard.getValue() == Card.NUMBER.JACK){
+                        if(currentTrumpSuit == Card.SUIT.DIAMONDS && selectedCard.getSuit() == Card.SUIT.HEARTS){
+                            firstPlayedSuit = Card.SUIT.DIAMONDS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.HEARTS && selectedCard.getSuit() == Card.SUIT.DIAMONDS){
+                            firstPlayedSuit = Card.SUIT.HEARTS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.CLUBS && selectedCard.getSuit() == Card.SUIT.SPADES){
+                            firstPlayedSuit = Card.SUIT.CLUBS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.SPADES && selectedCard.getSuit() == Card.SUIT.CLUBS){
+                            firstPlayedSuit = Card.SUIT.SPADES;
+                        }
+                    }
+                    else{
+                        firstPlayedSuit = player3Play.getSuit();
+                    }
                     numPlays++;
                     turn++;
                     return true;
@@ -620,7 +676,25 @@ public class EuchreState extends GameState {
                 else if(playerID == 3){
                     player4Play = selectedCard;
                     // card goes to middle
-                    firstPlayedSuit = player4Play.getSuit();
+                    //checks suit of the jack if played first and sets first played suit to the correct suit
+                    //according to which suit is trump
+                    if(selectedCard.getValue() == Card.NUMBER.JACK){
+                        if(currentTrumpSuit == Card.SUIT.DIAMONDS && selectedCard.getSuit() == Card.SUIT.HEARTS){
+                            firstPlayedSuit = Card.SUIT.DIAMONDS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.HEARTS && selectedCard.getSuit() == Card.SUIT.DIAMONDS){
+                            firstPlayedSuit = Card.SUIT.HEARTS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.CLUBS && selectedCard.getSuit() == Card.SUIT.SPADES){
+                            firstPlayedSuit = Card.SUIT.CLUBS;
+                        }
+                        if(currentTrumpSuit == Card.SUIT.SPADES && selectedCard.getSuit() == Card.SUIT.CLUBS){
+                            firstPlayedSuit = Card.SUIT.SPADES;
+                        }
+                    }
+                    else{
+                        firstPlayedSuit = player4Play.getSuit();
+                    }
                     numPlays++;
                     turn = 0;
                     return true;
@@ -688,12 +762,17 @@ public class EuchreState extends GameState {
      * checks if a round of playing one card is over
      * keeps track of trick scores
      */
-    public void isTrickComplete(){
+    public void isTrickComplete()  {
         // reset numPlayed
         numPlays = 0;
         // find if the round is over
         currentMiddle.clear();
         trickNum++;
+        try {
+            sleep(200);//display all four cards before determining winner
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int trickWinner;
             trickWinner = trickWinner();
             turn = trickWinner;
