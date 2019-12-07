@@ -158,14 +158,6 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
                 sendAllUpdatedState();
             }
         }
-        //goingAloneAction
-        else if(action instanceof EuchreGoingAloneAction){
-            EuchreGoingAloneAction aloneAct = (EuchreGoingAloneAction) action;
-            playerNum = this.getPlayerIdx(aloneAct.getPlayer());
-            if(state.turn == playerNum){
-                return state.isGoingAlone(playerNum);
-            }
-        }
         return false;
     }
 
