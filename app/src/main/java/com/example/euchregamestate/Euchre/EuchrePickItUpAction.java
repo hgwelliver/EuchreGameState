@@ -8,9 +8,11 @@ import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
  */
 public class EuchrePickItUpAction extends GameAction {
     private Card card;
+    private boolean a;
     public EuchrePickItUpAction(GamePlayer player, Card cardToDiscard){
         super(player);
         card = cardToDiscard;
+
     }
     public Card getCardToDiscard(){return card;}
 }
