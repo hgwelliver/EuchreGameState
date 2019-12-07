@@ -35,6 +35,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                     game.sendAction(new EuchrePassAction(this));
                 }
                 else if(latestState.numPass == 7){
+                    sleep(1);
                     Card.SUIT computerSuit;
                     if(latestState.kittyTop.getSuit() == Card.SUIT.CLUBS){
                         computerSuit = Card.SUIT.HEARTS;
@@ -240,7 +241,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
         int index = 0;
         int maxVal = 0;//if losing
 
-        int[] values = new int[5];
+        ArrayList<Integer> values = new ArrayList<>();
         for(int i = 0; i < hand.size(); i++){//initializes values
             int temp = Card.getValsVal(hand.get(i).getValue(),hand.get(i).getSuit(),s.currentTrumpSuit);
             if(hand.get(i).getSuit() == s.currentTrumpSuit | temp == 7){
@@ -249,16 +250,16 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
             if(hand.get(i).getSuit() == s.firstPlayedSuit && s.firstPlayedSuit != s.currentTrumpSuit){
                 temp += 10;
             }
-            values[i] = temp;
+            values.add(temp);
 
 
         }
-        int minVal = values[0];//min value if winning
+        int minVal = 25;//min value if winning
         int i;
         if(highCard){
             for(i = 0; i < hand.size(); i++){
-                if(values[i] < minVal){
-                     minVal = values[i];
+                if(values.get(i) < minVal && values.get(i) != 0){
+                     minVal = values.get(i);
                     index = i;
                 }
             }
@@ -266,8 +267,8 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
         }
         else{//if losing
             for(i = 0; i < hand.size(); i++){
-                if(values[i] > maxVal){
-                    maxVal = values[i];
+                if(values.get(i) > maxVal && values.get(i) != 0){
+                    maxVal = values.get(i);
                     index = i;
                 }
             }
@@ -277,7 +278,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
 
 
 
-    public ArrayList<Card> getValidHand(ArrayList<Card> hand){
+    public ArrayList<Card> getValidHand(ArrayList<Card> hand){//needs work
         ArrayList<Card> validHand = new ArrayList<>();
         if(latestState.numPlays ==0 | latestState.firstPlayedSuit == null){
             return hand;
@@ -290,7 +291,7 @@ public class EuchreSmartComputerPlayer extends EuchreComputerPlayer {
                 validHand.add(hand.get(i));
             }
         }
-        if(hand.isEmpty()){
+        if(validHand.isEmpty()){
             return hand;
         }
         else{
