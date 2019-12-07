@@ -478,6 +478,20 @@ public class EuchreState extends GameState {
                 turn = 2;
                 gameStage = 3;
             }
+            else if(dealer == 2){
+                // remove a card from the player's hand and add the middle card
+                player3Hand.remove(2);
+                player3Hand.add(middleCard);
+                turn = 3;
+                gameStage = 3;
+            }
+            else if(dealer == 3){
+                // remove a card from the player's hand and add the middle card
+                player4Hand.remove(2);
+                player4Hand.add(middleCard);
+                turn = 0;
+                gameStage = 3;
+            }
         }
         return false;
     }

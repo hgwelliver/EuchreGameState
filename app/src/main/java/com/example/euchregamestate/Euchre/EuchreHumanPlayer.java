@@ -178,7 +178,7 @@ public class EuchreHumanPlayer extends GameHumanPlayer {
                     passButton.setAlpha(0);
                     pickItUpButton.setAlpha(0);
                     orderUpButton.setAlpha(0);
-                    goingAloneButton.setAlpha(1);
+                    goingAloneButton.setAlpha(0);
                     selectTrumpButton.setAlpha(1);
                 }
                 if(latestState.gameStage == 3){
