@@ -49,8 +49,9 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
             playerNum = this.getPlayerIdx(playAct.getPlayer());
             if(state.turn == playerNum && state.gameStage == 3) {
                 if(playerNum != 0){
-                    state.validMove(playerNum, playAct.getCardToPlay());
-                    if(state.numPlays < 4) {
+
+                    if(state.player1Play == null | state.player2Play == null | state.player3Play == null | state.player4Play == null | state.numPlays <4) {
+                        state.validMove(playerNum, playAct.getCardToPlay());
                         sendAllUpdatedState();
                     }
                 }
