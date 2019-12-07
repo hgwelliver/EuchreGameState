@@ -4,7 +4,6 @@ import com.example.euchregamestate.GameFramework.infoMessage.GameState;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 /**
  * @author Sierra, Mikey, Haley, and Alex
@@ -50,7 +49,6 @@ public class EuchreState extends GameState {
     protected int blueScore;
     protected int redTrickScore;
     protected int blueTrickScore;
-    protected boolean isRoundOver;
     // current state of timer
     // current stage of game
     protected boolean startGame;
@@ -58,8 +56,6 @@ public class EuchreState extends GameState {
     protected int gameStage; // 0 for deal, 1 for deciding middle card, 2 for deciding trump, 3 for playing cards
     protected int numPass; // count number of passes
     protected boolean pickIt;
-    // random number generator
-    protected Random rand = new Random();
 
     public int getTurn() {
         return turn;
@@ -142,8 +138,7 @@ public class EuchreState extends GameState {
                 "Dealer: " + dealer + ", Team of Dealer: " + teamDealer + "\n" +
                 "Red Score, Tricks: " + redScore + ", " + redTrickScore + "\n" +
                 "Blue Score, Tricks: " + blueScore +", "+ blueTrickScore + "\n" +
-                "Game Stage: " + gameStage + "\n" +
-                "Going Alone Player: " + whoIsAlone + "\n" +
+                "Game Stage: " + gameStage + "\n"  +
                 "Passes: " + numPass + " Who Called: " + whoCalled + "\n" +
                 "Trump Suit: " + currentTrumpSuit + "\n" +
                 "Number of Plays; " + numPlays + "\n";
@@ -198,11 +193,6 @@ public class EuchreState extends GameState {
             player3Hand.add(i, deck.cardDeck.get(10 + i));
             player4Hand.add(i, deck.cardDeck.get(15 + i));
         }
-        int p1 = player1Hand.size();
-        int p2 = player2Hand.size();
-        int p3 = player3Hand.size();
-        int p4 = player4Hand.size();
-        int total = p1 + p2 + p3 + p4;
 
         for (int i = 0; i < 4; i++) {
             kitty.add(i, deck.cardDeck.get(20 + i));
@@ -467,7 +457,7 @@ public class EuchreState extends GameState {
      * the dealer will now have the middle card in their hand
      * suit of middle card becomes the trump suit
      */
-    public boolean isOrderUpTrump(int playerID){
+    public void isOrderUpTrump(int playerID){
         if(turn == playerID && gameStage == 1 && dealer != 0){
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
@@ -493,7 +483,6 @@ public class EuchreState extends GameState {
                 gameStage = 3;
             }
         }
-        return false;
     }
 
     /**
@@ -504,6 +493,7 @@ public class EuchreState extends GameState {
      */
     public boolean isPickItUp(int playerID, Card discard){
         if(turn == playerID && gameStage == 1 && dealer == playerID){
+            alone = inputAlone;
             currentTrumpSuit = middleCardSuit;
             // make dealer discard a card and give them the middle card
             if(dealer == 0){

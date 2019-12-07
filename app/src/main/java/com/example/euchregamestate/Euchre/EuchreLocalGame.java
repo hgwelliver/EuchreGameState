@@ -58,11 +58,42 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
                         if (cHand.get(i).getSuit() == state.firstPlayedSuit) {
                             firstSuits++;
                         }
+                        if(state.firstPlayedSuit == Card.SUIT.DIAMONDS && playAct.getCardToPlay().getSuit() == Card.SUIT.HEARTS){
+                            firstSuits++;
+                        }
+                        if(state.firstPlayedSuit == Card.SUIT.HEARTS && playAct.getCardToPlay().getSuit() == Card.SUIT.DIAMONDS){
+                            firstSuits++;
+                        }
+                        if(state.firstPlayedSuit == Card.SUIT.CLUBS && playAct.getCardToPlay().getSuit() == Card.SUIT.SPADES){
+                            firstSuits++;
+                        }
+                        if(state.firstPlayedSuit == Card.SUIT.SPADES && playAct.getCardToPlay().getSuit() == Card.SUIT.CLUBS){
+                            firstSuits++;
+                        }
                     }
                     if (firstSuits != 0) {
                         if (state.firstPlayedSuit == playAct.getCardToPlay().getSuit()) {
                             state.validMove(playerNum, playAct.getCardToPlay());
                             sendAllUpdatedState();
+                        }
+                        if(playAct.getCardToPlay().getValue() == Card.NUMBER.JACK){
+                            if(state.firstPlayedSuit == Card.SUIT.DIAMONDS && playAct.getCardToPlay().getSuit() == Card.SUIT.HEARTS){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+                            if(state.firstPlayedSuit == Card.SUIT.HEARTS && playAct.getCardToPlay().getSuit() == Card.SUIT.DIAMONDS){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+                            if(state.firstPlayedSuit == Card.SUIT.CLUBS && playAct.getCardToPlay().getSuit() == Card.SUIT.SPADES){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+                            if(state.firstPlayedSuit == Card.SUIT.SPADES && playAct.getCardToPlay().getSuit() == Card.SUIT.CLUBS){
+                                state.validMove(playerNum, playAct.getCardToPlay());
+                                sendAllUpdatedState();
+                            }
+
                         }
                     } else {
                         state.validMove(playerNum, playAct.getCardToPlay());
