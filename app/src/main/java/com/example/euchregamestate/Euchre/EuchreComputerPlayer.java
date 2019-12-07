@@ -28,7 +28,6 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
         latestState = (EuchreState) info;
         // set the player num
         int playerNum = this.playerNum;
-        // do what it do
         if(latestState.turn == playerNum){
             // pause for one second
             sleep(1);
@@ -58,7 +57,6 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }
             }
             else if(latestState.gameStage == 3){
-                Random rand = new Random();
                 ArrayList<Card> hand = latestState.getPlayerHand(playerNum);
 
                 ArrayList<Card> valid = new ArrayList<>();
@@ -70,11 +68,12 @@ public class EuchreComputerPlayer extends GameComputerPlayer {
                 }
                 // if valid array is empty then any card is valid
                 if(valid.isEmpty()){
-                        Card cardPlay = hand.get(0);
-                        game.sendAction(new EuchrePlayCardAction(this, cardPlay));
-                        return;
+                    sleep(1);
+                    Card cardPlay = hand.get(0);
+                    game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }
                 else {
+                    sleep(1);
                     Card cardPlay = valid.get(0);
                     game.sendAction(new EuchrePlayCardAction(this, cardPlay));
                 }

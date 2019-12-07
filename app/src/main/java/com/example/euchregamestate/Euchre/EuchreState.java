@@ -74,7 +74,7 @@ public class EuchreState extends GameState {
         this.quit = false;
         this.gameStage = 0;
         this.numPass = 0;
-        this.turn = 0;
+        this.turn = 1;
         this.trickNum = 0;
         this.redScore = 0;
         this.blueScore = 0;
@@ -119,21 +119,6 @@ public class EuchreState extends GameState {
         this.pickIt = other.pickIt;
     }
 
-    public void setPlay(int ID, Card c){
-        if(ID == 1){
-            player1Play = c;
-        }if(ID == 2){
-            player2Play = c;
-        }
-        if(ID == 3){
-            player3Play = c;
-        }
-        if(ID == 4){
-            player4Play = c;
-        }
-
-    }
-
     //playerNum = 1-4
     public ArrayList<Card> getPlayerHand(int playerNum){
         if(playerNum == 0){
@@ -145,10 +130,6 @@ public class EuchreState extends GameState {
         if(playerNum == 3){
             return player4Hand;}
         else{return null;}
-    }
-
-    public ArrayList<Card> getKittyTop(){
-        return kitty;
     }
 
     @Override
@@ -170,7 +151,7 @@ public class EuchreState extends GameState {
     }
 
     public String ArrayToString(ArrayList<Card> Arr){ //where object is card object
-        String ArrayContents1 =""; //contents of array
+        String ArrayContents1 = ""; //contents of array
         for(int i =0; i< Arr.size(); i++){
             Card card = Arr.get(i);
 
@@ -198,6 +179,14 @@ public class EuchreState extends GameState {
         kitty.clear();
         currentMiddle.clear();
 
+        /**
+         * External Citation
+         * Date: 19 September 2019
+         * Problem: Did not have a good way to shuffle array
+         * Resource: Dr. Tribelhorn, https://www.geeksforgeeks.org/collections-shuffle-java-examples/
+         * Solution: Tribelhorn informed us of the shuffle function, and
+         * we used the code in this post as a resource
+         */
         // shuffle deck
         Collections.shuffle(deck.cardDeck);
 
@@ -712,6 +701,7 @@ public class EuchreState extends GameState {
         player2Play = null;
         player3Play = null;
         player4Play = null;
+
         if(trickNum == 5){
             // reset everything for new round
             currentTrumpSuit = null;

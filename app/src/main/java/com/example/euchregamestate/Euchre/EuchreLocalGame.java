@@ -4,11 +4,9 @@ import com.example.euchregamestate.GameFramework.GamePlayer;
 import com.example.euchregamestate.GameFramework.LocalGame;
 import com.example.euchregamestate.GameFramework.actionMessage.GameAction;
 import com.example.euchregamestate.GameFramework.utilities.GameTimer;
-import com.example.euchregamestate.GameFramework.utilities.Logger;
 import com.example.euchregamestate.GameFramework.utilities.Tickable;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 /**
  * @author Sierra, Mikey, Haley, and Alex
@@ -16,7 +14,6 @@ import java.util.Timer;
 public class EuchreLocalGame extends LocalGame implements Tickable {
     private EuchreState state;
     int playerNum;
-    boolean waiting;
     public EuchreLocalGame(){
         state = new EuchreState();
     }
@@ -45,7 +42,6 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
     protected boolean makeMove(GameAction action) {
         playerNum = state.getTurn();
         if(action instanceof EuchrePlayCardAction) {
-            Logger.log("MakeMove","HavePlayCardAction");
             EuchrePlayCardAction playAct = (EuchrePlayCardAction) action;
             playerNum = this.getPlayerIdx(playAct.getPlayer());
             if(state.turn == playerNum && state.gameStage == 3) {
@@ -165,10 +161,16 @@ public class EuchreLocalGame extends LocalGame implements Tickable {
 
     @Override
     protected  void timerTicked(){
-        //state.isTrickComplete();
-        //sendAllUpdatedState();
+
     }
 
+    /**
+     * External Citation
+     * Date: 20 November 2019
+     * Problem: Did not know how to make a timer
+     * Resource: Dr. Tribelhorn
+     * Solution: Tribelhorn gave us some tips on how to combat this
+     */
     @Override
     public final void tick(GameTimer timer)
     {

@@ -1,5 +1,4 @@
 package com.example.euchregamestate.Euchre;
-
 import com.example.euchregamestate.GameFramework.infoMessage.GameInfo;
 
 import java.util.ArrayList;
