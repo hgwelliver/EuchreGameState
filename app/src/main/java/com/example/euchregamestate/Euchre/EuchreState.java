@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 /**
  * @author Sierra, Mikey, Haley, and Alex
  */
@@ -691,12 +693,17 @@ public class EuchreState extends GameState {
      * checks if a round of playing one card is over
      * keeps track of trick scores
      */
-    public void isTrickComplete(){
+    public void isTrickComplete()  {
         // reset numPlayed
         numPlays = 0;
         // find if the round is over
         currentMiddle.clear();
         trickNum++;
+        try {
+            sleep(200);//display all four cards before determining winner
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int trickWinner;
             trickWinner = trickWinner();
             turn = trickWinner;
